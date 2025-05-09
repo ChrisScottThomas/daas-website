@@ -2,9 +2,10 @@ resource "aws_cloudfront_origin_access_identity" "oai" {}
 
 resource "aws_cloudfront_distribution" "cdn" {
   origin {
-    domain_name = aws_s3_bucket.site.website_endpoint
+    domain_name = aws_s3_bucket_website_configuration.site.website_endpoint
     origin_id   = "s3-site"
   }
+
 
   enabled             = true
   default_root_object = "index.html"
