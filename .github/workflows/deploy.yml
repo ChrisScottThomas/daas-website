@@ -3,6 +3,7 @@ name: Deploy DaaS Waitlist
 on:
   push:
     branches: [main]
+  workflow_dispatch: {}
 
 jobs:
   deploy:
@@ -16,9 +17,6 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: '18'
-
-    - name: Install AWS CLI
-      run: sudo apt-get install -y awscli
 
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v2
@@ -61,4 +59,3 @@ jobs:
       run: |
         set -e
         aws ssm terminate-session --session-id ${{ github.run_id }}-${{ github.run_number }}
-        
