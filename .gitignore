@@ -1,0 +1,21 @@
+**/lambda.zip
+
+#  Local .terraform directories
+**/.terraform/*
+.terraform/*
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+
+# .tfvars files
+*.tfvars
+
+# generated files
+*.iml
+.idea/
+.terraform.lock.hcl
+
+# node
+
+/lambda/node_modules

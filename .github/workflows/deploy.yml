@@ -1,0 +1,64 @@
+name: Deploy DaaS Waitlist
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+
+    - name: Install AWS CLI
+      run: sudo apt-get install -y awscli
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v2
+      with:
+        role-skip-session-tagging: true
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        role-session-name: ${{ github.run_id }}-${{ github.run_number }}
+        aws-region: eu-west-2
+
+    - name: Install Terraform
+      uses: hashicorp/setup-terraform@v3
+      with:
+        terraform_version: 1.2.6
+
+    - name: Terraform Init & Apply
+      run: |
+        cd terraform
+        terraform init
+        terraform plan -no-color -out terraform.plan
+        terraform apply -auto-approve terraform.plan
+      continue-on-error: false
+
+    - name: Package Lambda Function
+      run: |
+        cd lambda
+        npm ci
+        zip -r ../lambda.zip .
+
+    - name: Inject API URL into HTML and Upload to S3
+      run: |
+        API_URL=$(terraform -chdir=terraform output -raw api_endpoint)
+        BUCKET=$(terraform -chdir=terraform output -raw bucket_name)
+        sed "s|API_URL_HERE|$API_URL|g" site/index.html > site/index.build.html
+        aws s3 cp site/index.build.html s3://$BUCKET/index.html --acl public-read
+
+    - name: "Terminate Session"
+      if: ${{ always() }}
+      id: terminate-session
+      run: |
+        set -e
+        aws ssm terminate-session --session-id ${{ github.run_id }}-${{ github.run_number }}
+        
