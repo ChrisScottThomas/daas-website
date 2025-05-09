@@ -15,3 +15,7 @@
 *.iml
 .idea/
 .terraform.lock.hcl
+
+# node
+
+/lambda/node_modules
