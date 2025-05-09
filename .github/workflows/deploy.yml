@@ -32,6 +32,12 @@ jobs:
       with:
         terraform_version: 1.2.6
 
+    - name: Package Lambda Function
+      run: |
+        cd lambda
+        npm ci
+        zip -r ../lambda.zip .
+
     - name: Terraform Init & Apply
       run: |
         cd terraform
@@ -39,12 +45,7 @@ jobs:
         terraform plan -no-color -out terraform.plan
         terraform apply -auto-approve terraform.plan
       continue-on-error: false
-
-    - name: Package Lambda Function
-      run: |
-        cd lambda
-        npm ci
-        zip -r ../lambda.zip .
+      working-directory: .
 
     - name: Inject API URL into HTML and Upload to S3
       run: |
