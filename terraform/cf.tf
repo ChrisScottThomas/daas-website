@@ -1,12 +1,16 @@
-resource "aws_cloudfront_origin_access_identity" "oai" {}
-
 resource "aws_cloudfront_distribution" "cdn" {
   depends_on = [aws_s3_bucket_website_configuration.site]
   origin {
     domain_name = aws_s3_bucket_website_configuration.site.website_endpoint
     origin_id   = "s3-site"
-  }
 
+    custom_origin_config {
+      http_port              = 80
+      https_port             = 443
+      origin_protocol_policy = "http-only"
+      origin_ssl_protocols   = ["TLSv1.2"]
+    }
+  }
 
   enabled             = true
   default_root_object = "index.html"

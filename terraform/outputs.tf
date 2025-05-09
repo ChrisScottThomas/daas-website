@@ -5,3 +5,7 @@ output "cloudfront_url" {
 output "api_endpoint" {
   value = "${aws_api_gateway_deployment.deployment.invoke_url}/waitlist"
 }
+
+output "s3_endpoint" {
+  value = aws_s3_bucket_website_configuration.site.website_endpoint
+}
