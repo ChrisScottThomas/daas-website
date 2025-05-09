@@ -1,6 +1,7 @@
 resource "aws_cloudfront_origin_access_identity" "oai" {}
 
 resource "aws_cloudfront_distribution" "cdn" {
+  depends_on = [aws_s3_bucket_website_configuration.site]
   origin {
     domain_name = aws_s3_bucket_website_configuration.site.website_endpoint
     origin_id   = "s3-site"
