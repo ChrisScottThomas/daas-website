@@ -9,7 +9,6 @@ resource "aws_lambda_function" "waitlist" {
     variables = {
       TABLE_NAME   = aws_dynamodb_table.waitlist.name
       SENDER_EMAIL = "noreply@yourdomain.com"
-      AWS_REGION   = "eu-west-2"
     }
   }
 }
