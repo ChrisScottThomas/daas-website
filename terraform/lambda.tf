@@ -8,7 +8,8 @@ resource "aws_lambda_function" "waitlist" {
   environment {
     variables = {
       TABLE_NAME   = aws_dynamodb_table.waitlist.name
-      SENDER_EMAIL = "noreply@yourdomain.com"
+      SENDER_EMAIL = "noreply@clarity.local" # Replace when you verify your sender
     }
   }
+
 }
