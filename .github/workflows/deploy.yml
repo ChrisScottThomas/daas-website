@@ -51,8 +51,7 @@ jobs:
       run: |
         API_URL=$(terraform -chdir=terraform output -raw api_endpoint)
         BUCKET=$(terraform -chdir=terraform output -raw bucket_name)
-        sed "s|API_URL_HERE|$API_URL|g" site/index.html > site/index.build.html
-        aws s3 cp site/index.build.html s3://$BUCKET/index.html
+        aws s3 cp site/ s3://$BUCKET/ --recursive
 
     - name: "Terminate Session"
       if: ${{ always() }}
