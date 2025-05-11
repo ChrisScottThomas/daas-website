@@ -47,11 +47,18 @@ jobs:
       continue-on-error: false
       working-directory: .
 
-    - name: Inject API URL into HTML and Upload to S3
+      - name: Build Astro site
       run: |
-        API_URL=$(terraform -chdir=terraform output -raw api_endpoint)
+        cd astro-site
+        npm ci
+        API_URL=$(terraform -chdir=../terraform output -raw api_endpoint)
+        sed -i "s|API_URL_HERE|$API_URL|g" src/pages/index.astro
+        npm run build
+    
+    - name: Deploy to S3
+      run: |
         BUCKET=$(terraform -chdir=terraform output -raw bucket_name)
-        aws s3 cp site/ s3://$BUCKET/ --recursive
+        aws s3 sync astro-site/dist/ s3://$BUCKET/ --delete    
 
     - name: "Terminate Session"
       if: ${{ always() }}
