@@ -5,15 +5,76 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Join the Waitlist</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      padding: 2rem;
+      background: #f9f9f9;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 2rem;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+      border-radius: 8px;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      font-size: 1.125rem;
+      color: #444;
+    }
+
+    form {
+      margin-top: 1.5rem;
+    }
+
+    input[type="email"] {
+      padding: 0.75rem;
+      font-size: 1rem;
+      width: 100%;
+      max-width: 400px;
+      margin-bottom: 1rem;
+    }
+
+    button {
+      background: #000;
+      color: #fff;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    #response {
+      margin-top: 1rem;
+      color: green;
+    }
+
+  </style>
 </head>
 
 <body>
-  <h1>Join the Waitlist</h1>
-  <form id="waitlist-form">
-    <input type="email" name="email" placeholder="Enter your email" required />
-    <button type="submit">Join</button>
-  </form>
-  <p id="response"></p>
+  <div class="container">
+    <h1>Unlock Faster, Smarter Discovery</h1>
+    <p>We help teams move from uncertainty to clarity — without the bloated costs, delays, or generic consultants.</p>
+    <p><strong>Join the waitlist</strong> to be first in line when we launch our Discovery-as-a-Service offering.</p>
+
+    <form id="waitlist-form">
+      <input type="email" name="email" placeholder="you@example.com" required />
+      <br />
+      <button type="submit">Join the Waitlist</button>
+    </form>
+    <p id="response"></p>
+  </div>
 
   <script>
     document.getElementById('waitlist-form').addEventListener('submit', async (e) => {
@@ -24,8 +85,11 @@
         body: JSON.stringify({ email }),
         headers: { 'Content-Type': 'application/json' }
       });
-      document.getElementById('response').textContent =
-        res.ok ? 'Thanks for joining!' : 'Something went wrong.';
+      if (res.ok) {
+        window.location.href = "/thank-you.html";
+      } else {
+        document.getElementById('response').textContent = "Something went wrong. Please try again.";
+      }
     });
   </script>
 </body>
