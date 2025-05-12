@@ -4,6 +4,7 @@ on:
     paths:
       - "**/*.tf"
       - "**/*.j2"
+      - "lambda/*"
       - ".github/workflows/**"
   workflow_dispatch: {}
 
@@ -42,11 +43,10 @@ jobs:
 
     - name: Terraform Init & Apply
       run: |
-        cd terraform
         terraform init
         terraform plan -no-color
       continue-on-error: false
-      working-directory: .
+      working-directory: terraform
 
     - name: "Terminate Session"
       if: ${{ always() }}

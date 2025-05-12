@@ -40,20 +40,18 @@ jobs:
 
     - name: Terraform Init & Apply
       run: |
-        cd terraform
         terraform init
         terraform plan -no-color -out terraform.plan
         terraform apply -auto-approve terraform.plan
       continue-on-error: false
-      working-directory: .
+      working-directory: terraform
 
     - name: Build Astro site
       run: |
-        cd astro-site
         npm ci
-        API_URL=$(terraform -chdir=../terraform output -raw api_endpoint)
-        sed -i "s|API_URL_HERE|$API_URL|g" src/pages/index.astro
         npm run build
+      continue-on-error: false
+      working-directory: astro-site
     
     - name: Deploy to S3
       run: |

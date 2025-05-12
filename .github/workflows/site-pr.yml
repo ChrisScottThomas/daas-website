@@ -1,0 +1,27 @@
+name: "Pull Request"
+on:
+  pull_request:
+    paths:
+      - "astro-site/*"
+      - ".github/workflows/**"
+  workflow_dispatch: {}
+
+jobs:
+  pull-request:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+
+    - name: Build Astro site
+      run: |
+        cd astro-site
+        npm ci
+        npm run build
+      continue-on-error: false
