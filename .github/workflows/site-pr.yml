@@ -2,7 +2,7 @@ name: "Pull Request"
 on:
   pull_request:
     paths:
-      - "astro-site/*"
+      - "astro-site/**"
       - ".github/workflows/**"
   workflow_dispatch: {}
 
