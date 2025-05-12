@@ -49,6 +49,8 @@ jobs:
     - name: Build Astro site
       run: |
         npm ci
+        API_URL=$(terraform -chdir=../terraform output -raw api_endpoint)
+        sed -i "s|API_URL_HERE|$API_URL|g" src/pages/index.astro
         npm run build
       continue-on-error: false
       working-directory: astro-site
