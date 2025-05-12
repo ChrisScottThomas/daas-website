@@ -5,14 +5,64 @@ import '../styles/base.css';
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Thanks for signing up for Clarity — a Strategic Insight-as-a-Service support plan built for product and enterprise leaders." />
-    <meta property="og:description" content="You're now on the waitlist for Clarity — get structured insights, not assumptions." />
-    <title>You're on the list — Clarity</title>
+    <meta name="description" content="Thanks for signing up for Clarity. — a Strategic Insight-as-a-Service support plan built for product and enterprise leaders." />
+    <meta property="og:description" content="You're now on the waitlist for Clarity. — get structured insights, not assumptions." />
+    <title>You're on the list — Clarity.</title>
   </head>
   <body class="bg-gray-50 text-gray-900">
     <main class="max-w-xl mx-auto mt-20 px-4 text-center">
-      <h1 class="text-3xl font-bold mb-2">You're on the list!</h1>
-      <p class="mb-4">Thanks for signing up for Clarity — our Strategic Insight-as-a-Service support plan. We'll be in touch soon with next steps.</p>
-    </main>
+
+  <style>
+    .logo-light {
+      display: block;
+    }
+    .logo-dark {
+      display: none;
+    }
+    @media (prefers-color-scheme: dark) {
+      .logo-light {
+        display: none;
+      }
+      .logo-dark {
+        display: block;
+      }
+    }
+  </style>
+
+  <!-- Light Mode Logo -->
+  <svg class="logo-light mx-auto mb-8" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+    <defs>
+      <linearGradient id="lightGradient" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#FFFFFF" />
+        <stop offset="100%" stop-color="#EAF6FB" />
+      </linearGradient>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#lightGradient)" />
+    <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
+          font-family="Inter, Helvetica, Arial, sans-serif"
+          font-size="48" font-weight="700" fill="#333">
+      Clarity.
+    </text>
+  </svg>
+
+  <!-- Dark Mode Logo -->
+  <svg class="logo-dark mx-auto mb-8" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+    <defs>
+      <linearGradient id="darkGradient" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#1A1A1A" />
+        <stop offset="100%" stop-color="#2C3E50" />
+      </linearGradient>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#darkGradient)" />
+    <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
+          font-family="Inter, Helvetica, Arial, sans-serif"
+          font-size="48" font-weight="700" fill="#F2F2F2">
+      Clarity.
+    </text>
+  </svg>
+
+  <h1 class="text-3xl font-bold mb-2">You're on the list!</h1>
+  <p class="mb-4">Thanks for signing up for Clarity. — our Strategic Insight-as-a-Service support plan. We'll be in touch soon with next steps.</p>
+</main>
   </body>
 </html>
