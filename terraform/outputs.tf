@@ -23,3 +23,7 @@ output "acm_dns_validation_record" {
 
   description = "DNS CNAME record to add for ACM certificate validation"
 }
+
+output "acm_certificate_arn" {
+  value = aws_acm_certificate.clarity.arn
+}
