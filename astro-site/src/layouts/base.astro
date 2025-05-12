@@ -1,0 +1,238 @@
+---
+const { title = "Clarity — Insight-as-a-Service" } = Astro.props;
+import "../styles/base.css";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta
+      name="description"
+      content="Clarity. Strategic Insight-as-a-Service support for product and enterprise leaders."
+    />
+    <meta property="og:title" content={title} />
+    <meta
+      property="og:description"
+      content="Structured insights, not assumptions. Support plans that give you clarity and speed."
+    />
+    <meta property="og:type" content="website" />
+    <meta name="robots" content="index, follow" />
+    <meta property="og:url" content="https://getclarity.win" />
+    <meta property="og:image" content="https://getclarity.win/og-image.jpg" />
+
+    <script>
+      const theme = localStorage.getItem("theme");
+      if (theme === "dark") {
+        document.documentElement.classList.add("dark");
+      } else if (theme === "light") {
+        document.documentElement.classList.remove("dark");
+      }
+    </script>
+  </head>
+
+  <body
+    class="min-h-screen text-gray-900 bg-gradient-to-b from-white to-[#EAF6FB] dark:from-[#1A1A1A] dark:to-[#2C3E50] dark:text-white bg-no-repeat"
+  >
+    <!-- Top-left logo and menu -->
+    <header
+      class="fixed top-4 left-4 z-50 flex flex-row items-center gap-4 w-auto"
+    >
+      <a href="/" aria-label="Clarity home" class="z-50 shrink-0">
+        <!-- Light Logo -->
+        <svg
+          class="h-10 dark:hidden"
+          viewBox="0 0 200 100"
+          xmlns="http://www.w3.org/2000/svg"
+          preserveAspectRatio="xMidYMid meet"
+        >
+          <text
+            x="50%"
+            y="50%"
+            dominant-baseline="middle"
+            text-anchor="middle"
+            font-family="Inter, Helvetica, Arial, sans-serif"
+            font-size="48"
+            font-weight="700"
+            fill="#333"
+          >
+            Clarity.
+          </text>
+        </svg>
+        <!-- Dark Logo -->
+        <svg
+          class="h-10 hidden dark:block"
+          viewBox="0 0 200 100"
+          xmlns="http://www.w3.org/2000/svg"
+          preserveAspectRatio="xMidYMid meet"
+        >
+          <text
+            x="50%"
+            y="50%"
+            dominant-baseline="middle"
+            text-anchor="middle"
+            font-family="Inter, Helvetica, Arial, sans-serif"
+            font-size="48"
+            font-weight="700"
+            fill="#F2F2F2"
+          >
+            Clarity.
+          </text>
+        </svg>
+      </a>
+
+      <!-- Burger Button -->
+      <button
+        id="menu-toggle"
+        class="z-50 p-2 rounded hover:bg-gray-200 dark:hover:bg-gray-700"
+        aria-label="Open menu"
+      >
+        <svg
+          class="w-6 h-6 text-gray-700 dark:text-white"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </header>
+
+    <!-- Slide-down mobile menu -->
+    <nav
+      id="menu-panel"
+      class="fixed top-16 left-4 right-4 bg-white dark:bg-gray-900 text-gray-800 dark:text-white rounded shadow-md overflow-hidden transition-all duration-300 transform scale-y-0 origin-top z-40"
+    >
+      <ul class="flex flex-col items-start gap-4 p-6 text-lg font-medium">
+        <li>
+          <a href="/how-we-can-help" class="hover:underline">How we can help</a>
+        </li>
+        <li>
+          <a href="/support-plans" class="hover:underline">Support Plans</a>
+        </li>
+        <li><a href="/about" class="hover:underline">About</a></li>
+      </ul>
+    </nav>
+
+    <!-- Theme toggle -->
+    <button
+      id="theme-toggle"
+      class="fixed top-4 right-4 z-50 p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition"
+      aria-label="Toggle Theme"
+    >
+      <svg
+        class="w-6 h-6 dark:hidden"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M21 12.79A9 9 0 0111.21 3 7 7 0 0012 21a9 9 0 009-8.21z"></path>
+      </svg>
+      <svg
+        class="w-6 h-6 hidden dark:inline"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M12 3v1m0 16v1m8.66-8.66l-.7.7m-12.02 0l-.7-.7M21 12h1M2 12H1m3.34-4.66l.7.7m12.02 0l.7-.7M12 5a7 7 0 100 14 7 7 0 000-14z"
+        ></path>
+      </svg>
+    </button>
+
+    <!-- Page content -->
+    <div class="pt-32 px-4">
+      <slot />
+    </div>
+
+    <!-- Footer logo -->
+    <footer class="mt-16 text-center">
+      <!-- Light -->
+      <svg
+        class="block dark:hidden mx-auto mb-4"
+        viewBox="0 0 400 200"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <text
+          x="50%"
+          y="50%"
+          dominant-baseline="middle"
+          text-anchor="middle"
+          font-family="Inter, Helvetica, Arial, sans-serif"
+          font-size="48"
+          font-weight="700"
+          fill="#333"
+        >
+          Clarity.
+        </text>
+      </svg>
+      <!-- Dark -->
+      <svg
+        class="hidden dark:block mx-auto mb-4"
+        viewBox="0 0 400 200"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <text
+          x="50%"
+          y="50%"
+          dominant-baseline="middle"
+          text-anchor="middle"
+          font-family="Inter, Helvetica, Arial, sans-serif"
+          font-size="48"
+          font-weight="700"
+          fill="#F2F2F2"
+        >
+          Clarity.
+        </text>
+      </svg>
+    </footer>
+
+    <!-- Shared scripts -->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const root = document.documentElement;
+        const menuBtn = document.getElementById("menu-toggle");
+        const panel = document.getElementById("menu-panel");
+        const themeToggle = document.getElementById("theme-toggle");
+
+        const theme = localStorage.getItem("theme");
+        if (theme === "dark") {
+          root.classList.add("dark");
+        } else if (theme === "light") {
+          root.classList.remove("dark");
+        }
+
+        themeToggle?.addEventListener("click", () => {
+          const isDark = root.classList.toggle("dark");
+          localStorage.setItem("theme", isDark ? "dark" : "light");
+        });
+
+        let open = false;
+        menuBtn?.addEventListener("click", () => {
+          open = !open;
+          panel.classList.toggle("scale-y-0", !open);
+          panel.classList.toggle("scale-y-100", open);
+        });
+
+        document.addEventListener("click", (e) => {
+          if (!panel.contains(e.target) && !menuBtn.contains(e.target)) {
+            panel.classList.add("scale-y-0");
+            open = false;
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
