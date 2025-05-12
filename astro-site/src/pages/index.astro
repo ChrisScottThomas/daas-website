@@ -1,151 +1,362 @@
 ---
-import '../styles/base.css';
+import "../styles/base.css";
 ---
+
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="robots" content="index, follow" />
-    <meta name="description" content="Clarity. is a premium Strategic Insight-as-a-Service partner.  Support plans that equip product and enterprise leaders with fast, actionable answers." />
+    <meta
+      name="description"
+      content="Clarity. is a premium Strategic Insight-as-a-Service partner. Support plans that equip product and enterprise leaders with fast, actionable answers."
+    />
     <meta name="author" content="Your Company or Name" />
-    <meta property="og:title" content="Clarity. — Insight-as-a-Service" />
-    <meta property="og:description" content="Clarity. helps leaders move faster with structured insights — not assumptions. Join the waitlist." />
+    <meta property="og:title" content="Clarity. Insight-as-a-Service" />
+    <meta
+      property="og:description"
+      content="Clarity. helps leaders move faster with structured insights; not assumptions. Join the waitlist."
+    />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://yourdomain.com" />
     <meta property="og:image" content="https://yourdomain.com/og-image.jpg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Clarity. — Insight-as-a-Service</title>
+    <title>Clarity. Insight-as-a-Service</title>
+    <script>
+      const theme = localStorage.getItem("theme");
+      if (theme === "dark") {
+        document.documentElement.classList.add("dark");
+      } else if (theme === "light") {
+        document.documentElement.classList.remove("dark");
+      }
+    </script>
   </head>
-  <body class="text-gray-900 bg-gradient-to-b from-white to-[#EAF6FB] dark:from-[#1A1A1A] dark:to-[#2C3E50] dark:text-white">
-    <main class="max-w-4xl mx-auto px-4 py-16 text-center">
-      <h1 class="text-4xl font-bold mb-4 leading-tight">Clarity. Without the Noise.</h1>
-      <p class="text-lg text-gray-600 mb-8">Join the waitlist for Clarity. — your Strategic Insight-as-a-Service Partner. Clear support plans designed for product and enterprise leaders who need faster answers, tighter focus, and confident decisions.</p>
-
-      <form id="waitlist-form" class="space-y-4 max-w-md mx-auto">
-        <input
-          type="email"
-          name="email"
-          required
-          placeholder="you@example.com"
-          class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-200"
-        />
-        <button
-          type="submit"
-          class="w-full py-2 px-4 bg-black text-white rounded font-medium hover:bg-gray-800 transition"
+  <body
+    class="text-gray-900 bg-gradient-to-b from-white to-[#EAF6FB] dark:from-[#1A1A1A] dark:to-[#2C3E50] dark:text-white"
+  >
+    <!-- Top-left logo -->
+    <header
+      class="fixed top-4 left-4 z-50 flex flex-row items-center gap-4 w-auto"
+    >
+      <a href="/" aria-label="Clarity home" class="z-50 shrink-0">
+        <!-- Light Logo -->
+        <svg
+          class="h-10 dark:hidden"
+          viewBox="0 0 200 100"
+          xmlns="http://www.w3.org/2000/svg"
+          preserveAspectRatio="xMidYMid meet"
         >
-          Join the Waitlist
-        </button>
-      </form>
-      <p id="response" class="mt-4 text-green-600"></p>
+          <text
+            x="50%"
+            y="50%"
+            dominant-baseline="middle"
+            text-anchor="middle"
+            font-family="Inter, Helvetica, Arial, sans-serif"
+            font-size="48"
+            font-weight="700"
+            fill="#333"
+          >
+            Clarity.
+          </text>
+        </svg>
+        <!-- Dark Logo -->
+        <svg
+          class="h-10 hidden dark:block"
+          viewBox="0 0 200 100"
+          xmlns="http://www.w3.org/2000/svg"
+          preserveAspectRatio="xMidYMid meet"
+        >
+          <text
+            x="50%"
+            y="50%"
+            dominant-baseline="middle"
+            text-anchor="middle"
+            font-family="Inter, Helvetica, Arial, sans-serif"
+            font-size="48"
+            font-weight="700"
+            fill="#F2F2F2"
+          >
+            Clarity.
+          </text>
+        </svg>
+      </a>
 
-      <script>
-        document.getElementById('waitlist-form').addEventListener('submit', async (e) => {
+      <!-- Burger Button -->
+      <button
+        id="menu-toggle"
+        class="z-50 p-2 rounded hover:bg-gray-200 dark:hover:bg-gray-700"
+        aria-label="Open menu"
+      >
+        <svg
+          class="w-6 h-6 text-gray-700 dark:text-white"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </header>
+  </body>
+  <!-- Slide-down mobile menu -->
+  <nav
+    id="menu-panel"
+    class="fixed top-16 left-4 right-4 bg-white dark:bg-gray-900 text-gray-800 dark:text-white rounded shadow-md overflow-hidden transition-all duration-300 transform scale-y-0 origin-top z-40"
+  >
+    <ul class="flex flex-col items-start gap-4 p-6 text-lg font-medium">
+      <li>
+        <a href="/how-we-can-help" class="hover:underline">How we can help</a>
+      </li>
+      <li>
+        <a href="/support-plans" class="hover:underline">Support Plans</a>
+      </li>
+      <li><a href="/about" class="hover:underline">About</a></li>
+    </ul>
+  </nav>
+
+  <!-- Top-right theme toggle -->
+  <button
+    id="theme-toggle"
+    class="fixed top-4 right-4 z-50 p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition"
+    aria-label="Toggle Theme"
+  >
+    <!-- Moon icon (light mode) -->
+    <svg
+      class="w-6 h-6 dark:hidden"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      viewBox="0 0 24 24"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M21 12.79A9 9 0 0111.21 3 7 7 0 0012 21a9 9 0 009-8.21z"></path>
+    </svg>
+    <!-- Sun icon (dark mode) -->
+    <svg
+      class="w-6 h-6 hidden dark:inline"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      viewBox="0 0 24 24"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M12 3v1m0 16v1m8.66-8.66l-.7.7m-12.02 0l-.7-.7M21 12h1M2 12H1m3.34-4.66l.7.7m12.02 0l.7-.7M12 5a7 7 0 100 14 7 7 0 000-14z"
+      ></path>
+    </svg>
+  </button>
+
+  <main class="max-w-4xl mx-auto px-4 py-24 text-center">
+    <h1 class="text-4xl font-bold mb-4 leading-tight">
+      Clarity. Without the Noise.
+    </h1>
+    <p class="text-lg text-gray-600 dark:text-gray-300 mb-8">
+      Join the waitlist for Clarity. Your Strategic Insight-as-a-Service
+      Partner. Clear support plans designed for product and enterprise leaders
+      who need faster answers, tighter focus, and confident decisions.
+    </p>
+
+    <form id="waitlist-form" class="space-y-4 max-w-md mx-auto">
+      <input
+        type="email"
+        name="email"
+        required
+        placeholder="you@example.com"
+        class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-200"
+      />
+      <button
+        type="submit"
+        class="w-full py-2 px-4 bg-black text-white rounded font-medium hover:bg-gray-800 transition"
+      >
+        Join the Waitlist
+      </button>
+    </form>
+    <p id="response" class="mt-4 text-green-600"></p>
+
+    <script>
+      document
+        .getElementById("waitlist-form")
+        .addEventListener("submit", async (e) => {
           e.preventDefault();
           const email = e.target.email.value;
-          const res = await fetch('API_URL_HERE', {
-            method: 'POST',
+          const res = await fetch("API_URL_HERE", {
+            method: "POST",
             body: JSON.stringify({ email }),
-            headers: { 'Content-Type': 'application/json' },
+            headers: { "Content-Type": "application/json" },
           });
           if (res.ok) {
-            window.location.href = '/thank-you';
+            window.location.href = "/thank-you";
           } else {
-            document.getElementById('response').textContent = 'Something went wrong. Please try again.';
+            document.getElementById("response").textContent =
+              "Something went wrong. Please try again.";
           }
         });
-      </script>
+    </script>
+
+    <!-- Trusted by section -->
     <section class="mt-16">
-  <p class="text-sm uppercase tracking-wide text-gray-500 mb-4">Trusted by product leaders at</p>
-  <div class="flex flex-wrap justify-center gap-6 opacity-80">
-    <img src="/placeholder-logo1.svg" alt="Logo 1" class="h-8" />
-    <img src="/placeholder-logo2.svg" alt="Logo 2" class="h-8" />
-    <img src="/placeholder-logo3.svg" alt="Logo 3" class="h-8" />
-    <img src="/placeholder-logo4.svg" alt="Logo 4" class="h-8" />
-  </div>
-</section>
+      <p
+        class="text-sm uppercase tracking-wide text-gray-500 dark:text-gray-400 mb-4"
+      >
+        Trusted by product leaders at
+      </p>
+      <div class="flex flex-wrap justify-center gap-6 opacity-80">
+        <img src="/placeholder-logo1.svg" alt="Logo 1" class="h-8" />
+        <img src="/placeholder-logo2.svg" alt="Logo 2" class="h-8" />
+        <img src="/placeholder-logo3.svg" alt="Logo 3" class="h-8" />
+        <img src="/placeholder-logo4.svg" alt="Logo 4" class="h-8" />
+      </div>
+    </section>
 
-<section class="mt-20 text-left">
-  <h2 class="text-2xl font-bold mb-6 text-center">Why Insight-as-a-Service?</h2>
-  <div class="grid md:grid-cols-3 gap-8">
-    <div class="p-6 border rounded-lg bg-white shadow-sm">
-      <h3 class="font-semibold text-lg mb-2">Outcome Clarity.</h3>
-      <p class="text-sm text-gray-600">Know exactly what to build and why — no more guessing, scope creep, or building the wrong thing.</p>
-    </div>
-    <div class="p-6 border rounded-lg bg-white shadow-sm">
-      <h3 class="font-semibold text-lg mb-2">Embedded Expertise</h3>
-      <p class="text-sm text-gray-600">Our team integrates into yours — no bloated decks or outside observers, just delivery-ready insight.</p>
-    </div>
-    <div class="p-6 border rounded-lg bg-white shadow-sm">
-      <h3 class="font-semibold text-lg mb-2">Predictable Cost</h3>
-      <p class="text-sm text-gray-600">Frictionless support plans — fixed scope, high impact, no unexpected invoices.</p>
-    </div>
-  </div>
-</section>
+    <!-- Value grid -->
+    <section class="mt-20 text-left">
+      <h2 class="text-2xl font-bold mb-6 text-center">
+        Why Insight-as-a-Service?
+      </h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="p-6 border rounded-lg bg-white dark:bg-black/20 shadow-sm">
+          <h3 class="font-semibold text-lg mb-2">Outcome Clarity.</h3>
+          <p class="text-sm text-gray-600 dark:text-gray-300">
+            Know exactly what to build and why. No more guessing, scope creep,
+            or building the wrong thing.
+          </p>
+        </div>
+        <div class="p-6 border rounded-lg bg-white dark:bg-black/20 shadow-sm">
+          <h3 class="font-semibold text-lg mb-2">Embedded Expertise</h3>
+          <p class="text-sm text-gray-600 dark:text-gray-300">
+            Our team integrates into yours. No bloated decks or outside
+            observers. Just delivery-ready, actionable insight.
+          </p>
+        </div>
+        <div class="p-6 border rounded-lg bg-white dark:bg-black/20 shadow-sm">
+          <h3 class="font-semibold text-lg mb-2">Predictable Cost</h3>
+          <p class="text-sm text-gray-600 dark:text-gray-300">
+            Frictionless support plans. Fixed scope, high impact, no unexpected
+            invoices.
+          </p>
+        </div>
+      </div>
+    </section>
 
-<section class="mt-20 text-center">
-  <h2 class="text-2xl font-bold mb-6">What Our Clients Say</h2>
-  <div class="max-w-3xl mx-auto">
-    <blockquote class="italic text-lg text-gray-700 mb-6">
-      “Before working with them, we were guessing what to build. Their Discovery process gave us clarity, confidence, and speed — we cut 3 months off our roadmap.”
-    </blockquote>
-    <p class="text-sm text-gray-500">— Head of Product, Fintech Scaleup</p>
-  </div>
-</section>
+    <!-- Testimonials -->
+    <section class="mt-20 text-center">
+      <h2 class="text-2xl font-bold mb-6">What Our Clients Say</h2>
+      <div class="max-w-3xl mx-auto">
+        <blockquote
+          class="italic text-lg text-gray-700 dark:text-gray-300 mb-6"
+        >
+          “Before working with them, we were guessing what to build. Their
+          Discovery process gave us clarity, confidence, and speed. We cut 3
+          months off our roadmap.”
+        </blockquote>
+        <p class="text-sm text-gray-500 dark:text-gray-400">
+          - Head of Product, Fintech Scaleup
+        </p>
+      </div>
+    </section>
 
-<section class="mt-20 bg-gray-900 text-white py-12 px-6 rounded-lg text-center">
-  <h2 class="text-2xl font-bold mb-4">Still thinking about it?</h2>
-  <p class="mb-6 text-lg">The sooner you're on the list, the sooner you'll stop wasting time on the wrong problems. Join now — no fluff, no spam, just Clarity.</p>
-  <a href="#waitlist-form" class="inline-block bg-white text-black font-semibold px-6 py-3 rounded hover:bg-gray-200 transition">Join the Waitlist</a>
-</section>
-<div class="mt-16">
-  <style>
-    .logo-light {
-      display: block;
-    }
-    .logo-dark {
-      display: none;
-    }
-    @media (prefers-color-scheme: dark) {
-      .logo-light {
-        display: none;
-      }
-      .logo-dark {
-        display: block;
-      }
-    }
-  </style>
+    <!-- Final CTA -->
+    <section
+      class="mt-20 bg-gray-900 text-white py-12 px-6 rounded-lg text-center"
+    >
+      <h2 class="text-2xl font-bold mb-4">Still thinking about it?</h2>
+      <p class="mb-6 text-lg">
+        Sign up for more information. The sooner you're on the list, the sooner you'll stop wasting time on
+        the wrong problems. Join now. No fluff, no spam, just Clarity.
+      </p>
+      <a
+        href="#waitlist-form"
+        class="inline-block bg-white text-black font-semibold px-6 py-3 rounded hover:bg-gray-200 transition"
+        >Join the Waitlist</a
+      >
+    </section>
 
-  <!-- Light Mode Logo -->
-  <svg class="logo-light mx-auto" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-    <defs>
-      <linearGradient id="lightGradient" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="#FFFFFF" />
-        <stop offset="100%" stop-color="#EAF6FB" />
-      </linearGradient>
-    </defs>
-    <rect width="100%" height="100%" fill="url(#lightGradient)" />
-    <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
+    <!-- Footer logo -->
+    <div class="mt-16">
+      <!-- Light -->
+      <svg
+        class="block dark:hidden mx-auto mb-4"
+        viewBox="0 0 400 200"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <text
+          x="50%"
+          y="50%"
+          dominant-baseline="middle"
+          text-anchor="middle"
           font-family="Inter, Helvetica, Arial, sans-serif"
-          font-size="48" font-weight="700" fill="#333">
-      Clarity.
-    </text>
-  </svg>
-
-  <!-- Dark Mode Logo -->
-  <svg class="logo-dark mx-auto" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-    <defs>
-      <linearGradient id="darkGradient" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="#1A1A1A" />
-        <stop offset="100%" stop-color="#2C3E50" />
-      </linearGradient>
-    </defs>
-    <rect width="100%" height="100%" fill="url(#darkGradient)" />
-    <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
+          font-size="48"
+          font-weight="700"
+          fill="#333"
+        >
+          Clarity.
+        </text>
+      </svg>
+      <!-- Dark -->
+      <svg
+        class="hidden dark:block mx-auto mb-4"
+        viewBox="0 0 400 200"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <text
+          x="50%"
+          y="50%"
+          dominant-baseline="middle"
+          text-anchor="middle"
           font-family="Inter, Helvetica, Arial, sans-serif"
-          font-size="48" font-weight="700" fill="#F2F2F2">
-      Clarity.
-    </text>
-  </svg>
-</div>
-</main>
-  </body>
+          font-size="48"
+          font-weight="700"
+          fill="#F2F2F2"
+        >
+          Clarity.
+        </text>
+      </svg>
+    </div>
+  </main>
+
+  <!-- Theme toggle script -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const root = document.documentElement;
+      const menuBtn = document.getElementById("menu-toggle");
+      const panel = document.getElementById("menu-panel");
+      const themeToggle = document.getElementById("theme-toggle");
+
+      // Initial theme load
+      const theme = localStorage.getItem("theme");
+      if (theme === "dark") {
+        root.classList.add("dark");
+      } else if (theme === "light") {
+        root.classList.remove("dark");
+      }
+
+      // Theme toggle logic
+      themeToggle?.addEventListener("click", () => {
+        const isDark = root.classList.toggle("dark");
+        localStorage.setItem("theme", isDark ? "dark" : "light");
+      });
+
+      // Mobile menu toggle logic
+      let open = false;
+      menuBtn.addEventListener("click", () => {
+        open = !open;
+        panel.classList.toggle("scale-y-0", !open);
+        panel.classList.toggle("scale-y-100", open);
+      });
+
+      // Close menu on outside click
+      document.addEventListener("click", (e) => {
+        if (!panel.contains(e.target) && !menuBtn.contains(e.target)) {
+          panel.classList.add("scale-y-0");
+          open = false;
+        }
+      });
+    });
+  </script>
 </html>
