@@ -16,9 +16,9 @@ output "bucket_name" {
 
 output "acm_dns_validation_record" {
   value = {
-    name  = aws_acm_certificate.clarity.domain_validation_options[0].resource_record_name
-    type  = aws_acm_certificate.clarity.domain_validation_options[0].resource_record_type
-    value = aws_acm_certificate.clarity.domain_validation_options[0].resource_record_value
+    name  = tolist(aws_acm_certificate.clarity.domain_validation_options)[0].resource_record_name
+    type  = tolist(aws_acm_certificate.clarity.domain_validation_options)[0].resource_record_type
+    value = tolist(aws_acm_certificate.clarity.domain_validation_options)[0].resource_record_value
   }
 
   description = "DNS CNAME record to add for ACM certificate validation"
