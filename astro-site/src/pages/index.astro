@@ -50,7 +50,26 @@ import Base from "../layouts/base.astro";
         });
     </script>
 
-    <!-- Add the rest of your sections below here: Trusted by, Why, Testimonials, CTA -->
+    <!-- waitlist Feature Flag -->
+     
+    <script>
+      const waitlistEnabled = false;
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const form = document.getElementById("waitlist-form");
+        const button = document.querySelector("#waitlist-form button");
+
+        if (!waitlistEnabled) {
+          form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            alert("Waitlist is currently closed. Check back soon!");
+          });
+          button.disabled = true;
+          button.classList.add("opacity-50", "cursor-not-allowed");
+          button.textContent = "Waitlist Closed";
+        }
+      });
+    </script>
 
     <!-- Trusted by section -->
     <section class="mt-16">
@@ -120,9 +139,9 @@ import Base from "../layouts/base.astro";
     >
       <h2 class="text-2xl font-bold mb-4">Still thinking about it?</h2>
       <p class="mb-6 text-lg">
-        Sign up for more information. <br>The sooner you're on the list, the sooner
-        you'll stop wasting time on the wrong problems. <br><br>Join now. No fluff, no
-        spam, just Clarity.
+        Sign up for more information. <br />The sooner you're on the list, the
+        sooner you'll stop wasting time on the wrong problems. <br /><br />Join
+        now. No fluff, no spam, just Clarity.
       </p>
       <a
         href="#waitlist-form"
