@@ -51,7 +51,7 @@ import Base from "../layouts/base.astro";
     </script>
 
     <!-- waitlist Feature Flag -->
-     
+
     <script>
       const waitlistEnabled = false;
 
@@ -72,7 +72,7 @@ import Base from "../layouts/base.astro";
     </script>
 
     <!-- Trusted by section -->
-    <section class="mt-16">
+    <section id="trusted-by" class="mt-16">
       <p
         class="text-sm uppercase tracking-wide text-gray-500 dark:text-gray-400 mb-4"
       >
@@ -85,6 +85,17 @@ import Base from "../layouts/base.astro";
         <img src="/placeholder-logo4.svg" alt="Logo 4" class="h-8" />
       </div>
     </section>
+
+    <script>
+      const showTrustedBy = false;
+
+      document.addEventListener("DOMContentLoaded", () => {
+        if (!showTrustedBy) {
+          const section = document.getElementById("trusted-by");
+          if (section) section.remove(); // or section.style.display = "none";
+        }
+      });
+    </script>
 
     <!-- Value grid -->
     <section class="mt-20 text-left">

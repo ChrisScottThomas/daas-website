@@ -15,7 +15,7 @@ resource "aws_cloudfront_distribution" "cdn" {
   enabled             = true
   default_root_object = "index.html"
 
-  aliases = ["getclarity.win"]
+  aliases = ["www.getclarity.win"]
 
   default_cache_behavior {
     target_origin_id       = "s3-site"
