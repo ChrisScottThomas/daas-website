@@ -22,3 +22,9 @@ provider "aws" {
   region = "eu-west-2"
 
 }
+
+provider "aws" {
+  # Required to be in N Virgina as Cloudfront doesn't use a certificate from a different region for SSL
+  alias  = "northvirginia"
+  region = "us-east-1"
+}
