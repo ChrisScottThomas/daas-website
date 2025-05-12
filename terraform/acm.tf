@@ -1,4 +1,4 @@
-resource "aws_acm_certificate" "burendo_handbook" {
+resource "aws_acm_certificate" "clarity" {
   provider          = aws.northvirginia
   domain_name       = "getclarity.win"
   validation_method = "DNS"
