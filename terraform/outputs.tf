@@ -27,3 +27,7 @@ output "acm_dns_validation_record" {
 output "acm_certificate_arn" {
   value = aws_acm_certificate.clarity.arn
 }
+
+output "route53_nameservers" {
+  value = aws_route53_zone.clarity.name_servers
+}
