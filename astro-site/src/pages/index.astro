@@ -7,7 +7,7 @@ import Base from "../layouts/base.astro";
     <h1 class="text-4xl font-bold mb-4 leading-tight">
       Clarity. Without the Noise.
     </h1>
-    <p class="text-lg text-gray-600 dark:text-gray-300 mb-8">
+    <p id="sub-header" class="text-lg text-gray-600 dark:text-gray-300 mb-8">
       Join the waitlist for Clarity. — your Strategic Insight-as-a-Service
       Partner. Clear support plans designed for product and enterprise leaders
       who need faster answers, tighter focus, and confident decisions.
@@ -18,7 +18,7 @@ import Base from "../layouts/base.astro";
         type="email"
         name="email"
         required
-        placeholder="you@example.com"
+        placeholder="your@futurepartner.com"
         class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-200"
       />
       <button
@@ -102,26 +102,68 @@ import Base from "../layouts/base.astro";
       <h2 class="text-2xl font-bold mb-6 text-center">
         Why Insight-as-a-Service?
       </h2>
-      <div class="grid md:grid-cols-3 gap-8">
+      <div class="grid md:grid-cols-2 gap-8">
         <div class="p-6 border rounded-lg bg-white dark:bg-black/20 shadow-sm">
           <h3 class="font-semibold text-lg mb-2">Outcome Clarity.</h3>
           <p class="text-sm text-gray-600 dark:text-gray-300">
-            Know exactly what to build and why. No more guessing, scope creep,
-            or building the wrong thing.
+            Know exactly what to build and why. <br />No more guessing, scope
+            creep, or wasted effort.
           </p>
         </div>
         <div class="p-6 border rounded-lg bg-white dark:bg-black/20 shadow-sm">
-          <h3 class="font-semibold text-lg mb-2">Embedded Expertise</h3>
+          <h3 class="font-semibold text-lg mb-2">Embedded Expertise.</h3>
           <p class="text-sm text-gray-600 dark:text-gray-300">
-            Our team integrates into yours. No bloated decks or outside
-            observers. Just delivery-ready, actionable insight.
+            We integrate into your team, not just your calendar.<br /> No bloated
+            decks. Just actionable insight.
           </p>
         </div>
         <div class="p-6 border rounded-lg bg-white dark:bg-black/20 shadow-sm">
-          <h3 class="font-semibold text-lg mb-2">Predictable Cost</h3>
+          <h3 class="font-semibold text-lg mb-2">Predictable Cost.</h3>
           <p class="text-sm text-gray-600 dark:text-gray-300">
-            Frictionless support plans. Fixed scope, high impact, no unexpected
-            invoices.
+            Frictionless support plans with fixed scope. <br />High impact. No
+            surprises. No extras.
+          </p>
+        </div>
+        <div class="p-6 border rounded-lg bg-white dark:bg-black/20 shadow-sm">
+          <h3 class="font-semibold text-lg mb-2">Strategic Continuity.</h3>
+          <p class="text-sm text-gray-600 dark:text-gray-300">
+            No stop-start engagements or endless SoWs. <br />Consistent
+            thinking, context & momentum.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Value grid -->
+    <section class="mt-20 text-left">
+      <h2 class="text-2xl font-bold mb-6 text-center">Why Clarity.?</h2>
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="p-6 border rounded-lg bg-white dark:bg-black/20 shadow-sm">
+          <h3 class="font-semibold text-lg mb-2">Real Understanding.</h3>
+          <p class="text-sm text-gray-600 dark:text-gray-300">
+            Your language. Your constraints. Your goals. <br />
+            Faster traction. Less translation.
+          </p>
+        </div>
+        <div class="p-6 border rounded-lg bg-white dark:bg-black/20 shadow-sm">
+          <h3 class="font-semibold text-lg mb-2">Confident Decisions.</h3>
+          <p class="text-sm text-gray-600 dark:text-gray-300">
+            We combine proven frameworks with lived experience. <br />Clear.
+            Justified. Actionable recommendations.
+          </p>
+        </div>
+        <div class="p-6 border rounded-lg bg-white dark:bg-black/20 shadow-sm">
+          <h3 class="font-semibold text-lg mb-2">Faster Progress.</h3>
+          <p class="text-sm text-gray-600 dark:text-gray-300">
+            You'll leave each engagement with tangible outputs:<br /> Priorities.
+            Blockers. Next steps. Immediate progress.
+          </p>
+        </div>
+        <div class="p-6 border rounded-lg bg-white dark:bg-black/20 shadow-sm">
+          <h3 class="font-semibold text-lg mb-2">Zero Overhead.</h3>
+          <p class="text-sm text-gray-600 dark:text-gray-300">
+            Our approach is designed to extract insight quickly. <br />You get
+            value without adding more to your plate.
           </p>
         </div>
       </div>
@@ -159,14 +201,14 @@ import Base from "../layouts/base.astro";
     <section
       class="mt-20 bg-gray-900 text-white py-12 px-6 rounded-lg text-center"
     >
-      <h2 class="text-2xl font-bold mb-4">Still thinking about it?</h2>
+      <h2 class="text-2xl font-bold mb-4">Still unsure?</h2>
       <p class="mb-6 text-lg">
-        Sign up for more information. <br />The sooner you're on the list, the
-        sooner you'll stop wasting time on the wrong problems. <br /><br />Join
-        now. No fluff, no spam, just Clarity.
+        We get it, and that's why we're here. <br /> Making decisions is hard without
+        all the data. <br /> Sign up for more information. <br /><br />Join now.
+        No fluff, no spam, just Clarity.
       </p>
       <a
-        href="#waitlist-form"
+        href="#sub-header"
         class="inline-block bg-white text-black font-semibold px-6 py-3 rounded hover:bg-gray-200 transition"
         >Join the Waitlist</a
       >
