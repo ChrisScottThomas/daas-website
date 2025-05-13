@@ -128,7 +128,7 @@ import Base from "../layouts/base.astro";
     </section>
 
     <!-- Testimonials -->
-    <section class="mt-20 text-center">
+    <section id="testimonials" class="mt-20 text-center">
       <h2 class="text-2xl font-bold mb-6">What Our Clients Say</h2>
       <div class="max-w-3xl mx-auto">
         <blockquote
@@ -143,6 +143,17 @@ import Base from "../layouts/base.astro";
         </p>
       </div>
     </section>
+
+    <script>
+      const showTestimonials = false;
+
+      document.addEventListener("DOMContentLoaded", () => {
+        if (!showTestimonials) {
+          const section = document.getElementById("testimonials");
+          if (section) section.remove(); // or section.style.display = "none";
+        }
+      });
+    </script>
 
     <!-- Final CTA -->
     <section
