@@ -101,6 +101,24 @@ import "../styles/base.css";
             d="M4 6h16M4 12h16M4 18h16"></path>
         </svg>
       </button>
+      <!-- Home Icon -->
+      <a
+        href="/"
+        class="z-50 p-2 rounded hover:bg-gray-200 dark:hover:bg-gray-700"
+        aria-label="Home"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          class="w-6 h-6 text-gray-700 dark:text-white"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M2.25 12.5l9-9 9 9v8.25a.75.75 0 01-.75.75h-4.5v-5.25a.75.75 0 00-.75-.75h-6a.75.75 0 00-.75.75v5.25h-4.5a.75.75 0 01-.75-.75V12.5z"
+            clip-rule="evenodd"></path>
+        </svg>
+      </a>
     </header>
 
     <!-- Slide-down mobile menu -->
@@ -110,12 +128,18 @@ import "../styles/base.css";
     >
       <ul class="flex flex-col items-start gap-4 p-6 text-lg font-medium">
         <li>
-          <a href="/how-we-can-help" class="hover:underline">How we can help</a>
+          <a href="/what-is-insight-as-a-service" class="hover:underline"
+            >What is Insight-as-a-Service?</a
+          >
         </li>
         <li>
-          <a href="/support-plans" class="hover:underline">Support Plans</a>
+          <a href="/why-clarity" class="hover:underline">Why Clarity.?</a>
         </li>
-        <li><a href="/about" class="hover:underline">About</a></li>
+        <li>
+          <a href="/why-insight-as-a-service" class="hover:underline"
+            >Why Insight-as-a-Service?</a
+          >
+        </li>
       </ul>
     </nav>
 
@@ -199,7 +223,6 @@ import "../styles/base.css";
       </svg>
     </footer>
 
-  <script type="module" src="/scripts/menu.js"></script>
-
+    <script type="module" src="/scripts/menu.js"></script>
   </body>
 </html>
