@@ -1,128 +1,191 @@
-# Clarity — Insight-as-a-Service Waitlist
+# Clarity. — Insight-as-a-Service
 
-A high-confidence, statically generated waitlist website for Clarity, a Strategic Insight-as-a-Service support plan for enterprise and product leaders. Built with Astro + Tailwind CSS, deployed via AWS (S3, CloudFront, API Gateway, Lambda, DynamoDB) using Terraform and GitHub Actions.
+Clarity. is a strategic Insight-as-a-Service platform, offering leadership support plans for product and enterprise decision-makers.  
+This repo powers the Clarity. website and waitlist, built for speed, clarity, and simplicity.
+
+> 🌐 Live site: https://getclarity.win
+
+---
+
+## ⚙️ Stack Overview
+
+| Area              | Technology                           |
+|-------------------|---------------------------------------|
+| Frontend          | Astro                                 |
+| Styling           | Tailwind CSS                          |
+| State             | Fully static, no JS frameworks used   |
+| Hosting           | AWS S3 + CloudFront                   |
+| Form backend      | AWS API Gateway + Lambda + DynamoDB   |
+| Email             | AWS SES (with confirmation flow)      |
+| Domain/DNS        | Route 53 + getclarity.win             |
+| Infra Management  | Terraform                             |
+| Deployment        | GitHub Actions                        |
 
 ---
 
 ## 📁 Project Structure
-```
-.
-├── astro-site/           # Static site built with Astro
-│   ├── src/              # Pages, components, and styles
-│   └── public/           # Static assets (robots.txt, favicon)
-├── lambda/               # Lambda function to handle form submissions
-├── terraform/            # Infrastructure as Code (AWS setup)
-├── .github/workflows/    # GitHub Actions deploy pipeline
-└── README.md
-```
+
+/
+├── src/
+│   ├── pages/               # All routable .astro pages
+│   ├── layouts/             # Base layout template
+│   ├── styles/              # Tailwind and global styles
+│   ├── scripts/             # Theme + burger menu logic
+├── public/                  # Static assets (logos, favicon, robots.txt)
+├── terraform/               # IaC for S3, CloudFront, Lambda, SES etc.
+├── .github/workflows/       # GitHub Actions CI/CD pipeline
+├── package.json             # Site dependencies
+└── README.md                # This file
 
 ---
 
-## 🚀 Live Components
+## 🧠 Key Pages
 
-### 🌐 Astro Frontend (`astro-site/`)
-- Static landing page + thank-you page
-- Tailwind CSS for styling
-- Deployed to S3 and served via CloudFront
-
-### 📬 Waitlist API (Lambda + API Gateway)
-- Accepts form submissions (email only)
-- Stores to DynamoDB
-- Sends SES email confirmation
-
-### ☁️ Terraform Infrastructure (`terraform/`)
-- S3 buckets (frontend + state)
-- CloudFront CDN
-- API Gateway
-- Lambda function
-- DynamoDB for storage
-- IAM roles and permissions
+| Route                  | Purpose                                |
+|------------------------|----------------------------------------|
+| /                      | Waitlist landing page                  |
+| /thank-you             | Post-submission confirmation           |
+| /how-we-can-help       | Overview of the service model          |
+| /support-plans         | Pricing and engagement options         |
+| /about                 | Mission, vision, and philosophy        |
 
 ---
 
-## 🧰 Dependencies
+## 🚀 Local Development
 
-Install the following before use:
-```bash
-brew install nvm && nvm install 20
-npm install -g terraform
-npm install -g npm@9.6.7
-```
+### 1. Install dependencies
 
-Install project-specific dependencies:
-```bash
-cd astro-site
 npm install
-```
 
----
+### 2. Run the dev server
 
-## 🛠 Running Locally
-
-### Frontend
-```bash
-cd astro-site
 npm run dev
-```
-Visit: `http://localhost:4321`
 
-### Build for Production
-```bash
+Visit http://localhost:4321
+
+### 3. Build for production
+
 npm run build
-```
-Generates `astro-site/dist/` for S3 upload.
+
+Output is generated in dist/.
 
 ---
 
-## 🧪 Testing Lambda
-Edit and test `lambda/index.js` manually or deploy to AWS using Terraform.
+## ☁️ Infrastructure (Terraform)
 
-### Environment Variables
-Ensure Lambda is configured with:
-- `TABLE_NAME`
-- `SENDER_EMAIL`
+The terraform/ directory provisions:
 
----
+- S3 bucket (static site hosting)
+- CloudFront distribution (CDN + SSL)
+- Route 53 DNS zone (getclarity.win)
+- API Gateway + Lambda (waitlist handler)
+- DynamoDB (waitlist email storage)
+- SES (email confirmation)
 
-## 🔁 Deployment Pipeline
-GitHub Actions handles full CI/CD:
-- Builds Astro site
-- Pulls API Gateway URL from Terraform outputs
-- Injects it into landing page
-- Syncs final `dist/` folder to S3
+### Getting Started
 
-To trigger manually:
-```bash
-git push origin main
-```
-
----
-
-## ⚙️ Terraform Setup
-```bash
 cd terraform
 terraform init
 terraform apply
-```
-Outputs:
-- API Gateway endpoint
-- Bucket name
-- CloudFront URL
+
+> ACM certificates must be created in us-east-1 for CloudFront compatibility.  
+> If you're not using Route 53 for your domain registrar, update NS records manually.
 
 ---
 
-## 📥 SES Setup (Amazon Console)
-1. Verify your sender email address
-2. Stay in sandbox or request production access
+## 📬 SES Email Flow
+
+1. Form submission triggers API Gateway → Lambda.
+2. Lambda stores the email in DynamoDB.
+3. Lambda sends confirmation email via SES.
+
+### Required Lambda Environment Variables
+
+- TABLE_NAME — DynamoDB table
+- SENDER_EMAIL — Verified SES sender
 
 ---
 
-## 🧼 TODOs
-- Add real domain
-- Enable Plausible or GoatCounter analytics
-- Add logo, real testimonials, and client logos
-- Add pricing or plans page as needed
+## 🔐 Domain: getclarity.win
+
+- DNS is managed via Route 53
+- Domain registered externally (e.g. GoDaddy)
+- NS records must be pointed to Route 53
+- SSL issued via ACM for:
+  - getclarity.win
+  - www.getclarity.win
 
 ---
 
-Built to be fast, lightweight, and credible for high-value B2B offerings.
+## 🌗 Features
+
+- Fully responsive layout (mobile-first)
+- Dark/light mode with persistent toggle
+- Burger menu with accessible interactions
+- Fixed logo + home icon navigation
+- Feature-flag logic to enable/disable sections (e.g. Join button, testimonials)
+- SVG-based brand logo adapting to theme
+- Single layout system (base.astro) for consistency
+
+---
+
+## 🧪 Testing the Lambda Locally
+
+1. Edit the lambda/index.js file
+2. Manually invoke the handler or deploy via Terraform
+3. Use test event payloads (email-only JSON)
+
+---
+
+## 🛠 Deployment (CI/CD)
+
+All commits to main trigger a GitHub Actions workflow:
+
+- Builds the Astro static site
+- Injects the deployed API Gateway URL into the form
+- Uploads to S3
+- Invalidates CloudFront
+
+Manually trigger a redeploy:
+
+git push origin main
+
+---
+
+## 📈 Future Enhancements
+
+- Analytics (e.g. Plausible, GoatCounter)
+- Expanded pages (FAQs, ROI calculator, use cases)
+- Add testimonials and client logos
+- Add authentication for subscriber dashboard
+- Multi-page form flow or plan selector
+- Add 404 page and sitemap.xml
+
+---
+
+## 🧠 Inspiration & Philosophy
+
+Clarity. was inspired by:
+
+- Unreasonable Hospitality by Will Guidara
+- $100M Offers by Alex Hormozi
+- Real frustrations of product teams and digital leaders
+
+It’s built to be practical, fast, and minimal —  
+because decision-makers don’t have time for fluff.
+
+---
+
+## 👨‍💻 Maintainer
+
+Made by Chris Scott-Thomas  
+Crafted with Astro, AWS, and a lot of care.
+
+---
+
+## 🫶 License
+
+MIT — free to use, fork, or learn from.
+
+> Built for clarity.  
+> Without the noise.
