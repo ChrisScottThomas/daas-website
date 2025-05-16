@@ -24,7 +24,7 @@ This repo powers the Clarity. website and waitlist, built for speed, clarity, an
 ---
 
 ## 📁 Project Structure
-
+```
 /
 ├── src/
 │   ├── pages/               # All routable .astro pages
@@ -36,7 +36,7 @@ This repo powers the Clarity. website and waitlist, built for speed, clarity, an
 ├── .github/workflows/       # GitHub Actions CI/CD pipeline
 ├── package.json             # Site dependencies
 └── README.md                # This file
-
+```
 ---
 
 ## 🧠 Key Pages
