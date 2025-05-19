@@ -69,7 +69,8 @@ import Base from "../layouts/base.astro";
           <li>Radar picks up issues early</li>
         </ul>
         <blockquote class="italic text-blue-200 mt-2">
-          “You spend less time explaining everything again and more time moving forward.”
+          “You spend less time explaining everything again and more time moving
+          forward.”
         </blockquote>
       </div>
     </div>
@@ -110,23 +111,35 @@ import Base from "../layouts/base.astro";
     <div class="grid md:grid-cols-3 gap-8 text-center text-sm md:text-base">
       <div class="p-4 border rounded-lg bg-white dark:bg-black/20">
         <h3 class="font-semibold text-lg mb-2">Clarity. Base</h3>
-        <p>
-          For teams starting small or validating one area.<br />Quick traction,
-          clear priorities, light support.
+        <p class="text-left">
+          <li class="text-left">
+            For teams starting small or validating one area.
+          </li><li class="text-left">
+            Quick traction, clear priorities, light support.
+          </li>
         </p>
       </div>
       <div class="p-4 border rounded-lg bg-white dark:bg-black/20">
         <h3 class="font-semibold text-lg mb-2">Clarity. Plus</h3>
-        <p>
-          For product and platform leaders juggling multiple moving parts.<br
-          />Ongoing prioritisation, insight, and sharper decisions.
+        <p class="text-left">
+          <li class="text-left">
+            For product and platform leaders juggling multiple moving parts.
+          </li>
+          <li class="text-left">
+            Ongoing prioritisation, insight, and sharper decisions.
+          </li>
         </p>
       </div>
       <div class="p-4 border rounded-lg bg-white dark:bg-black/20">
         <h3 class="font-semibold text-lg mb-2">Clarity. Partner</h3>
-        <p>
-          For high-velocity orgs or complex portfolios.<br />Proactive support,
-          deeper embeddedness, and foresight you can act on.
+        <p class="text-left">
+          <li class="text-left">
+            For high-velocity orgs or complex portfolios.
+          </li>
+          <li class="text-left">
+            Proactive support, deeper embeddedness, and foresight you can act
+            on.
+          </li>
         </p>
       </div>
     </div>
@@ -172,46 +185,53 @@ import Base from "../layouts/base.astro";
   </section>
 
   <!-- Navigation Arrows -->
-  <section class="my-32 flex justify-center items-center gap-16">
-    <!-- Left Arrow Link -->
-    <a
-      href="/why-clarity-works"
-      aria-label="Previous page"
-      class="hover:text-blue-600 transition"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        viewBox="0 0 24 24"
-        width="64"
-        height="64"
+  <section class="my-16 flex flex-col items-center gap-4 text-center">
+    <p class="text-lg text-gray-600 dark:text-gray-400">
+      Got some unanswered questions? Check out the FAQ.
+    </p>
+    <div class="flex gap-12 justify-center items-center">
+      <!-- Left Arrow Link -->
+      <a
+        href="/why-clarity-works"
+        aria-label="Previous page"
+        class="hover:text-blue-600 transition"
       >
-        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"
-        ></path>
-      </svg>
-    </a>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+          width="64"
+          height="64"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M15 19l-7-7 7-7"></path>
+        </svg>
+      </a>
 
-    <!-- Right Arrow Link -->
-    <a
-      href="/faq"
-      aria-label="Next page"
-      class="hover:text-blue-600 transition"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        viewBox="0 0 24 24"
-        width="64"
-        height="64"
+      <!-- Right Arrow Link -->
+      <a
+        href="/faq"
+        aria-label="Next page"
+        class="hover:text-blue-600 transition"
       >
-        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"
-        ></path>
-      </svg>
-    </a>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+          width="64"
+          height="64"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"
+          ></path>
+        </svg>
+      </a>
+    </div>
   </section>
 
   <div class="text-center mb-24">
