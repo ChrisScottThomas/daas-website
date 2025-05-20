@@ -1,8 +1,13 @@
 ---
+import HeadMeta from "../components/HeadMeta.astro";
 const {
   title = "Clarity — Insight-as-a-Service",
   description = "Clarity. Strategic Insight-as-a-Service support for product and enterprise leaders.",
-  ogImage = "https://getclarity.win/og-image.jpg",
+  type,
+  pubDate,
+  updatedDate,
+  canonicalURL,
+  ogImage,
 } = Astro.props;
 import "../styles/base.css";
 ---
@@ -12,14 +17,16 @@ import "../styles/base.css";
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{title}</title>
-    <meta name="description" content={description} />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:image" content={ogImage} />
-    <meta property="og:type" content="website" />
+    <HeadMeta
+      title={title}
+      description={description}
+      type={type}
+      pubDate={pubDate}
+      updatedDate={updatedDate}
+      canonicalURL={canonicalURL}
+      ogImage={ogImage}
+    />
     <meta name="robots" content="index, follow" />
-    <meta property="og:url" content="https://getclarity.win" />
 
     <script>
       const theme = localStorage.getItem("theme");

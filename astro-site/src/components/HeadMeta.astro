@@ -1,0 +1,35 @@
+---
+const {
+  title = "Clarity — Insight-as-a-Service",
+  description = "Clarity. Strategic Insight-as-a-Service support for product and enterprise leaders.",
+  type = "WebPage",
+  pubDate,
+  updatedDate,
+  canonicalURL = Astro.url.href,
+  ogImage
+} = Astro.props;
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": type,
+  name: title,
+  description: description,
+  url: canonicalURL,
+  ...(pubDate && { datePublished: pubDate }),
+  ...(updatedDate && { dateModified: updatedDate }),
+};
+---
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonicalURL} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:type" content="website" />
+<meta property="og:url" content={canonicalURL} />
+<script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+<meta property="og:site_name" content="Clarity." />
+<meta
+  property="og:image"
+  content={ogImage ?? "https://getclarity.win/og-image.jpg"}
+/>
