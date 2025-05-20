@@ -1,26 +1,25 @@
 ---
-const { title = "Clarity — Insight-as-a-Service" } = Astro.props;
+const {
+  title = "Clarity — Insight-as-a-Service",
+  description = "Clarity. Strategic Insight-as-a-Service support for product and enterprise leaders.",
+  ogImage = "https://getclarity.win/og-image.jpg",
+} = Astro.props;
 import "../styles/base.css";
 ---
 
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
-    <meta
-      name="description"
-      content="Clarity. Strategic Insight-as-a-Service support for product and enterprise leaders."
-    />
+    <meta name="description" content={description} />
     <meta property="og:title" content={title} />
-    <meta
-      property="og:description"
-      content="Structured insights, not assumptions. Support plans that give you clarity and speed."
-    />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
     <meta property="og:type" content="website" />
     <meta name="robots" content="index, follow" />
     <meta property="og:url" content="https://getclarity.win" />
-    <meta property="og:image" content="https://getclarity.win/og-image.jpg" />
 
     <script>
       const theme = localStorage.getItem("theme");
@@ -85,6 +84,8 @@ import "../styles/base.css";
       <!-- Burger Button -->
       <button
         id="menu-toggle"
+        aria-controls="menu-panel"
+        aria-expanded="false"
         class="z-50 p-2 rounded hover:bg-gray-200 dark:hover:bg-gray-700"
         aria-label="Open menu"
       >
@@ -177,7 +178,7 @@ import "../styles/base.css";
     </button>
 
     <!-- Page content -->
-    <div class="pt-32 px-4">
+    <div class="pt-32 px-4 sm:px-6 lg:px-8">
       <slot />
     </div>
 
