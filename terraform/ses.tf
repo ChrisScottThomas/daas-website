@@ -11,14 +11,9 @@ output "ses_identity_arn" {
   description = "ARN of the verified SES email identity"
 }
 
-# Optional: Custom Mail From Domain (for branding and deliverability)
-# Uncomment if you want to manage MAIL FROM domain later
-# resource "aws_ses_domain_mail_from" "clarity" {
-#   domain           = "getclarity.win"
-#   mail_from_domain = "mail.getclarity.win"
-# 
-#   behavior_on_mx_failure = "UseDefaultValue"
-# }
+resource "aws_ses_domain_mail_from" "clarity" {
+  domain           = "getclarity.win"
+  mail_from_domain = "mail.getclarity.win"
 
-# You’ll still need to confirm the identity manually via the AWS Console (click verification link)
-# Alternatively, you can automate this using Route53 if DNS is hosted in AWS
+  behavior_on_mx_failure = "UseDefaultValue"
+}
