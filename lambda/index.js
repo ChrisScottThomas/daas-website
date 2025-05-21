@@ -42,11 +42,39 @@ exports.handler = async (event) => {
         Subject: { Data: "You're on the waitlist for Clarity." },
         Body: {
           Text: {
-            Data: "Thanks for signing up for more information on the Clarity. Insight-as-a-Service Support Plan. We'll be in touch soon with details, pricing, launch date and more."
+            Data: `Thanks for signing up to learn more about Clarity.
+    
+    You're officially on the waitlist.
+    
+    We'll be in touch soon with launch details, pricing options, and your first steps.
+    
+    Until then — you're not alone in wanting faster decisions, more focus, and less noise.
+    
+    — The Clarity. Team`
+          },
+          Html: {
+            Data: `
+              <html>
+                <body style="font-family: Inter, sans-serif; line-height: 1.6; color: #333;">
+                  <h2 style="color: #0753AD;">You're on the waitlist for Clarity.</h2>
+                  <p>Thanks for signing up to learn more about <strong>Clarity.</strong></p>
+                  <p>You're officially on the waitlist. We'll be in touch soon with:</p>
+                  <ul>
+                    <li>Launch details</li>
+                    <li>Support Plan pricing</li>
+                    <li>Your first steps to get started</li>
+                  </ul>
+                  <p>Until then — you're not alone in wanting faster decisions, more focus, and less noise.</p>
+                  <p style="margin-top: 2em;">— The Clarity. Team</p>
+                </body>
+              </html>
+            `
           }
         }
       }
     }).promise();
+    
+    
 
     console.log("Confirmation email sent via SES to:", email);
 
