@@ -41,3 +41,22 @@ resource "aws_route53_record" "www" {
     evaluate_target_health = false
   }
 }
+
+resource "aws_route53_record" "dkim" {
+  count   = 3
+  zone_id = aws_route53_zone.clarity.zone_id
+  name    = "${aws_ses_domain_dkim.clarity.dkim_tokens[count.index]}._domainkey.getclarity.win"
+  type    = "CNAME"
+  ttl     = 300
+  records = [
+    "${aws_ses_domain_dkim.clarity.dkim_tokens[count.index]}.dkim.amazonses.com"
+  ]
+}
+
+resource "aws_route53_record" "spf" {
+  zone_id = aws_route53_zone.clarity.zone_id
+  name    = "_spf.getclarity.win"
+  type    = "TXT"
+  ttl     = 300
+  records = ["v=spf1 include:amazonses.com ~all"]
+}
