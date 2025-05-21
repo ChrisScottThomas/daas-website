@@ -3,7 +3,8 @@ output "cloudfront_url" {
 }
 
 output "api_endpoint" {
-  value = "${aws_api_gateway_deployment.deployment.invoke_url}/waitlist"
+  description = "Public POST endpoint for waitlist signup"
+  value       = "https://${aws_api_gateway_rest_api.waitlist_api.id}.execute-api.eu-west-2.amazonaws.com/${aws_api_gateway_stage.prod_stage.stage_name}/waitlist"
 }
 
 output "s3_endpoint" {
