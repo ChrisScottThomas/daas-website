@@ -3,8 +3,8 @@ resource "aws_lambda_function" "waitlist" {
   role             = aws_iam_role.lambda_exec.arn
   handler          = "index.handler"
   runtime          = "nodejs18.x"
-  filename         = "../lambda/lambda.zip"
-  source_code_hash = filebase64sha256("../lambda/lambda.zip")
+  filename         = "../lambda.zip"
+  source_code_hash = filebase64sha256("../lambda.zip")
 
   environment {
     variables = {
