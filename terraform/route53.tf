@@ -60,3 +60,13 @@ resource "aws_route53_record" "spf" {
   ttl     = 300
   records = ["v=spf1 include:amazonses.com ~all"]
 }
+
+resource "aws_route53_record" "dmarc" {
+  zone_id = data.aws_route53_zone.clarity.zone_id
+  name    = "_dmarc.getclarity.win"
+  type    = "TXT"
+  ttl     = 300
+  records = [
+    "v=DMARC1; p=none; rua=mailto:postmaster@getclarity.win"
+  ]
+}
