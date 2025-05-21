@@ -70,3 +70,19 @@ resource "aws_route53_record" "dmarc" {
     "v=DMARC1; p=none; rua=mailto:postmaster@getclarity.win"
   ]
 }
+
+resource "aws_route53_record" "mail_from_spf" {
+  zone_id = aws_route53_zone.clarity.zone_id
+  name    = "mail.getclarity.win"
+  type    = "TXT"
+  ttl     = 300
+  records = ["v=spf1 include:amazonses.com ~all"]
+}
+
+resource "aws_route53_record" "mail_from_mx" {
+  zone_id = aws_route53_zone.clarity.zone_id
+  name    = "mail.getclarity.win"
+  type    = "MX"
+  ttl     = 300
+  records = ["10 feedback-smtp.eu-west-2.amazonses.com"]
+}
