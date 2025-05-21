@@ -62,7 +62,7 @@ resource "aws_route53_record" "spf" {
 }
 
 resource "aws_route53_record" "dmarc" {
-  zone_id = data.aws_route53_zone.clarity.zone_id
+  zone_id = aws_route53_zone.clarity.zone_id
   name    = "_dmarc.getclarity.win"
   type    = "TXT"
   ttl     = 300
