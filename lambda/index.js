@@ -5,28 +5,50 @@ const TABLE_NAME = process.env.TABLE_NAME;
 const SENDER_EMAIL = process.env.SENDER_EMAIL;
 
 exports.handler = async (event) => {
+  console.log("Lambda invoked", {
+    timestamp: new Date().toISOString(),
+    method: event.httpMethod,
+    path: event.path,
+  });
+
   try {
-    const { email } = JSON.parse(event.body);
+    const body = JSON.parse(event.body);
+    const email = body?.email;
 
     if (!email || !email.includes('@')) {
-      return { statusCode: 400, body: JSON.stringify({ error: 'Invalid email' }) };
+      console.warn("Invalid email received:", email);
+      return {
+        statusCode: 400,
+        body: JSON.stringify({ error: 'Invalid email' })
+      };
     }
+
+    console.log("Valid email received:", email);
 
     await dynamo.put({
       TableName: TABLE_NAME,
-      Item: { email, createdAt: new Date().toISOString() }
+      Item: {
+        email,
+        createdAt: new Date().toISOString()
+      }
     }).promise();
+
+    console.log("Email stored in DynamoDB");
 
     await ses.sendEmail({
       Source: SENDER_EMAIL,
       Destination: { ToAddresses: [email] },
       Message: {
-        Subject: { Data: "You're on the waitlist for Clarity" },
+        Subject: { Data: "You're on the waitlist for Clarity." },
         Body: {
-          Text: { Data: "Thanks for signing up for Clarity — our Strategic Insight-as-a-Service support plan. We'll be in touch soon with next steps." }
+          Text: {
+            Data: "Thanks for signing up for more information on the Clarity. Insight-as-a-Service Support Plan. We'll be in touch soon with details, pricing, launch date and more."
+          }
         }
       }
     }).promise();
+
+    console.log("Confirmation email sent via SES to:", email);
 
     return {
       statusCode: 200,
@@ -36,8 +58,16 @@ exports.handler = async (event) => {
       },
       body: JSON.stringify({ success: true })
     };
+
   } catch (err) {
-    console.error(err);
-    return { statusCode: 500, body: JSON.stringify({ error: 'Server error' }) };
+    console.error("Lambda failed:", {
+      message: err.message,
+      stack: err.stack
+    });
+
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: 'Server error' })
+    };
   }
 };
