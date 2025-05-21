@@ -36,7 +36,7 @@ jobs:
       run: |
         cd lambda
         npm ci
-        zip -r ../lambda.zip .
+        zip -r lambda.zip .
 
     - name: Terraform Init & Apply
       run: |
