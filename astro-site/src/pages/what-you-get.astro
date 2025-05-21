@@ -109,47 +109,53 @@ import Base from "../layouts/base.astro";
     </ul>
   </section>
 
-  <section class="max-w-4xl mx-auto mb-24">
+  <section class="max-w-4xl mx-auto mb-24 px-4">
     <h2 class="text-2xl font-bold mb-6 text-center">
       Choosing the Right Support Plan
     </h2>
-    <div class="grid md:grid-cols-3 gap-8 text-center text-sm md:text-base">
-      <div class="p-4 border rounded-lg bg-white dark:bg-black/20">
-        <h3 class="font-semibold text-lg mb-2">Clarity. Base</h3>
-        <p class="text-left">
-          <li class="text-left">
-            For teams starting small or validating one area.
-          </li><li class="text-left">
-            Quick traction, clear priorities, light support.
-          </li>
-        </p>
+
+    <div class="grid md:grid-cols-3 gap-6 items-stretch text-sm md:text-base">
+      <!-- Base -->
+      <div
+        class="flex flex-col h-full p-6 border rounded-lg bg-white dark:bg-black/20 text-left"
+      >
+        <h3 class="font-semibold text-lg mb-3 text-center">Clarity. Base</h3>
+        <ul class="list-disc list-outside pl-5 space-y-2">
+          <li>For teams starting small or validating one area.</li>
+          <li>Quick traction, clear priorities, light support.</li>
+        </ul>
       </div>
-      <div class="p-4 border rounded-lg bg-white dark:bg-black/20">
-        <h3 class="font-semibold text-lg mb-2">Clarity. Plus</h3>
-        <p class="text-left">
-          <li class="text-left">
+
+      <!-- Plus -->
+      <div
+        class="flex flex-col h-full p-6 border rounded-lg bg-white dark:bg-black/20 text-left"
+      >
+        <h3 class="font-semibold text-lg mb-3 text-center">Clarity. Plus</h3>
+        <ul class="list-disc list-outside pl-5 space-y-2">
+          <li>
             For product and platform leaders juggling multiple moving parts.
           </li>
-          <li class="text-left">
-            Ongoing prioritisation, insight, and sharper decisions.
-          </li>
-        </p>
+          <li>Ongoing prioritisation, insight, and sharper decisions.</li>
+        </ul>
       </div>
-      <div class="p-4 border rounded-lg bg-white dark:bg-black/20">
-        <h3 class="font-semibold text-lg mb-2">Clarity. Partner</h3>
-        <p class="text-left">
-          <li class="text-left">
-            For high-velocity orgs or complex portfolios.
-          </li>
-          <li class="text-left">
+
+      <!-- Partner -->
+      <div
+        class="flex flex-col h-full p-6 border rounded-lg bg-white dark:bg-black/20 text-left"
+      >
+        <h3 class="font-semibold text-lg mb-3 text-center">Clarity. Partner</h3>
+        <ul class="list-disc list-outside pl-5 space-y-2">
+          <li>For high-velocity orgs or complex portfolios.</li>
+          <li>
             Proactive support, deeper embeddedness, and foresight you can act
             on.
           </li>
-        </p>
+        </ul>
       </div>
     </div>
+
     <blockquote
-      class="italic text-center mt-4 text-blue-500 dark:text-blue-300"
+      class="italic text-center mt-6 text-blue-500 dark:text-blue-300"
     >
       “Not sure? Start small. Most clients scale up once they feel the support.”
     </blockquote>
