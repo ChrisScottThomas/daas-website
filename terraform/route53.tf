@@ -124,10 +124,13 @@ resource "aws_route53_record" "ses_verification" {
   records = [aws_ses_domain_identity.clarity.verification_token]
 }
 
-resource "aws_route53_record" "gmail_dkim" {
+resource "aws_route53_record" "google_dkim" {
   zone_id = aws_route53_zone.clarity.zone_id
-  name    = "google._domainkey.${aws_route53_zone.clarity.name}"
+  name    = "google._domainkey.getclarity.win"
   type    = "TXT"
   ttl     = 300
-  records = ["v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsRh7KMmvzxH7WjY6xAcQEKkwhHqhR4Vhz1Lo0HynKA1EZPASVrGmjkcozUCyr9x8fmqhzlfPRDaQKSnWt/885KLQuQhJDTp7uYLZ+9V48D7JD/WXE+qOzemeNnkE12xoKuig7PlcVcjUvKG6C9a7L9Qugs57HJakPN4Z1ku3N9BKq5Q7/3ib0kvtvUC2uVAz9yaeIkk443dx/zKiblKYp8KElpq6LJsHqLf3CjduQ00vBx2vmXo14lIvRGU6UCOU2B/4C+DbX5HrqIzzXThMzigPoMorCfh2UIzDyosz9cDW+Dp/pHiI6ScET3qHB2Yiu6kfHhPFDvnRnokbwOqf+wIDAQAB"]
+  records = [
+    "v=DKIM1; k=rsa; ",
+    "p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsRh7KMmvzxH7WjY6xAcQEKkwhHqhR4Vhz1Lo0HynKA1EZPASVrGmjkcozUCyr9x8fmqhzlfPRDaQKSnWt/885KLQuQhJDTp7uYLZ+9V48D7JD/WXE+qOzemeNnkE12xoKuig7PlcVcjUvKG6C9a7L9Qugs57HJakPN4Z1ku3N9BKq5Q7/3ib0kvtvUC2uVAz9yaeIkk443dx/zKiblKYp8KElpq6LJsHqLf3CjduQ00vBx2vmXo14lIvRGU6UCOU2B/4C+DbX5HrqIzzXThMzigPoMorCfh2UIzDyosz9cDW+Dp/pHiI6ScET3qHB2Yiu6kfHhPFDvnRnokbwOqf+wIDAQAB"
+  ]
 }
