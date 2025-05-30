@@ -1,4 +1,5 @@
 const AWS = require('aws-sdk');
+const fetch = require('node-fetch'); // Required for Airtable POST
 const dynamo = new AWS.DynamoDB.DocumentClient();
 const ses = new AWS.SES();
 const secretsManager = new AWS.SecretsManager();
@@ -9,22 +10,24 @@ const AIRTABLE_SECRET_ARN = process.env.AIRTABLE_SECRET_ARN;
 const AIRTABLE_BASE_ID = process.env.AIRTABLE_BASE_ID;
 const AIRTABLE_TABLE_NAME = process.env.AIRTABLE_TABLE_NAME;
 
-let airtableToken; // cache across invocations
+let airtableToken;
 
 async function getAirtableToken() {
   if (airtableToken) return airtableToken;
 
+  console.log("Fetching Airtable token from Secrets Manager...");
   const secret = await secretsManager.getSecretValue({
     SecretId: AIRTABLE_SECRET_ARN,
   }).promise();
-
   airtableToken = secret.SecretString;
+
+  console.log("Airtable token successfully retrieved.");
   return airtableToken;
 }
 
 const postToAirtable = async ({ email, foundingMember }) => {
+  console.log("Posting to Airtable...");
   const token = await getAirtableToken();
-
   const url = `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${encodeURIComponent(AIRTABLE_TABLE_NAME)}`;
 
   const body = {
@@ -49,19 +52,20 @@ const postToAirtable = async ({ email, foundingMember }) => {
   });
 
   if (!res.ok) {
-    const err = await res.text();
-    console.error("Airtable API error:", err);
-    throw new Error("Failed to store signup in Airtable");
+    const errText = await res.text();
+    console.error("Airtable POST failed:", errText);
+    throw new Error(`Airtable API Error: ${errText}`);
   }
 
   console.log("Successfully posted to Airtable");
 };
 
 exports.handler = async (event) => {
-  console.log("Lambda invoked", {
+  console.log("Lambda invoked:", {
     timestamp: new Date().toISOString(),
     method: event.httpMethod,
     path: event.path,
+    rawBody: event.body,
   });
 
   try {
@@ -70,16 +74,17 @@ exports.handler = async (event) => {
     const foundingMember = !!body?.foundingMember;
 
     if (!email || !email.includes('@')) {
-      console.warn("Invalid email received:", email);
+      console.warn("Invalid email submitted:", email);
       return {
         statusCode: 400,
         body: JSON.stringify({ error: 'Invalid email' }),
       };
     }
 
-    console.log("Valid email received:", { email, foundingMember });
+    console.log("Processing valid email:", { email, foundingMember });
 
-    // Store in DynamoDB
+    // 1. Store in DynamoDB
+    console.log("Storing signup in DynamoDB...");
     await dynamo.put({
       TableName: TABLE_NAME,
       Item: {
@@ -88,13 +93,13 @@ exports.handler = async (event) => {
         createdAt: new Date().toISOString(),
       },
     }).promise();
+    console.log("Successfully stored in DynamoDB");
 
-    console.log("Email stored in DynamoDB");
-
-    // Store in Airtable
+    // 2. Store in Airtable
     await postToAirtable({ email, foundingMember });
 
-    // Send confirmation email
+    // 3. Send confirmation email
+    console.log("Sending SES confirmation email...");
     await ses.sendEmail({
       Source: SENDER_EMAIL,
       Destination: { ToAddresses: [email] },
@@ -133,8 +138,7 @@ Until then — you're not alone in wanting faster decisions, more focus, and les
         },
       },
     }).promise();
-
-    console.log("Confirmation email sent via SES to:", email);
+    console.log("SES email sent to:", email);
 
     return {
       statusCode: 200,
