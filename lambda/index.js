@@ -36,7 +36,7 @@ const postToAirtable = async ({ email, foundingMember }) => {
         fields: {
           Email: email,
           "Founding Member": foundingMember,
-          "Signup Timestamp": new Date().toISOString(),
+          "Created At": new Date().toISOString(),
         },
       },
     ],
