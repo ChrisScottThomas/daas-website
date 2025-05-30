@@ -86,3 +86,14 @@ resource "aws_route53_record" "mail_from_mx" {
   ttl     = 300
   records = ["10 feedback-smtp.eu-west-2.amazonses.com"]
 }
+
+resource "aws_route53_record" "google_verification" {
+  zone_id = aws_route53_zone.clarity.zone_id
+  name    = aws_route53_zone.clarity.name
+  type    = "TXT"
+  ttl     = 300
+  records = [
+    "google-site-verification=3lFFbJbfvZLdQS1LKuxAYhF4kCMNGGyEMtNhkzysSfo"
+  ]
+  depends_on = [aws_route53_zone.clarity]
+}
