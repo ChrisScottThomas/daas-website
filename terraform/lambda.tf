@@ -10,7 +10,7 @@ resource "aws_lambda_function" "waitlist" {
     variables = {
       TABLE_NAME          = aws_dynamodb_table.waitlist.name
       SENDER_EMAIL        = "hello@getclarity.win"
-      AIRTABLE_TOKEN      = data.aws_secretsmanager_secret.airtable_token.arn
+      AIRTABLE_SECRET_ARN = data.aws_secretsmanager_secret.airtable_token.arn
       AIRTABLE_BASE_ID    = "appK1h4aAzYAGEjTB"
       AIRTABLE_TABLE_NAME = "Signups"
     }
