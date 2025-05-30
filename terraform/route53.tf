@@ -58,7 +58,9 @@ resource "aws_route53_record" "spf" {
   name    = "_spf.getclarity.win"
   type    = "TXT"
   ttl     = 300
-  records = ["v=spf1 include:amazonses.com ~all"]
+  records = [
+    "v=spf1 include:_spf.google.com include:amazonses.com ~all"
+  ]
 }
 
 resource "aws_route53_record" "dmarc" {
@@ -84,7 +86,13 @@ resource "aws_route53_record" "mail_from_mx" {
   name    = "mail.getclarity.win"
   type    = "MX"
   ttl     = 300
-  records = ["10 feedback-smtp.eu-west-2.amazonses.com"]
+  records = [
+    "1 ASPMX.L.GOOGLE.COM.",
+    "5 ALT1.ASPMX.L.GOOGLE.COM.",
+    "5 ALT2.ASPMX.L.GOOGLE.COM.",
+    "10 ALT3.ASPMX.L.GOOGLE.COM.",
+    "10 ALT4.ASPMX.L.GOOGLE.COM."
+  ]
 }
 
 resource "aws_route53_record" "google_verification" {
@@ -96,4 +104,12 @@ resource "aws_route53_record" "google_verification" {
     "google-site-verification=3lFFbJbfvZLdQS1LKuxAYhF4kCMNGGyEMtNhkzysSfo"
   ]
   depends_on = [aws_route53_zone.clarity]
+}
+
+resource "aws_route53_record" "ses_verification" {
+  zone_id = aws_route53_zone.clarity.zone_id
+  name    = "_amazonses.${aws_route53_zone.clarity.name}"
+  type    = "TXT"
+  ttl     = 300
+  records = [aws_ses_domain_identity.clarity.verification_token]
 }
