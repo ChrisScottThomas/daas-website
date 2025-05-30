@@ -81,6 +81,16 @@ resource "aws_route53_record" "mail_from_spf" {
   records = ["v=spf1 include:amazonses.com ~all"]
 }
 
+resource "aws_route53_record" "google_activation_mx" {
+  zone_id = aws_route53_zone.clarity.zone_id
+  name    = aws_route53_zone.clarity.name
+  type    = "MX"
+  ttl     = 300
+  records = [
+    "1 SMTP.GOOGLE.COM."
+  ]
+}
+
 resource "aws_route53_record" "mail_from_mx" {
   zone_id = aws_route53_zone.clarity.zone_id
   name    = "mail.getclarity.win"
