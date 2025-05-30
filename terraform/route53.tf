@@ -91,9 +91,9 @@ resource "aws_route53_record" "google_activation_mx" {
   ]
 }
 
-resource "aws_route53_record" "mail_from_mx" {
+resource "aws_route53_record" "gmail_mx" {
   zone_id = aws_route53_zone.clarity.zone_id
-  name    = "mail.getclarity.win"
+  name    = "getclarity.win"
   type    = "MX"
   ttl     = 300
   records = [
@@ -102,6 +102,16 @@ resource "aws_route53_record" "mail_from_mx" {
     "5 ALT2.ASPMX.L.GOOGLE.COM.",
     "10 ALT3.ASPMX.L.GOOGLE.COM.",
     "10 ALT4.ASPMX.L.GOOGLE.COM."
+  ]
+}
+
+resource "aws_route53_record" "mail_from_mx" {
+  zone_id = aws_route53_zone.clarity.zone_id
+  name    = "mail.getclarity.win"
+  type    = "MX"
+  ttl     = 300
+  records = [
+    "10 feedback-smtp.eu-west-2.amazonses.com"
   ]
 }
 
