@@ -98,16 +98,59 @@ exports.handler = async (event) => {
     // 2. Store in Airtable
     await postToAirtable({ email, foundingMember });
 
-    // 3. Send confirmation email
-    console.log("Sending SES confirmation email...");
-    await ses.sendEmail({
-      Source: SENDER_EMAIL,
-      Destination: { ToAddresses: [email] },
-      Message: {
-        Subject: { Data: "You're on the waitlist for Clarity." },
-        Body: {
-          Text: {
-            Data: `Thanks for signing up to learn more about Clarity.
+    // Send different confirmation emails based on foundingMember status
+    const subject = foundingMember
+      ? "Welcome, Founding Member — You're In"
+      : "You're on the waitlist for Clarity.";
+
+    const htmlBody = foundingMember
+      ? `
+  <html>
+    <body style="font-family: Inter, sans-serif; line-height: 1.6; color: #333;">
+      <h2 style="color: #0753AD;">You're officially a Clarity. Founding Member</h2>
+      <p>Thanks for joining early — we're excited to shape Clarity. with you.</p>
+      <p>You'll get first access to:</p>
+      <ul>
+        <li>Founding pricing</li>
+        <li>Exclusive onboarding</li>
+        <li>Input into our first Support Plans</li>
+      </ul>
+      <p>We'll be in touch very soon. Until then — welcome to the inside.</p>
+      <p style="margin-top: 2em;">— The Clarity. Team</p>
+    </body>
+  </html>
+`
+      : `
+  <html>
+    <body style="font-family: Inter, sans-serif; line-height: 1.6; color: #333;">
+      <h2 style="color: #0753AD;">You're on the waitlist for Clarity.</h2>
+      <p>Thanks for signing up to learn more about <strong>Clarity.</strong></p>
+      <p>You're officially on the waitlist. We'll be in touch soon with:</p>
+      <ul>
+        <li>Launch details</li>
+        <li>Support Plan pricing</li>
+        <li>Your first steps to get started</li>
+      </ul>
+      <p>Until then — you're not alone in wanting faster decisions, more focus, and less noise.</p>
+      <p style="margin-top: 2em;">— The Clarity. Team</p>
+    </body>
+  </html>
+`;
+
+    const textBody = foundingMember
+      ? `You're officially a Clarity. Founding Member.
+
+Thanks for joining early — we're excited to shape Clarity. with you.
+
+You'll get first access to:
+- Founding pricing
+- Exclusive onboarding
+- Input into our first Support Plans
+
+We'll be in touch very soon. Until then — welcome to the inside.
+
+— The Clarity. Team`
+      : `Thanks for signing up to learn more about Clarity.
 
 You're officially on the waitlist.
 
@@ -115,29 +158,24 @@ We'll be in touch soon with launch details, pricing options, and your first step
 
 Until then — you're not alone in wanting faster decisions, more focus, and less noise.
 
-— The Clarity. Team`,
-          },
-          Html: {
-            Data: `
-              <html>
-                <body style="font-family: Inter, sans-serif; line-height: 1.6; color: #333;">
-                  <h2 style="color: #0753AD;">You're on the waitlist for Clarity.</h2>
-                  <p>Thanks for signing up to learn more about <strong>Clarity.</strong></p>
-                  <p>You're officially on the waitlist. We'll be in touch soon with:</p>
-                  <ul>
-                    <li>Launch details</li>
-                    <li>Support Plan pricing</li>
-                    <li>Your first steps to get started</li>
-                  </ul>
-                  <p>Until then — you're not alone in wanting faster decisions, more focus, and less noise.</p>
-                  <p style="margin-top: 2em;">— The Clarity. Team</p>
-                </body>
-              </html>
-            `,
-          },
+— The Clarity. Team`;
+
+    await ses.sendEmail({
+      Source: SENDER_EMAIL,
+      Destination: { ToAddresses: [email] },
+      Message: {
+        Subject: { Data: subject },
+        Body: {
+          Text: { Data: textBody },
+          Html: { Data: htmlBody },
         },
       },
     }).promise();
+
+    console.log(
+      `Confirmation email sent via SES (${foundingMember ? "Founding Member" : "Waitlist"}) to:`,
+      email
+    );
     console.log("SES email sent to:", email);
 
     return {
