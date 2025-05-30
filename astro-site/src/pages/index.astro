@@ -66,12 +66,14 @@ import Base from "../layouts/base.astro";
         .addEventListener("submit", async (e) => {
           e.preventDefault();
           const email = e.target.email.value;
-          const foundingMember = e.target.foundingMember.checked;
+          const foundingMember = e.target.foundingMember?.checked ?? false;
+
           const res = await fetch("API_URL_HERE", {
             method: "POST",
             body: JSON.stringify({ email, foundingMember }),
             headers: { "Content-Type": "application/json" },
           });
+          
           if (res.ok) {
             window.location.href = "/thank-you";
           } else {
