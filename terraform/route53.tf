@@ -83,7 +83,7 @@ resource "aws_route53_record" "mail_from_spf" {
 
 resource "aws_route53_record" "gmail_mx" {
   zone_id = aws_route53_zone.clarity.zone_id
-  name    = "getclarity.win"
+  name    = aws_route53_zone.clarity.name
   type    = "MX"
   ttl     = 300
   records = [
