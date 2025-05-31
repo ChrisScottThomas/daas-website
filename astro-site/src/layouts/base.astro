@@ -67,12 +67,12 @@ import "../styles/base.css";
   >
     <!-- Top-left logo and menu -->
     <header
-      class="fixed top-4 left-4 z-50 flex flex-row items-center gap-4 w-auto"
+      class="fixed top-4 left-4 z-50 flex flex-row items-center gap-4 w-auto bg-white/80 dark:bg-gray-900/80 backdrop-blur-md rounded-lg px-3 py-2 sm:bg-transparent sm:dark:bg-transparent"
     >
       <a href="/" aria-label="Clarity home" class="z-50 shrink-0">
         <!-- Light Logo -->
         <svg
-          class="h-10 dark:hidden"
+          class="h-10 dark:hidden pointer-events-none"
           viewBox="0 0 200 100"
           xmlns="http://www.w3.org/2000/svg"
           preserveAspectRatio="xMidYMid meet"
@@ -92,7 +92,7 @@ import "../styles/base.css";
         </svg>
         <!-- Dark Logo -->
         <svg
-          class="h-10 hidden dark:block"
+          class="h-10 hidden dark:block pointer-events-none"
           viewBox="0 0 200 100"
           xmlns="http://www.w3.org/2000/svg"
           preserveAspectRatio="xMidYMid meet"
@@ -121,7 +121,7 @@ import "../styles/base.css";
         aria-label="Open menu"
       >
         <svg
-          class="w-6 h-6 text-gray-700 dark:text-white"
+          class="w-6 h-6 text-gray-700 dark:text-white pointer-events-none"
           fill="none"
           stroke="currentColor"
           stroke-width="2"
@@ -143,7 +143,7 @@ import "../styles/base.css";
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
           fill="currentColor"
-          class="w-6 h-6 text-gray-700 dark:text-white"
+          class="w-6 h-6 text-gray-700 dark:text-white pointer-events-none"
         >
           <path
             fill-rule="evenodd"
@@ -182,7 +182,7 @@ import "../styles/base.css";
       aria-label="Toggle Theme"
     >
       <svg
-        class="w-6 h-6 dark:hidden"
+        class="w-6 h-6 dark:hidden pointer-events-none"
         fill="none"
         stroke="currentColor"
         stroke-width="2"
@@ -194,7 +194,7 @@ import "../styles/base.css";
           d="M21 12.79A9 9 0 0111.21 3 7 7 0 0012 21a9 9 0 009-8.21z"></path>
       </svg>
       <svg
-        class="w-6 h-6 hidden dark:inline"
+        class="w-6 h-6 hidden dark:inline pointer-events-none"
         fill="none"
         stroke="currentColor"
         stroke-width="2"
@@ -209,7 +209,7 @@ import "../styles/base.css";
     </button>
 
     <!-- Page content -->
-    <div class="pt-32 px-4 sm:px-6 lg:px-8">
+    <div class="pt-32 sm:pt-40 px-4 sm:px-6 lg:px-8">
       <slot />
     </div>
 
@@ -217,7 +217,7 @@ import "../styles/base.css";
     <footer class="mt-16 text-center">
       <!-- Light -->
       <svg
-        class="block dark:hidden mx-auto mb-4"
+        class="block dark:hidden mx-auto mb-4 pointer-events-none"
         viewBox="0 0 400 200"
         xmlns="http://www.w3.org/2000/svg"
       >
@@ -236,7 +236,7 @@ import "../styles/base.css";
       </svg>
       <!-- Dark -->
       <svg
-        class="hidden dark:block mx-auto mb-4"
+        class="hidden dark:block mx-auto mb-4 pointer-events-none"
         viewBox="0 0 400 200"
         xmlns="http://www.w3.org/2000/svg"
       >
