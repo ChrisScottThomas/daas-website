@@ -53,8 +53,9 @@ import Modal from "../components/Modal.astro";
         >
           <h2 class="text-2xl font-bold mb-2">Clarity. Base</h2>
           <p class="text-gray-600 dark:text-gray-400 mb-4">
-            Focused support for a single area or initiative. Perfect for
-            validating, aligning, or accelerating one direction.
+            Responsive, low-friction support focused on a single team or
+            initiative. Often used to accelerate product decisions, unblock
+            delivery, or sharpen direction without spinning up a project.
           </p>
           <!-- Annual -->
           <div x-show="billing === 'annually'" class="mb-4">
@@ -88,9 +89,9 @@ import Modal from "../components/Modal.astro";
           <ul
             class="flex-1 list-disc list-outside pl-6 space-y-2 text-left text-gray-700 dark:text-gray-300"
           >
-            <li>Targeted support when decisions count</li>
-            <li>Context-rich input on a defined focus</li>
-            <li>Actionable direction without scope or delay</li>
+            <li>Lightweight, always-on support for one focus area</li>
+            <li>Quick-turn input that feels embedded, not external</li>
+            <li>Clear thinking when the next step isn't obvious</li>
           </ul>
           <div class="mt-6 text-center">
             <a
@@ -107,8 +108,9 @@ import Modal from "../components/Modal.astro";
         >
           <h2 class="text-2xl font-bold mb-2">Clarity. Plus</h2>
           <p class="text-gray-600 dark:text-gray-400 mb-4">
-            Strategic cadence across multiple workstreams. Designed for teams
-            navigating complexity or change.
+            Trusted support across multiple teams or workstreams. Ideal when
+            strategic clarity needs to scale — but you still want things to feel
+            fast, familiar, and close to the work.
           </p>
           <!-- Annual -->
           <div x-show="billing === 'annually'" class="mb-4">
@@ -138,9 +140,9 @@ import Modal from "../components/Modal.astro";
           <ul
             class="flex-1 list-disc list-outside pl-6 space-y-2 text-left text-gray-700 dark:text-gray-300"
           >
-            <li>Clarity. embedded across your workstreams</li>
-            <li>Proactive prioritisation and decision briefings</li>
-            <li>Strategic radar to track what's coming next</li>
+            <li>Context-aware input across multiple decision points</li>
+            <li>Regular rhythm of sessions, insight, and briefings</li>
+            <li>Strategy stays joined-up even as priorities shift</li>
           </ul>
           <div class="mt-6 text-center">
             <a
@@ -153,12 +155,13 @@ import Modal from "../components/Modal.astro";
 
         <!-- Clarity. Partner -->
         <div
-          class="flex flex-col h-full border-2 border-black dark:border-white rounded-lg p-6 text-left shadow-md bg-gray-50 dark:bg-gray-800"
+          class="flex flex-col h-full border border-gray-300 dark:border-gray-600 rounded-lg p-6 text-left shadow-sm bg-white dark:bg-gray-900"
         >
           <h2 class="text-2xl font-bold mb-2">Clarity. Partner</h2>
           <p class="text-gray-600 dark:text-gray-400 mb-4">
-            Always-on, embedded partnership for fast-moving teams who need
-            clarity at every decision point.
+            Strategic partnership embedded at the leadership level. Designed for
+            clients navigating complex change, competing priorities, or
+            high-stakes decision-making across a portfolio.
           </p>
           <!-- Annual -->
           <div x-show="billing === 'annually'" class="mb-4">
@@ -188,9 +191,9 @@ import Modal from "../components/Modal.astro";
           <ul
             class="flex-1 list-disc list-outside pl-6 space-y-2 text-left text-gray-700 dark:text-gray-300"
           >
-            <li>Continuous alignment across product and strategy</li>
-            <li>Proactive input before the questions are asked</li>
-            <li>Quarterly review + evolving strategic roadmap</li>
+            <li>Clarity. lead embedded across your leadership rhythm</li>
+            <li>Proactive thinking, not just reactive input</li>
+            <li>Decisions feel coordinated, timely, and confident</li>
           </ul>
           <div class="mt-6 text-center">
             <a
@@ -203,16 +206,22 @@ import Modal from "../components/Modal.astro";
       </div>
     </div>
 
-    <section class="mt-20 max-w-6xl mx-auto px-4">
-      <h2 class="text-3xl font-bold mb-10 text-center">Compare the Plans</h2>
+    <section class="mt-20 max-w-5xl mx-auto px-4 text-center mb-12">
+      <h2 class="text-3xl font-bold mb-10">Compare the Plans</h2>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div
+        id="compare-plans"
+        class="flex-1 grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch text-left"
+      >
         <!-- Base Plan -->
         <div
-          class="bg-white dark:bg-gray-900 p-6 rounded-xl shadow-md border border-gray-200 dark:border-gray-700 text-left"
+          class="flex flex-col h-full border border-gray-300 dark:border-gray-600 rounded-lg p-6 text-left shadow-sm bg-white dark:bg-gray-900"
         >
-          <h3 class="text-xl font-bold mb-4">Clarity. Base</h3>
-          <ul class="space-y-2 text-gray-700 dark:text-gray-300 text-sm">
+          <h2 class="text-2xl font-bold mb-2">Clarity. Base</h2>
+          <ul
+            class="flex-1 list-disc list-outside pl-6 space-y-2 text-left text-gray-700
+          dark:text-gray-300"
+          >
             <li><strong>Best for:</strong> A single delivery team</li>
             <li><strong>Presence:</strong> Named lead, async input</li>
             <li><strong>Sessions:</strong> Fortnightly (optional)</li>
@@ -225,19 +234,22 @@ import Modal from "../components/Modal.astro";
 
         <!-- Plus Plan -->
         <div
-          class="bg-white dark:bg-gray-900 p-6 rounded-xl shadow-md border border-gray-200 dark:border-gray-700 text-left relative"
+          class="flex flex-col h-full border border-gray-300 dark:border-gray-600 rounded-lg p-6 text-left shadow-sm bg-white dark:bg-gray-900"
         >
           <!-- <span
             class="absolute top-4 right-4 px-2 py-1 text-xs font-semibold bg-[#EF5974] text-white rounded"
           >
             Most chosen
           </span> -->
-          <h3 class="text-xl font-bold mb-4">Clarity. Plus</h3>
-          <ul class="space-y-2 text-gray-700 dark:text-gray-300 text-sm">
+          <h2 class="text-2xl font-bold mb-2">Clarity. Plus</h2>
+          <ul
+            class="flex-1 list-disc list-outside pl-6 space-y-2 text-left text-gray-700
+          dark:text-gray-300"
+          >
             <li><strong>Best for:</strong> Multi-team initiatives</li>
             <li><strong>Presence:</strong> Multi-stakeholder engagement</li>
             <li><strong>Sessions:</strong> Weekly</li>
-            <li><strong>Briefs:</strong> 2–3 per month</li>
+            <li><strong>Briefs:</strong> 2-3 per month</li>
             <li><strong>Radar:</strong> Included</li>
             <li><strong>In-person:</strong> Remote only</li>
             <li>
@@ -248,10 +260,13 @@ import Modal from "../components/Modal.astro";
 
         <!-- Partner Plan -->
         <div
-          class="bg-white dark:bg-gray-900 p-6 rounded-xl shadow-md border border-gray-200 dark:border-gray-700 text-left relative"
+          class="flex flex-col h-full border border-gray-300 dark:border-gray-600 rounded-lg p-6 text-left shadow-sm bg-white dark:bg-gray-900"
         >
-          <h3 class="text-xl font-bold mb-4">Clarity. Partner</h3>
-          <ul class="space-y-2 text-gray-700 dark:text-gray-300 text-sm">
+          <h2 class="text-2xl font-bold mb-2">Clarity. Partner</h2>
+          <ul
+            class="flex-1 list-disc list-outside pl-6 space-y-2 text-left text-gray-700
+          dark:text-gray-300"
+          >
             <li>
               <strong>Best for:</strong> Executive-level support or portfolios
             </li>
@@ -270,9 +285,9 @@ import Modal from "../components/Modal.astro";
       </div>
     </section>
 
-    <section class="mt-20 flex flex-col mx-auto px-4 py-10 max-w-5xl">
+    <section class="mt-20 flex flex-col mx-auto px-4 py-10 max-w-5xl mb-12">
       <h2 class="text-3xl font-bold mb-6">
-        🧭 Not sure which plan is right for you?
+        Not sure which plan is right for you?
       </h2>
       <p class="mb-4">
         Answer a few quick questions to help guide your choice.
@@ -414,7 +429,7 @@ import Modal from "../components/Modal.astro";
                 value="C"
                 class="accent-[#EF5974]"
               />
-              <span class="text-base">Frequently – sessions, briefs, radar</span
+              <span class="text-base">Frequently - sessions, briefs, radar</span
               >
             </label>
           </div>
@@ -501,14 +516,28 @@ import Modal from "../components/Modal.astro";
         };
 
         modalContent.innerHTML = `
-      <div class="text-center">
-        <h3 class="text-2xl font-bold mb-2">Your Match</h3>
-        <p class="mb-4">${planMap[max[0]]}</p>
-        <a href="#support-plans" class="inline-block mt-2 px-4 py-2 rounded-xl bg-[#EF5974] text-white font-semibold hover:bg-[#e1526f] transition">
-          View Plan Details
-        </a>
-      </div>
-    `;
+  <div class="text-center">
+    <h3 class="text-2xl font-bold mb-2">Your Match</h3>
+    <p class="mb-4">${planMap[max[0]]}</p>
+    <a
+      href="#support-plans"
+      id="viewPlanDetailsLink"
+      class="inline-block mt-2 px-4 py-2 rounded-xl bg-[#EF5974] text-white font-semibold hover:bg-[#e1526f] transition"
+    >
+      View Plan Details
+    </a>
+  </div>
+`;
+
+        document
+          .getElementById("viewPlanDetailsLink")
+          .addEventListener("click", () => {
+            // Delay modal close slightly to allow anchor jump
+            setTimeout(() => {
+              resultModal.classList.add("hidden");
+              document.body.style.overflow = "";
+            }, 100); // 100ms gives time for scroll to occur
+          });
 
         resultModal.classList.remove("hidden");
         document.body.style.overflow = "hidden";
