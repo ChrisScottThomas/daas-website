@@ -1,0 +1,537 @@
+---
+import Base from "../layouts/base.astro";
+import Modal from "../components/Modal.astro";
+---
+
+<Base title="Support Plans — Clarity.">
+  <main class="max-w-5xl mx-auto px-4 py-24 text-center">
+    <h1 class="text-5xl font-bold mb-4 leading-tight">Support Plans</h1>
+    <p class="text-xl text-gray-600 dark:text-gray-300 mb-12">
+      Simple, strategic support — at the pace that suits you.
+    </p>
+
+    <!-- Microcopy + Toggle -->
+    <div x-data="{ billing: 'monthly' }">
+      <!-- Toggle -->
+      <div class="mb-6 flex flex-col items-center">
+        <div class="flex justify-center gap-2 mb-2">
+          <button
+            :class="billing === 'monthly' ? 'bg-black text-white' : 'bg-gray-200 dark:bg-gray-700 dark:text-white'"
+            @click="billing = 'monthly'"
+            class="px-4 py-2 rounded-l font-medium"
+          >
+            Monthly
+          </button>
+          <button
+            :class="billing === 'quarterly' ? 'bg-black text-white' : 'bg-gray-200 dark:bg-gray-700 dark:text-white'"
+            @click="billing = 'quarterly'"
+            class="px-4 py-2 font-medium"
+          >
+            Quarterly
+          </button>
+          <button
+            :class="billing === 'annually' ? 'bg-black text-white' : 'bg-gray-200 dark:bg-gray-700 dark:text-white'"
+            @click="billing = 'annually'"
+            class="px-4 py-2 rounded-r font-medium"
+          >
+            Annually
+          </button>
+        </div>
+        <p class="text-sm text-gray-500 dark:text-gray-400">
+          Annual pricing: Get 12 months for the price of 11
+        </p>
+      </div>
+
+      <!-- Plans Grid -->
+      <div
+        id="support-plans"
+        class="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch"
+      >
+        <!-- Clarity. Base -->
+        <div
+          class="flex flex-col h-full border border-gray-300 dark:border-gray-600 rounded-lg p-6 text-left shadow-sm bg-white dark:bg-gray-900"
+        >
+          <h2 class="text-2xl font-bold mb-2">Clarity. Base</h2>
+          <p class="text-gray-600 dark:text-gray-400 mb-4">
+            Focused support for a single area or initiative. Perfect for
+            validating, aligning, or accelerating one direction.
+          </p>
+          <!-- Annual -->
+          <div x-show="billing === 'annually'" class="mb-4">
+            <p class="text-3xl font-extrabold">
+              £54,989
+              <span class="text-base text-gray-500 line-through ml-2"
+                >£59,988</span
+              >
+            </p>
+            <p x-show="billing === 'annually'" class="text-sm text-blue-400">
+              Save £4,999 annually
+            </p>
+          </div>
+
+          <!-- Quarterly -->
+          <p
+            x-show="billing === 'quarterly'"
+            class="text-3xl font-extrabold mb-4"
+          >
+            £14,997
+          </p>
+
+          <!-- Monthly -->
+          <p
+            x-show="billing === 'monthly'"
+            class="text-3xl font-extrabold mb-4"
+          >
+            £4,999
+          </p>
+
+          <ul
+            class="flex-1 list-disc list-outside pl-6 space-y-2 text-left text-gray-700 dark:text-gray-300"
+          >
+            <li>Targeted support when decisions count</li>
+            <li>Context-rich input on a defined focus</li>
+            <li>Actionable direction without scope or delay</li>
+          </ul>
+          <div class="mt-6 text-center">
+            <a
+              href="#waitlist"
+              class="inline-block bg-black text-white px-4 py-2 rounded hover:bg-gray-800 transition text-center"
+              >Join Waitlist</a
+            >
+          </div>
+        </div>
+
+        <!-- Clarity. Plus -->
+        <div
+          class="flex flex-col h-full border border-gray-300 dark:border-gray-600 rounded-lg p-6 text-left shadow-sm bg-white dark:bg-gray-900"
+        >
+          <h2 class="text-2xl font-bold mb-2">Clarity. Plus</h2>
+          <p class="text-gray-600 dark:text-gray-400 mb-4">
+            Strategic cadence across multiple workstreams. Designed for teams
+            navigating complexity or change.
+          </p>
+          <!-- Annual -->
+          <div x-show="billing === 'annually'" class="mb-4">
+            <p class="text-3xl font-extrabold">
+              £109,989
+              <span class="text-base text-gray-500 line-through ml-2"
+                >£119,988</span
+              >
+            </p>
+            <p x-show="billing === 'annually'" class="text-sm text-blue-400">
+              Save £9,999 annually
+            </p>
+          </div>
+          <p
+            x-show="billing === 'quarterly'"
+            class="text-3xl font-extrabold mb-4"
+          >
+            £29,997
+          </p>
+          <p
+            x-show="billing === 'monthly'"
+            class="text-3xl font-extrabold mb-4"
+          >
+            £9,999
+          </p>
+
+          <ul
+            class="flex-1 list-disc list-outside pl-6 space-y-2 text-left text-gray-700 dark:text-gray-300"
+          >
+            <li>Clarity. embedded across your workstreams</li>
+            <li>Proactive prioritisation and decision briefings</li>
+            <li>Strategic radar to track what's coming next</li>
+          </ul>
+          <div class="mt-6 text-center">
+            <a
+              href="#waitlist"
+              class="inline-block bg-black text-white px-4 py-2 rounded hover:bg-gray-800 transition"
+              >Join Waitlist</a
+            >
+          </div>
+        </div>
+
+        <!-- Clarity. Partner -->
+        <div
+          class="flex flex-col h-full border-2 border-black dark:border-white rounded-lg p-6 text-left shadow-md bg-gray-50 dark:bg-gray-800"
+        >
+          <h2 class="text-2xl font-bold mb-2">Clarity. Partner</h2>
+          <p class="text-gray-600 dark:text-gray-400 mb-4">
+            Always-on, embedded partnership for fast-moving teams who need
+            clarity at every decision point.
+          </p>
+          <!-- Annual -->
+          <div x-show="billing === 'annually'" class="mb-4">
+            <p class="text-3xl font-extrabold">
+              £131,989
+              <span class="text-base text-gray-500 line-through ml-2"
+                >£143,988</span
+              >
+            </p>
+            <p x-show="billing === 'annually'" class="text-sm text-blue-400">
+              Save £11,999 annually
+            </p>
+          </div>
+          <p
+            x-show="billing === 'quarterly'"
+            class="text-3xl font-extrabold mb-4"
+          >
+            £35,997
+          </p>
+          <p
+            x-show="billing === 'monthly'"
+            class="text-3xl font-extrabold mb-4"
+          >
+            £11,999
+          </p>
+
+          <ul
+            class="flex-1 list-disc list-outside pl-6 space-y-2 text-left text-gray-700 dark:text-gray-300"
+          >
+            <li>Continuous alignment across product and strategy</li>
+            <li>Proactive input before the questions are asked</li>
+            <li>Quarterly review + evolving strategic roadmap</li>
+          </ul>
+          <div class="mt-6 text-center">
+            <a
+              href="#waitlist"
+              class="inline-block bg-black text-white px-4 py-2 rounded hover:bg-gray-800 transition"
+              >Join Waitlist</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="mt-20 max-w-6xl mx-auto px-4">
+      <h2 class="text-3xl font-bold mb-10 text-center">Compare the Plans</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Base Plan -->
+        <div
+          class="bg-white dark:bg-gray-900 p-6 rounded-xl shadow-md border border-gray-200 dark:border-gray-700 text-left"
+        >
+          <h3 class="text-xl font-bold mb-4">Clarity. Base</h3>
+          <ul class="space-y-2 text-gray-700 dark:text-gray-300 text-sm">
+            <li><strong>Best for:</strong> A single delivery team</li>
+            <li><strong>Presence:</strong> Named lead, async input</li>
+            <li><strong>Sessions:</strong> Fortnightly (optional)</li>
+            <li><strong>Briefs:</strong> Around 1 per month</li>
+            <li><strong>Radar:</strong> Available on request</li>
+            <li><strong>In-person:</strong> Not included</li>
+            <li><strong>Outcome:</strong> Unblocked delivery, sharper focus</li>
+          </ul>
+        </div>
+
+        <!-- Plus Plan -->
+        <div
+          class="bg-white dark:bg-gray-900 p-6 rounded-xl shadow-md border border-gray-200 dark:border-gray-700 text-left relative"
+        >
+          <!-- <span
+            class="absolute top-4 right-4 px-2 py-1 text-xs font-semibold bg-[#EF5974] text-white rounded"
+          >
+            Most chosen
+          </span> -->
+          <h3 class="text-xl font-bold mb-4">Clarity. Plus</h3>
+          <ul class="space-y-2 text-gray-700 dark:text-gray-300 text-sm">
+            <li><strong>Best for:</strong> Multi-team initiatives</li>
+            <li><strong>Presence:</strong> Multi-stakeholder engagement</li>
+            <li><strong>Sessions:</strong> Weekly</li>
+            <li><strong>Briefs:</strong> 2–3 per month</li>
+            <li><strong>Radar:</strong> Included</li>
+            <li><strong>In-person:</strong> Remote only</li>
+            <li>
+              <strong>Outcome:</strong> Joined-up strategy, aligned momentum
+            </li>
+          </ul>
+        </div>
+
+        <!-- Partner Plan -->
+        <div
+          class="bg-white dark:bg-gray-900 p-6 rounded-xl shadow-md border border-gray-200 dark:border-gray-700 text-left relative"
+        >
+          <h3 class="text-xl font-bold mb-4">Clarity. Partner</h3>
+          <ul class="space-y-2 text-gray-700 dark:text-gray-300 text-sm">
+            <li>
+              <strong>Best for:</strong> Executive-level support or portfolios
+            </li>
+            <li>
+              <strong>Presence:</strong> Strategic partner across leadership
+            </li>
+            <li><strong>Sessions:</strong> Weekly or as needed</li>
+            <li><strong>Briefs:</strong> As required, tailored to audience</li>
+            <li><strong>Radar:</strong> Included with watchlist</li>
+            <li><strong>In-person:</strong> Optional by request</li>
+            <li>
+              <strong>Outcome:</strong> Confident, joined-up decision-making
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="mt-20 flex flex-col mx-auto px-4 py-10 max-w-5xl">
+      <h2 class="text-3xl font-bold mb-6">
+        🧭 Not sure which plan is right for you?
+      </h2>
+      <p class="mb-4">
+        Answer a few quick questions to help guide your choice.
+      </p>
+
+      <form
+        id="planQuiz"
+        class="flex flex-col mx-auto space-y-8 bg-white dark:bg-gray-900 p-6 rounded-2xl shadow-md"
+      >
+        <!-- Question 1 -->
+        <fieldset>
+          <legend class="block text-left font-semibold mb-3"
+            >1. How many teams or workstreams do you want support across?</legend
+          >
+          <div class="space-y-2">
+            <label
+              class="flex justify-start items-center gap-3 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-xl px-4 py-2 cursor-pointer transition"
+            >
+              <input
+                type="radio"
+                name="q1"
+                value="A"
+                required
+                class="accent-[#EF5974]"
+              />
+              <span class="text-base">Just one team</span>
+            </label>
+            <label
+              class="flex justify-start items-center gap-3 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-xl px-4 py-2 cursor-pointer transition"
+            >
+              <input
+                type="radio"
+                name="q1"
+                value="B"
+                class="accent-[#EF5974]"
+              />
+              <span class="text-base"
+                >A few related teams or a strategic area</span
+              >
+            </label>
+            <label
+              class="flex justify-start items-center gap-3 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-xl px-4 py-2 cursor-pointer transition"
+            >
+              <input
+                type="radio"
+                name="q1"
+                value="C"
+                class="accent-[#EF5974]"
+              />
+              <span class="text-base"
+                >Multiple teams, execs, or shifting priorities</span
+              >
+            </label>
+          </div>
+        </fieldset>
+
+        <!-- Question 2 -->
+        <fieldset>
+          <legend class="block text-left font-semibold mb-3"
+            >2. What kind of support are you looking for?</legend
+          >
+          <div class="space-y-2">
+            <label
+              class="flex justify-start items-center gap-3 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-xl px-4 py-2 cursor-pointer transition"
+            >
+              <input
+                type="radio"
+                name="q2"
+                value="A"
+                required
+                class="accent-[#EF5974]"
+              />
+              <span class="text-base"
+                >A thought partner for product/delivery</span
+              >
+            </label>
+            <label
+              class="flex justify-start items-center gap-3 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-xl px-4 py-2 cursor-pointer transition"
+            >
+              <input
+                type="radio"
+                name="q2"
+                value="B"
+                class="accent-[#EF5974]"
+              />
+              <span class="text-base">A lens across multiple squads</span>
+            </label>
+            <label
+              class="flex justify-start items-center gap-3 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-xl px-4 py-2 cursor-pointer transition"
+            >
+              <input
+                type="radio"
+                name="q2"
+                value="C"
+                class="accent-[#EF5974]"
+              />
+              <span class="text-base"
+                >Strategic presence at leadership level</span
+              >
+            </label>
+          </div>
+        </fieldset>
+
+        <!-- Question 3 -->
+        <fieldset>
+          <legend class="block text-left font-semibold mb-3"
+            >3. How often do you want input from Clarity.?</legend
+          >
+          <div class="space-y-2">
+            <label
+              class="flex justify-start items-center gap-3 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-xl px-4 py-2 cursor-pointer transition"
+            >
+              <input
+                type="radio"
+                name="q3"
+                value="A"
+                required
+                class="accent-[#EF5974]"
+              />
+              <span class="text-base">A couple of times a month</span>
+            </label>
+            <label
+              class="flex justify-start items-center gap-3 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-xl px-4 py-2 cursor-pointer transition"
+            >
+              <input
+                type="radio"
+                name="q3"
+                value="B"
+                class="accent-[#EF5974]"
+              />
+              <span class="text-base">Weekly</span>
+            </label>
+            <label
+              class="flex justify-start items-center gap-3 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-xl px-4 py-2 cursor-pointer transition"
+            >
+              <input
+                type="radio"
+                name="q3"
+                value="C"
+                class="accent-[#EF5974]"
+              />
+              <span class="text-base">Frequently – sessions, briefs, radar</span
+              >
+            </label>
+          </div>
+        </fieldset>
+
+        <!-- Question 4 -->
+        <fieldset>
+          <legend class="block text-left font-semibold mb-3"
+            >4. Who will we be working with day-to-day?</legend
+          >
+          <div class="space-y-2">
+            <label
+              class="flex justify-start items-center gap-3 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-xl px-4 py-2 cursor-pointer transition"
+            >
+              <input
+                type="radio"
+                name="q4"
+                value="A"
+                required
+                class="accent-[#EF5974]"
+              />
+              <span class="text-base">Product Owner / Team Lead</span>
+            </label>
+            <label
+              class="flex justify-start items-center gap-3 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-xl px-4 py-2 cursor-pointer transition"
+            >
+              <input
+                type="radio"
+                name="q4"
+                value="B"
+                class="accent-[#EF5974]"
+              />
+              <span class="text-base">Heads of Product / Tech</span>
+            </label>
+            <label
+              class="flex justify-start items-center gap-3 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-xl px-4 py-2 cursor-pointer transition"
+            >
+              <input
+                type="radio"
+                name="q4"
+                value="C"
+                class="accent-[#EF5974]"
+              />
+              <span class="text-base">Director / CPO / Exec Team</span>
+            </label>
+          </div>
+        </fieldset>
+
+        <!-- Submit -->
+        <button
+          type="submit"
+          class="bg-[#EF5974] text-white font-bold px-6 py-2 rounded-xl hover:bg-[#e1526f] transition"
+        >
+          Show My Match
+        </button>
+      </form>
+    </section>
+
+    <Modal id="quizResultModal">
+      <div id="quizResultContent"></div>
+    </Modal>
+
+    <script type="text/javascript">
+      const form = document.getElementById("planQuiz");
+      const resultModal = document.getElementById("quizResultModal");
+      const modalContent = document.getElementById("quizResultContent");
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        const formData = new FormData(form);
+        const counts = { A: 0, B: 0, C: 0 };
+
+        for (const [, value] of formData.entries()) {
+          counts[value]++;
+        }
+
+        const max = Object.entries(counts).reduce((a, b) =>
+          a[1] > b[1] ? a : b,
+        );
+        const planMap = {
+          A: `<strong>Base Plan:</strong> Best for focused support with a single delivery team.`,
+          B: `<strong>Plus Plan:</strong> Ideal for multi-team strategy and alignment.`,
+          C: `<strong>Partner Plan:</strong> Built for execs and portfolios needing confident, joined-up decisions.`,
+        };
+
+        modalContent.innerHTML = `
+      <div class="text-center">
+        <h3 class="text-2xl font-bold mb-2">Your Match</h3>
+        <p class="mb-4">${planMap[max[0]]}</p>
+        <a href="#support-plans" class="inline-block mt-2 px-4 py-2 rounded-xl bg-[#EF5974] text-white font-semibold hover:bg-[#e1526f] transition">
+          View Plan Details
+        </a>
+      </div>
+    `;
+
+        resultModal.classList.remove("hidden");
+        document.body.style.overflow = "hidden";
+      });
+
+      window.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+          document.getElementById("quizResultModal").classList.add("hidden");
+          document.body.style.overflow = "";
+        }
+      });
+
+      document.addEventListener("click", (e) => {
+        if (e.target.id === "quizResultModal") {
+          resultModal.classList.add("hidden");
+          document.body.style.overflow = "";
+        }
+      });
+    </script>
+
+    <!-- AlpineJS for toggling -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+      defer></script>
+  </main>
+</Base>
