@@ -52,6 +52,14 @@ import "../styles/base.css";
           (window.plausible.q = window.plausible.q || []).push(arguments);
         };
     </script>
+    {
+      Astro.url.pathname.includes("support-plans-preview") && (
+        <>
+          <meta name="robots" content="noindex, nofollow" />
+          <meta name="googlebot" content="noindex, nofollow" />
+        </>
+      )
+    }
   </head>
 
   <body
