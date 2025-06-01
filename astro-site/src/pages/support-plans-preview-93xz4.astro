@@ -1,6 +1,7 @@
 ---
 import Base from "../layouts/base.astro";
 import Modal from "../components/Modal.astro";
+import BarChart from "../components/BarChart.jsx";
 ---
 
 <Base title="Support Plans — Clarity.">
@@ -109,7 +110,7 @@ import Modal from "../components/Modal.astro";
           <h2 class="text-2xl font-bold mb-2">Clarity. Plus</h2>
           <p class="text-gray-600 dark:text-gray-400 mb-4">
             Trusted support across multiple teams or workstreams. Ideal when
-            strategic clarity needs to scale — but you still want things to feel
+            strategic clarity needs to scale, but you still want things to feel
             fast, familiar, and close to the work.
           </p>
           <!-- Annual -->
@@ -227,7 +228,7 @@ import Modal from "../components/Modal.astro";
             <li><strong>Sessions:</strong> Fortnightly (optional)</li>
             <li><strong>Briefs:</strong> Around 1 per month</li>
             <li><strong>Radar:</strong> Available on request</li>
-            <li><strong>In-person:</strong> Not included</li>
+            <li><strong>In-person:</strong> Remote only</li>
             <li><strong>Outcome:</strong> Unblocked delivery, sharper focus</li>
           </ul>
         </div>
@@ -251,7 +252,7 @@ import Modal from "../components/Modal.astro";
             <li><strong>Sessions:</strong> Weekly</li>
             <li><strong>Briefs:</strong> 2-3 per month</li>
             <li><strong>Radar:</strong> Included</li>
-            <li><strong>In-person:</strong> Remote only</li>
+            <li><strong>In-person:</strong> Optional by request</li>
             <li>
               <strong>Outcome:</strong> Joined-up strategy, aligned momentum
             </li>
@@ -283,6 +284,22 @@ import Modal from "../components/Modal.astro";
           </ul>
         </div>
       </div>
+    </section>
+
+    <section class="mt-20 max-w-5xl mx-auto px-4 text-center mb-12">
+      <h2 class="text-3xl font-bold mb-6">
+        Clarity. vs. Traditional Consultancy
+      </h2>
+      <p class="text-xl text-gray-600 dark:text-gray-300 mb-4">
+        Compare average daily costs and see how Clarity. stacks up.
+      </p>
+
+      <BarChart client:visible />
+
+      <p class="text-sm text-gray-500 dark:text-gray-400 mt-4">
+        Data from: ITJobsWatch, Malt, LinkedIn. Clarity. daily rates assume 22
+        working days/month.
+      </p>
     </section>
 
     <section class="mt-20 flex flex-col mx-auto px-4 py-10 max-w-5xl mb-12">
