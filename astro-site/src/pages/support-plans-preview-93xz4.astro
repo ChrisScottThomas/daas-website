@@ -287,14 +287,14 @@ import BarChart from "../components/BarChart.jsx";
     </section>
 
     <section class="mt-20 max-w-5xl mx-auto px-4 text-center mb-12">
-      <h2 class="text-3xl font-bold mb-6">
+      <h2 class="text-3xl font-bold mb-6" id="clarityRateChart">
         Clarity. vs. Traditional Consultancy
       </h2>
       <p class="text-xl text-gray-600 dark:text-gray-300 mb-4">
         Compare average daily costs and see how Clarity. stacks up.
       </p>
 
-      <BarChart client:visible />
+      <BarChart client:only="react" />
 
       <p class="text-sm text-gray-500 dark:text-gray-400 mt-4">
         Data from: ITJobsWatch, Malt, LinkedIn. Clarity. daily rates assume 22
