@@ -9,17 +9,18 @@ import Base from "../layouts/base.astro";
   canonicalURL="https://getclarity.win/"
 >
   <main class="max-w-4xl mx-auto px-4 py-24 text-center">
-    <h1 id="Clarity." class="text-5xl font-bold mb-4 leading-tight">
-      Clarity. Without the Noise.
+    <h1 id="Clarity." class="text-5xl font-bold mb-8 leading-tight">
+      Too many priorities. Not enough certainty.
     </h1>
     <p
       id="sub-header"
       class="text-3xl font-bold text-gray-600 dark:text-gray-300 mb-8"
     >
-      Your Insight-as-a-Service Partner.
+      Clarity. helps you find your next step. Faster, clearer, and with expert
+      support.
     </p>
     <p id="sub-header" class="text-2xl text-gray-600 dark:text-gray-300 mb-8">
-      For tech and delivery leaders who need focus, speed, and certainty.
+      No projects. No overwhelm. Just flexible support, at your side.
     </p>
 
     <form id="waitlist-form" class="space-y-4 max-w-md mx-auto">
@@ -73,7 +74,7 @@ import Base from "../layouts/base.astro";
             body: JSON.stringify({ email, foundingMember }),
             headers: { "Content-Type": "application/json" },
           });
-          
+
           if (res.ok) {
             window.location.href = "/thank-you";
           } else {
@@ -103,6 +104,44 @@ import Base from "../layouts/base.astro";
         }
       });
     </script>
+
+    <section class="max-w-3xl mx-auto px-4 py-20 text-center">
+      <h2 class="text-3xl font-bold mb-6">Sound familiar?</h2>
+      <div
+        class="flex flex-col h-full p-6 rounded-lg text-left items-center justify-center mb-12"
+      >
+        <ul
+          class="grid md:grid-cols-1 gap-4 text-base md:text-lg list-disc list-outside"
+        >
+          <li>
+            You're stuck between two good options and can't afford to guess
+            wrong.
+          </li>
+          <li>Everyone has ideas but no one agrees what matters most.</li>
+          <li>You've got momentum, but no clear way to focus it.</li>
+          <li>You're tired of spinning up projects just to get clarity.</li>
+        </ul>
+      </div>
+      <p class="text-xl font-medium mb-12">
+        That's where Clarity. fits. Right in the middle of the mess.
+      </p>
+
+      <p class="text-lg mb-4 text-left">
+        When you act with confidence, things move faster. When you wait too
+        long, opportunities drift, and tension builds.
+      </p>
+
+      <p class="text-lg mb-10 text-left">
+        We help you choose well, act quickly, and back it up with experience.
+      </p>
+
+      <!-- <a
+        href="#waitlist"
+        class="inline-block px-6 py-3 rounded-xl bg-[#429EDB] text-white font-semibold hover:bg-[#1F78C1] transition"
+      >
+        Get Clarity.
+      </a> -->
+    </section>
 
     <!-- Trusted by section -->
     <section id="trusted-by" class="mt-16">
@@ -158,7 +197,25 @@ import Base from "../layouts/base.astro";
       });
     </script>
 
-    <section class="my-16 flex flex-col items-center gap-4 text-center">
+    <!-- Final CTA -->
+    <section
+      id="final-cta"
+      class="mt-20 bg-gray-900 text-white py-12 px-6 rounded-lg text-center"
+    >
+      <h2 class="text-2xl font-bold mb-4">Still unsure?</h2>
+      <p class="mb-6 text-lg">
+        That's why Clarity exists.<br /> You don't need all the answers, just a better
+        way to find them. <br /><br />No fluff. No spam. Just Clarity.<br /><br
+        />
+      </p>
+      <a
+        href="#Clarity."
+        class="inline-block bg-white text-black font-semibold px-6 py-3 rounded hover:bg-gray-200 transition"
+        >Join the Waitlist</a
+      >
+    </section>
+
+    <section class="my-8 flex flex-col items-center gap-4 text-center">
       <p class="text-lg text-gray-600 dark:text-gray-400">
         Want to see how Clarity. helps? Start here:
       </p>
@@ -180,24 +237,6 @@ import Base from "../layouts/base.astro";
           ></path>
         </svg>
       </a>
-    </section>
-
-    <!-- Final CTA -->
-    <section
-      id="final-cta"
-      class="mt-20 bg-gray-900 text-white py-12 px-6 rounded-lg text-center"
-    >
-      <h2 class="text-2xl font-bold mb-4">Still unsure?</h2>
-      <p class="mb-6 text-lg">
-        That's why Clarity exists.<br /> You don't need all the answers, just a better
-        way to find them. <br /><br />No fluff. No spam. Just Clarity.<br /><br
-        />
-      </p>
-      <a
-        href="#Clarity."
-        class="inline-block bg-white text-black font-semibold px-6 py-3 rounded hover:bg-gray-200 transition"
-        >Join the Waitlist</a
-      >
     </section>
 
     <script>
