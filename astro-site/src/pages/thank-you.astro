@@ -3,17 +3,34 @@ import Base from "../layouts/base.astro";
 ---
 
 <Base title="You're on the list — Clarity.">
-  <main class="max-w-3xl mx-auto mt-40 px-4 text-center">
-    <h1 class="text-4xl font-bold mb-4 leading-tight">You're on the list!</h1>
-    <p class="mb-4">
-      Thanks for signing up for more information on the Clarity. Insight-as-a-Service Support Plan.<br>
-      We'll be in touch soon with details, pricing, launch date and more.
+  <section class="max-w-3xl mx-auto px-4 py-24 text-center">
+    <h1 class="text-4xl font-bold mb-6">You're on the list.</h1>
+    <p class="text-lg text-gray-600 dark:text-gray-300 mb-8">
+      Thanks for joining the Clarity. waitlist.
+      <br />
+      We'll be in touch soon to share next steps and early access details.
     </p>
-    <a
-      href="/"
-      class="inline-block mt-4 text-sm font-medium text-blue-600 dark:text-blue-300 hover:underline transition"
+
+    <h2 class="text-2xl font-bold mb-6">
+      In the meantime, here's what to expect:
+    </h2>
+    <div
+      class="flex flex-col h-full p-6 rounded-lg text-left items-center justify-center mb-12"
     >
-      ← Back to Home
-    </a>
-  </main>
+      <ul
+        class="grid md:grid-cols-1 gap-4 text-base md:text-lg list-disc list-outside pl-6"
+      >
+        <li>You'll receive a confirmation email shortly</li>
+        <li>Founding Members will be contacted directly</li>
+        <li>You can unsubscribe or update your info at any time</li>
+      </ul>
+    </div>
+
+    <!-- <a
+        href="/support-plans-preview-93xz4"
+        class="inline-block bg-[#429EDB] text-white font-semibold px-6 py-3 rounded-xl hover:bg-[#1F78C1] transition"
+      >
+        View Support Plans
+      </a> -->
+  </section>
 </Base>
