@@ -1,4 +1,4 @@
-**/lambda.zip
+**/*.zip
 
 #  Local .terraform directories
 **/.terraform/*
@@ -18,4 +18,5 @@
 
 # node
 
-/lambda/node_modules
+/waitlist-lambda/node_modules
+/retry-lambda/node_modules

@@ -32,11 +32,17 @@ jobs:
       with:
         terraform_version: 1.12.0
 
-    - name: Package Lambda Function
+    - name: Package Waitlist Lambda Function
       run: |
-        cd lambda
         npm ci
-        zip -r ../lambda.zip .
+        zip -r ../waitlist-lambda.zip .
+      working-directory: waitlist-lambda
+  
+    - name: Package Retry Lambda Function
+      run: |
+        npm ci
+        zip -r ../retry-lambda.zip .
+      working-directory: retry-lambda
 
     - name: Terraform Init & Apply
       run: |
