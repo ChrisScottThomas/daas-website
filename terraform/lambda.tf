@@ -30,7 +30,7 @@ resource "aws_lambda_function" "waitlist_retry" {
   runtime       = "nodejs18.x"
 
   filename         = "../lambda/retry-lambda.zip"
-  source_code_hash = filebase64sha256("../lambda/retry-lambda.zip")
+  source_code_hash = filebase64sha256("../retry-lambda.zip")
 
   environment {
     variables = {
