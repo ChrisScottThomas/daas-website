@@ -1,0 +1,128 @@
+---
+import Base from "../layouts/base.astro";
+
+const today = new Date().toLocaleDateString("en-GB", {
+  day: "2-digit",
+  month: "long",
+  year: "numeric",
+});
+---
+
+<Base title="Terms & Conditions — Clarity.">
+  <main
+    class="prose prose-lg dark:prose-invert max-w-3xl mx-auto px-4 py-24 text-left"
+  >
+    <h1>Terms & Conditions</h1>
+    <p><strong>Effective date:</strong> {today}</p>
+
+    <div
+      class="bg-blue-50 dark:bg-[#1F2A44] p-4 rounded-md border-l-4 border-blue-300 dark:border-blue-500 mb-12"
+    >
+      <p class="text-sm">
+        TL;DR: You pay upfront, can cancel anytime, we respect your data, and
+        you get real support — not fine print games. Questions? Just ask us at <a
+          href="mailto:support@getclarity.win">support@getclarity.win</a
+        >.
+      </p>
+    </div>
+
+    <h2 class="mt-12 mb-4">1. About Us</h2>
+    <p>
+      Clarity. is a trading name of <strong
+        >Clarity. Support Services Ltd</strong
+      >, a UK-based company registered in England and Wales. Registered office:
+      [Insert address].
+    </p>
+
+    <hr class="my-8 border-gray-300 dark:border-gray-600" />
+
+    <h2 class="mt-12 mb-4">2. Our Services</h2>
+    <p>
+      We provide insight and advisory support services via flexible Support
+      Plans for product, delivery, and transformation leaders. These plans grant
+      access to ongoing strategic support — not fixed deliverables.
+    </p>
+
+    <hr class="my-8 border-gray-300 dark:border-gray-600" />
+
+    <h2 class="mt-12 mb-4">3. Engagement</h2>
+    <p>By subscribing, you agree to:</p>
+    <ul>
+      <li>
+        Engage in good faith and provide enough context for meaningful support
+      </li>
+      <li>
+        Accept that we don’t guarantee outcomes, but act in your best interest
+      </li>
+      <li>
+        Understand we may pause or end service for misuse, non-payment, or
+        breach
+      </li>
+    </ul>
+
+    <hr class="my-8 border-gray-300 dark:border-gray-600" />
+
+    <h2 class="mt-12 mb-4">4. Payment Terms</h2>
+    <ul>
+      <li>All plans are prepaid based on your selected billing cycle</li>
+      <li>Payments are securely processed via Stripe</li>
+      <li>Invoices include UK VAT where applicable</li>
+      <li>Late or failed payments may lead to service suspension</li>
+    </ul>
+
+    <hr class="my-8 border-gray-300 dark:border-gray-600" />
+
+    <h2 class="mt-12 mb-4">5. Cancellations</h2>
+    <ul>
+      <li>You can cancel at any time via your account or by contacting us</li>
+      <li>
+        Cancellation stops future billing, but no partial refunds are issued
+      </li>
+      <li>We reserve the right to cancel access if terms are breached</li>
+    </ul>
+
+    <div
+      class="bg-gray-50 dark:bg-gray-800 p-4 rounded-md border border-gray-200 dark:border-gray-700 mt-6"
+    >
+      <strong>Note:</strong> Cancelling your plan does not automatically trigger
+      a refund. Please see our <a href="/refund-policy">Refund Policy</a>.
+    </div>
+
+    <hr class="my-8 border-gray-300 dark:border-gray-600" />
+
+    <h2 class="mt-12 mb-4">6. Confidentiality</h2>
+    <p>
+      All conversations, artefacts, and materials you share are treated as
+      confidential. In return, you agree not to share Clarity. materials (tools,
+      session content, or recordings) outside your organisation without written
+      permission.
+    </p>
+
+    <hr class="my-8 border-gray-300 dark:border-gray-600" />
+
+    <h2 class="mt-12 mb-4">7. Intellectual Property</h2>
+    <p>
+      Any content or artefacts created by Clarity. remain our intellectual
+      property unless agreed otherwise. You’re free to use them internally, but
+      not sell, publish, or share them externally.
+    </p>
+
+    <hr class="my-8 border-gray-300 dark:border-gray-600" />
+
+    <h2 class="mt-12 mb-4">8. Liability</h2>
+    <p>
+      We are not liable for indirect or consequential losses. Our total
+      liability is limited to the amount paid by you in your most recent billing
+      cycle.
+    </p>
+
+    <hr class="my-8 border-gray-300 dark:border-gray-600" />
+
+    <h2 class="mt-12 mb-4">9. Disputes</h2>
+    <p>
+      We aim to resolve any dispute quickly and informally. If that’s not
+      possible, matters are governed by UK law and handled in the courts of
+      England and Wales.
+    </p>
+  </main>
+</Base>

@@ -1,0 +1,99 @@
+---
+import Base from "../layouts/base.astro";
+
+const today = new Date().toLocaleDateString("en-GB", {
+  day: "2-digit",
+  month: "long",
+  year: "numeric",
+});
+---
+
+<Base title="Refund Policy — Clarity.">
+  <main
+    class="prose prose-lg dark:prose-invert max-w-3xl mx-auto px-4 py-24 text-left"
+  >
+    <h1>Refund Policy</h1>
+    <p><strong>Effective date:</strong> {today}</p>
+
+    <div
+      class="bg-blue-50 dark:bg-[#1F2A44] p-4 rounded-md border-l-4 border-blue-300 dark:border-blue-500 mb-12"
+    >
+      <p class="text-sm">
+        We want you to feel confident and supported when you work with Clarity.
+        That means being fair, clear, and human about refunds. If something’s
+        gone wrong, we’ll make it right — just get in touch.
+      </p>
+    </div>
+
+    <h2 class="mt-12 mb-4">1. No Automatic Refunds</h2>
+    <p>
+      Clarity. Support Plans are prepaid. We do not automatically issue refunds
+      for:
+    </p>
+    <ul>
+      <li>Change of mind</li>
+      <li>Unused sessions or time</li>
+      <li>Late or forgotten cancellations</li>
+    </ul>
+
+    <hr class="my-8 border-gray-300 dark:border-gray-600" />
+
+    <h2 class="mt-12 mb-4">2. Exceptional Circumstances</h2>
+    <p>
+      We understand life happens. If something serious occurs (like illness,
+      bereavement, or technical failure), you can request a refund. Each case is
+      assessed fairly and individually.
+    </p>
+    <p>
+      You can also request to pause your plan or receive future credit instead
+      of a refund if preferred.
+    </p>
+
+    <hr class="my-8 border-gray-300 dark:border-gray-600" />
+
+    <h2 class="mt-12 mb-4">3. Service Guarantee</h2>
+    <p>
+      If you feel we didn’t deliver what was promised, please tell us within 14
+      days of the issue arising. We’ll always aim to:
+    </p>
+    <ul>
+      <li>Understand what went wrong</li>
+      <li>
+        Make it right — this could mean extra support, a replacement session, or
+        a goodwill refund
+      </li>
+    </ul>
+
+    <div
+      class="bg-gray-50 dark:bg-gray-800 p-4 rounded-md border border-gray-200 dark:border-gray-700 mt-6"
+    >
+      <strong>Note:</strong> If we’ve already significantly delivered your plan or
+      service window has passed, we may offer credit rather than a cash refund.
+    </div>
+
+    <hr class="my-8 border-gray-300 dark:border-gray-600" />
+
+    <h2 class="mt-12 mb-4">4. How to Request a Refund</h2>
+    <p>
+      Email <a href="mailto:support@getclarity.win">support@getclarity.win</a> with
+      the following:
+    </p>
+    <ul>
+      <li>Your full name</li>
+      <li>Your plan type and payment date</li>
+      <li>A brief explanation of the issue or request</li>
+    </ul>
+    <p>
+      We’ll reply within 5 working days and aim to resolve things quickly and
+      fairly.
+    </p>
+
+    <hr class="my-8 border-gray-300 dark:border-gray-600" />
+
+    <p class="italic text-sm">
+      Clarity. aims to build lasting relationships — not trap people in unwanted
+      subscriptions. If you ever feel we’ve not lived up to our name, please let
+      us know. We’re here to help.
+    </p>
+  </main>
+</Base>

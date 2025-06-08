@@ -1,0 +1,20 @@
+---
+// Footer.astro
+const currentYear = new Date().getFullYear();
+---
+
+<footer
+  class="text-sm text-gray-500 dark:text-gray-400 text-center mt-20 py-8 border-t border-gray-200 dark:border-gray-700"
+>
+  <p class="mb-2">
+    &copy; {currentYear} Clarity. Support Services Ltd — All rights reserved.
+  </p>
+  <nav class="flex justify-center gap-6 text-xs underline underline-offset-2">
+    <a href="/terms">Terms & Conditions</a>
+    <a href="/refund-policy">Refund Policy</a>
+  </nav>
+  <p class="mt-2 italic">
+    Clarity. is not a legal, financial, or health advisor. Always seek
+    professional advice.
+  </p>
+</footer>
