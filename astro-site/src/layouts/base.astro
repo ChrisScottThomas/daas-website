@@ -65,9 +65,9 @@ import "../styles/base.css";
   <body
     class="min-h-screen text-gray-900 bg-gradient-to-b from-white to-[#EAF6FB] dark:from-[#1A1A1A] dark:to-[#2C3E50] dark:text-white bg-no-repeat"
   >
-    <!-- Top-left logo and menu -->
+    <!-- Top-left logo and desktop nav -->
     <header
-      class="fixed top-4 left-4 z-50 flex flex-row items-center gap-4 w-auto bg-white/80 dark:bg-gray-900/80 backdrop-blur-md rounded-lg px-3 py-2 sm:bg-transparent sm:dark:bg-transparent"
+      class="fixed top-4 left-4 z-50 flex flex-row items-center gap-6 w-auto bg-white/80 dark:bg-gray-900/80 backdrop-blur-md rounded-lg px-3 py-2 sm:bg-transparent sm:dark:bg-transparent"
     >
       <a href="/" aria-label="Clarity home" class="z-50 shrink-0">
         <!-- Light Logo -->
@@ -112,12 +112,26 @@ import "../styles/base.css";
         </svg>
       </a>
 
-      <!-- Burger Button -->
+      <!-- Desktop nav -->
+      <nav class="hidden md:flex gap-4 text-sm font-medium">
+        <a href="/why-clarity-works" class="hover:underline"
+          >Why Clarity. Works</a
+        >
+        <a href="/what-you-get" class="hover:underline"
+          >What You'll Get (and When).</a
+        >
+        <a href="/daas" class="hover:underline">Discovery-as-a-Service</a>
+        <a href="/founding-offer" class="hover:underline">Founding Offer</a>
+        <a href="/support-plans" class="hover:underline">Our Support Plans</a>
+        <a href="/faq" class="hover:underline">FAQ.</a>
+      </nav>
+
+      <!-- Mobile Burger (hidden on md and up) -->
       <button
         id="menu-toggle"
         aria-controls="menu-panel"
         aria-expanded="false"
-        class="z-50 p-2 rounded hover:bg-gray-200 dark:hover:bg-gray-700"
+        class="md:hidden z-50 p-2 rounded hover:bg-gray-200 dark:hover:bg-gray-700"
         aria-label="Open menu"
       >
         <svg
@@ -133,30 +147,12 @@ import "../styles/base.css";
             d="M4 6h16M4 12h16M4 18h16"></path>
         </svg>
       </button>
-      <!-- Home Icon -->
-      <a
-        href="/"
-        class="z-50 p-2 rounded hover:bg-gray-200 dark:hover:bg-gray-700"
-        aria-label="Home"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="currentColor"
-          class="w-6 h-6 text-gray-700 dark:text-white pointer-events-none"
-        >
-          <path
-            fill-rule="evenodd"
-            d="M2.25 12.5l9-9 9 9v8.25a.75.75 0 01-.75.75h-4.5v-5.25a.75.75 0 00-.75-.75h-6a.75.75 0 00-.75.75v5.25h-4.5a.75.75 0 01-.75-.75V12.5z"
-            clip-rule="evenodd"></path>
-        </svg>
-      </a>
     </header>
 
     <!-- Slide-down mobile menu -->
     <nav
       id="menu-panel"
-      class="fixed top-16 left-4 right-4 bg-white dark:bg-gray-900 text-gray-800 dark:text-white rounded shadow-md overflow-hidden transition-all duration-300 transform scale-y-0 origin-top z-40"
+      class="md:hidden fixed top-16 left-4 right-4 bg-white dark:bg-gray-900 text-gray-800 dark:text-white rounded shadow-md overflow-hidden transition-all duration-300 transform scale-y-0 origin-top z-40"
     >
       <ul class="flex flex-col items-start gap-4 p-6 text-lg font-medium">
         <li>
@@ -170,8 +166,15 @@ import "../styles/base.css";
           >
         </li>
         <li>
-          <a href="/faq" class="hover:underline">FAQ.</a>
+          <a href="/daas" class="hover:underline">Discovery-as-a-Service</a>
         </li>
+        <li>
+          <a href="/founding-offer" class="hover:underline">Founding Offer</a>
+        </li>
+        <li>
+          <a href="/support-plans" class="hover:underline">Our Support Plans</a>
+        </li>
+        <li><a href="/faq" class="hover:underline">FAQ.</a></li>
       </ul>
     </nav>
 

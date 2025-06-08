@@ -95,12 +95,59 @@ exports.handler = async () => {
         : "You're on the waitlist for Clarity.";
 
       const htmlBody = foundingMember
-        ? `<html><body><h2 style=\"color:#0753AD\">You're officially a Clarity. Founding Member</h2><p>Thanks for joining early — we're excited to shape Clarity. with you.</p><p>You'll get first access to:</p><ul><li>Founding pricing</li><li>Exclusive onboarding</li><li>Input into our first Support Plans</li></ul><p>We'll be in touch very soon. Until then — welcome to the inside.</p><p style=\"margin-top:2em\">— The Clarity. Team</p></body></html>`
-        : `<html><body><h2 style=\"color:#0753AD\">You're on the waitlist for Clarity.</h2><p>Thanks for signing up to learn more about Clarity.</p><p>You're officially on the waitlist. We'll be in touch soon with:</p><ul><li>Launch details</li><li>Support Plan pricing</li><li>Your first steps to get started</li></ul><p>Until then — you're not alone in wanting faster decisions, more focus, and less noise.</p><p style=\"margin-top:2em\">— The Clarity. Team</p></body></html>`;
+        ? `<html><body style="font-family: Inter, sans-serif; line-height: 1.6; color: #333;">
+            <h2 style="color:#0753AD;">Welcome to the inside.</h2>
+            <p>You're officially a <strong>Clarity. Founding Member</strong> — thank you for backing us early.</p>
+            <p>As a Founding Member, you'll get:</p>
+            <ul>
+              <li>First access to our Support Plans</li>
+              <li>Founding pricing, locked in for your first year</li>
+              <li>Priority onboarding and extra async input</li>
+            </ul>
+            <p>You'll also have the chance to shape how Clarity. evolves — your feedback matters.</p>
+            <p>We'll be in touch very soon. Until then, welcome — it means a lot.</p>
+            <p style="margin-top: 2em;">— The Clarity. Team</p>
+          </body></html>`
+        : `<html><body style="font-family: Inter, sans-serif; line-height: 1.6; color: #333;">
+            <h2 style="color:#0753AD;">You're officially on the Clarity. waitlist</h2>
+            <p>Thanks for signing up to learn more about <strong>Clarity.</strong></p>
+            <p>We'll be in touch soon with:</p>
+            <ul>
+              <li>Launch details and your first steps</li>
+              <li>A preview of our Support Plans</li>
+              <li>Early access opportunities</li>
+            </ul>
+            <p>Until then — you're not alone in wanting faster decisions, more focus, and less noise.</p>
+            <p style="margin-top: 2em;">— The Clarity. Team</p>
+          </body></html>`;
 
       const textBody = foundingMember
-        ? `You're officially a Clarity. Founding Member.\n\nThanks for joining early — we're excited to shape Clarity. with you.\n\nYou'll get first access to:\n- Founding pricing\n- Exclusive onboarding\n- Input into our first Support Plans\n\nWe'll be in touch very soon. Until then — welcome to the inside.\n\n— The Clarity. Team`
-        : `Thanks for signing up to learn more about Clarity.\n\nYou're officially on the waitlist.\n\nWe'll be in touch soon with launch details, pricing options, and your first steps.\n\nUntil then — you're not alone in wanting faster decisions, more focus, and less noise.\n\n— The Clarity. Team`;
+        ? `Welcome to the inside.
+
+You're officially a Clarity. Founding Member — thank you for backing us early.
+
+As a Founding Member, you'll get:
+- First access to our Support Plans
+- Founding pricing, locked in for your first year
+- Priority onboarding and extra async input
+
+You'll also have the chance to shape how Clarity. evolves — your feedback matters.
+
+We'll be in touch very soon. Until then, welcome — it means a lot.
+
+— The Clarity. Team`
+        : `You're officially on the Clarity. waitlist.
+
+Thanks for signing up to learn more about Clarity.
+
+We'll be in touch soon with:
+- Launch details and your first steps
+- A preview of our Support Plans
+- Early access opportunities
+
+Until then — you're not alone in wanting faster decisions, more focus, and less noise.
+
+— The Clarity. Team`;
 
       await clients.ses.sendEmail({
         Source: SENDER_EMAIL,

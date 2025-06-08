@@ -36,13 +36,13 @@ export default function BarChart() {
       "Clarity. Partner"
     ];
 
-    const data = [505, 525, 575, 778, 925, 227, 455, 545];
+    const data = [505, 525, 575, 778, 925, 273, 455, 682];
 
     const marketBenchmark = {
       "Clarity. Base": 505,
       "Clarity. Plus": 575,
       "Clarity. Partner": 778
-    };
+    };    
 
     const lightColours = [
       "#808080", "#808080", "#808080", "#808080", "#808080", // market greys
