@@ -8,8 +8,8 @@ import BarChart from "../components/BarChart.jsx";
   <main class="max-w-5xl mx-auto px-4 py-24 text-center">
     <h1 class="text-5xl font-bold mb-4 leading-tight">Support Plans</h1>
     <p class="text-xl text-gray-600 dark:text-gray-300 mb-12">
-      Get expert support that helps you move faster, focus better, and make
-      decisions you trust.
+      Get clarity on what matters most. Through expert insight that helps you
+      move faster, focus better, and make decisions you trust.
     </p>
 
     <!-- Microcopy + Toggle -->
@@ -39,8 +39,11 @@ import BarChart from "../components/BarChart.jsx";
             Annually
           </button>
         </div>
-        <p class="text-sm text-gray-500 dark:text-gray-400">
-          Annual pricing: Get 12 months for the price of 11
+        <p x-show="billing === 'annually'" class="text-sm text-blue-400">
+          Annual pricing: Save 16% and get 12 months for the price of 10
+        </p>
+        <p x-show="billing === 'quarterly'" class="text-sm text-blue-400">
+          Quarterly pricing: Pay less. Save 8%, billed every 3 months.
         </p>
       </div>
 
@@ -55,45 +58,51 @@ import BarChart from "../components/BarChart.jsx";
         >
           <h2 class="text-2xl font-bold mb-2">Clarity. Base</h2>
           <p class="text-gray-600 dark:text-gray-400 mb-4">
-            Responsive, low-friction support focused on a single team or
-            initiative. Great when you need momentum behind one product,
-            project, or team. Unblocks decisions without spinning up a project.
+            Discovery-as-a-Service support, focused on one team or initiative.
+            Ideal when you need clarity around one product, project, or
+            question. Surfaces insight and options without spinning up a full
+            engagement.
           </p>
           <!-- Annual -->
           <div x-show="billing === 'annually'" class="mb-4">
             <p class="text-3xl font-extrabold">
-              £54,989
+              £59,990
               <span class="text-base text-gray-500 line-through ml-2"
-                >£59,988</span
+                >£71,988</span
               >
             </p>
             <p x-show="billing === 'annually'" class="text-sm text-blue-400">
-              Save £4,999 annually
+              Save £11,998 annually
             </p>
           </div>
 
           <!-- Quarterly -->
-          <p
-            x-show="billing === 'quarterly'"
-            class="text-3xl font-extrabold mb-4"
-          >
-            £14,997
-          </p>
+          <div x-show="billing === 'quarterly'" class="mb-4">
+            <p class="text-3xl font-extrabold">
+              £16,497
+              <span class="text-base text-gray-500 line-through ml-2"
+                >£17,997</span
+              >
+            </p>
+            <p x-show="billing === 'quarterly'" class="text-sm text-blue-400">
+              Save £1,500 quarterly
+            </p>
+          </div>
 
           <!-- Monthly -->
           <p
             x-show="billing === 'monthly'"
             class="text-3xl font-extrabold mb-4"
           >
-            £4,999
+            £5,999
           </p>
 
           <ul
             class="flex-1 list-disc list-outside pl-6 space-y-2 text-left text-gray-700 dark:text-gray-300"
           >
-            <li>Lightweight, always-on support for one focus area</li>
-            <li>Quick-turn input that feels embedded, not external</li>
-            <li>Clear thinking when the next step isn't obvious</li>
+            <li>Insight on demand — shaped by experience, not templates</li>
+            <li>Trusted input from people who've solved it before</li>
+            <li>One priority at a time, explored with pace and precision</li>
           </ul>
           <div class="mt-6 text-center">
             <a
@@ -117,21 +126,26 @@ import BarChart from "../components/BarChart.jsx";
           <!-- Annual -->
           <div x-show="billing === 'annually'" class="mb-4">
             <p class="text-3xl font-extrabold">
-              £109,989
+              £99,990
               <span class="text-base text-gray-500 line-through ml-2"
                 >£119,988</span
               >
             </p>
-            <p x-show="billing === 'annually'" class="text-sm text-blue-400">
-              Save £9,999 annually
-            </p>
+            <p class="text-sm text-blue-400">Save £19,998 annually</p>
           </div>
-          <p
-            x-show="billing === 'quarterly'"
-            class="text-3xl font-extrabold mb-4"
-          >
-            £29,997
-          </p>
+
+          <!-- Quarterly -->
+          <div x-show="billing === 'quarterly'" class="mb-4">
+            <p class="text-3xl font-extrabold">
+              £27,497
+              <span class="text-base text-gray-500 line-through ml-2"
+                >£29,997</span
+              >
+            </p>
+            <p class="text-sm text-blue-400">Save £2,500 quarterly</p>
+          </div>
+
+          <!-- Monthly -->
           <p
             x-show="billing === 'monthly'"
             class="text-3xl font-extrabold mb-4"
@@ -168,26 +182,31 @@ import BarChart from "../components/BarChart.jsx";
           <!-- Annual -->
           <div x-show="billing === 'annually'" class="mb-4">
             <p class="text-3xl font-extrabold">
-              £131,989
+              £149,990
               <span class="text-base text-gray-500 line-through ml-2"
-                >£143,988</span
+                >£179,988</span
               >
             </p>
-            <p x-show="billing === 'annually'" class="text-sm text-blue-400">
-              Save £11,999 annually
-            </p>
+            <p class="text-sm text-blue-400">Save £29,998 annually</p>
           </div>
-          <p
-            x-show="billing === 'quarterly'"
-            class="text-3xl font-extrabold mb-4"
-          >
-            £35,997
-          </p>
+
+          <!-- Quarterly -->
+          <div x-show="billing === 'quarterly'" class="mb-4">
+            <p class="text-3xl font-extrabold">
+              £41,397
+              <span class="text-base text-gray-500 line-through ml-2"
+                >£44,997</span
+              >
+            </p>
+            <p class="text-sm text-blue-400">Save £3,600 quarterly</p>
+          </div>
+
+          <!-- Monthly -->
           <p
             x-show="billing === 'monthly'"
             class="text-3xl font-extrabold mb-4"
           >
-            £11,999
+            £14,999
           </p>
 
           <ul
@@ -208,11 +227,13 @@ import BarChart from "../components/BarChart.jsx";
       </div>
     </div>
 
-    <section class="mt-20 max-w-5xl mx-auto px-4 text-center mb-12">
+    <section
+      id="compare-plans"
+      class="mt-20 max-w-5xl mx-auto px-4 text-center mb-12"
+    >
       <h2 class="text-3xl font-bold mb-10">Compare the Plans</h2>
 
       <div
-        id="compare-plans"
         class="flex-1 grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch text-left"
       >
         <!-- Base Plan -->
@@ -221,16 +242,46 @@ import BarChart from "../components/BarChart.jsx";
         >
           <h2 class="text-2xl font-bold mb-2">Clarity. Base</h2>
           <ul
-            class="flex-1 list-disc list-outside pl-6 space-y-2 text-left text-gray-700
-          dark:text-gray-300"
+            class="flex-1 list-disc list-outside pl-6 space-y-2 text-left text-gray-700 dark:text-gray-300"
           >
-            <li><strong>Best for:</strong> A single delivery team</li>
-            <li><strong>Presence:</strong> Named lead, async input</li>
-            <li><strong>Sessions:</strong> Fortnightly (optional)</li>
-            <li><strong>Briefs:</strong> Around 1 per month</li>
-            <li><strong>Radar:</strong> Available on request</li>
-            <li><strong>In-person:</strong> Remote only</li>
-            <li><strong>Outcome:</strong> Clear focus, fewer blockers</li>
+            <li>
+              <strong>Best for:</strong> One high-priority question or area.
+            </li>
+            <li><strong>Presence:</strong> Expert input, mostly async.</li>
+            <li>
+              <strong>
+                <span
+                  title="A short, focused conversation where we walk through what we've found and what it means for your next steps."
+                  class="underline text-blue-400 hover:text-blue-500 cursor-help"
+                >
+                  Playback:</span
+                >
+              </strong>
+              Fortnightly (optional).
+            </li>
+            <li>
+              <strong>
+                <span
+                  title="A concise summary of insight or options, tailored to help you move forward with confidence."
+                  class="underline text-blue-400 hover:text-blue-500 cursor-help"
+                >
+                  Briefs:</span
+                >
+              </strong>
+              Around 1 per month.
+            </li>
+            <li>
+              <strong>
+                <span
+                  title="A rolling view of emerging risks, trends, and signals to keep on your strategic horizon."
+                  class="underline text-blue-400 hover:text-blue-500 cursor-help"
+                >
+                  Radar:</span
+                >
+              </strong>Available on request.
+            </li>
+            <li><strong>In-person:</strong> Remote only.</li>
+            <li><strong>Outcome:</strong> Options surfaced. Decisions made.</li>
           </ul>
         </div>
 
@@ -245,18 +296,45 @@ import BarChart from "../components/BarChart.jsx";
           </span> -->
           <h2 class="text-2xl font-bold mb-2">Clarity. Plus</h2>
           <ul
-            class="flex-1 list-disc list-outside pl-6 space-y-2 text-left text-gray-700
-          dark:text-gray-300"
+            class="flex-1 list-disc list-outside pl-6 space-y-2 text-left text-gray-700 dark:text-gray-300"
           >
-            <li><strong>Best for:</strong> Multi-team initiatives</li>
-            <li><strong>Presence:</strong> Multi-stakeholder engagement</li>
-            <li><strong>Sessions:</strong> Weekly</li>
-            <li><strong>Briefs:</strong> 2-3 per month</li>
-            <li><strong>Radar:</strong> Included</li>
-            <li><strong>In-person:</strong> Optional by request</li>
+            <li><strong>Best for:</strong> Multi-team initiatives.</li>
+            <li><strong>Presence:</strong> Multi-stakeholder engagement.</li>
             <li>
-              <strong>Outcome:</strong> Aligned teams, faster strategy
+              <strong>
+                <span
+                  title="A short, focused conversation where we walk through what we've found and what it means for your next steps."
+                  class="underline text-blue-400 hover:text-blue-500 cursor-help"
+                >
+                  Playback:</span
+                >
+              </strong>
+              Weekly.
             </li>
+            <li>
+              <strong>
+                <span
+                  title="A concise summary of insight or options, tailored to help you move forward with confidence."
+                  class="underline text-blue-400 hover:text-blue-500 cursor-help"
+                >
+                  Briefs:</span
+                >
+              </strong>
+              2-3 per month.
+            </li>
+            <li>
+              <strong>
+                <span
+                  title="A rolling view of emerging risks, trends, and signals to keep on your strategic horizon."
+                  class="underline text-blue-400 hover:text-blue-500 cursor-help"
+                >
+                  Radar:</span
+                >
+              </strong>
+              Included
+            </li>
+            <li><strong>In-person:</strong> Optional by request.</li>
+            <li><strong>Outcome:</strong> Aligned teams. Faster strategy.</li>
           </ul>
         </div>
 
@@ -266,28 +344,58 @@ import BarChart from "../components/BarChart.jsx";
         >
           <h2 class="text-2xl font-bold mb-2">Clarity. Partner</h2>
           <ul
-            class="flex-1 list-disc list-outside pl-6 space-y-2 text-left text-gray-700
-          dark:text-gray-300"
+            class="flex-1 list-disc list-outside pl-6 space-y-2 text-left text-gray-700 dark:text-gray-300"
           >
             <li>
-              <strong>Best for:</strong> Executive-level support or portfolios
+              <strong>Best for:</strong> Executive-level support or portfolios.
             </li>
             <li>
-              <strong>Presence:</strong> Strategic partner across leadership
+              <strong>Presence:</strong> Strategic partner across leadership.
             </li>
-            <li><strong>Sessions:</strong> Weekly or as needed</li>
-            <li><strong>Briefs:</strong> As required, tailored to audience</li>
-            <li><strong>Radar:</strong> Included with watchlist</li>
-            <li><strong>In-person:</strong> Optional by request</li>
             <li>
-              <strong>Outcome:</strong> Confident leadership decisions
+              <strong>
+                <span
+                  title="A short, focused conversation where we walk through what we've found and what it means for your next steps."
+                  class="underline text-blue-400 hover:text-blue-500 cursor-help"
+                >
+                  Playback:</span
+                >
+              </strong>
+              Weekly or as needed.
             </li>
+            <li>
+              <strong>
+                <span
+                  title="A concise summary of insight or options, tailored to help you move forward with confidence."
+                  class="underline text-blue-400 hover:text-blue-500 cursor-help"
+                >
+                  Briefs:</span
+                >
+              </strong>
+              As required, tailored to audience.
+            </li>
+            <li>
+              <strong>
+                <span
+                  title="A rolling view of emerging risks, trends, and signals to keep on your strategic horizon."
+                  class="underline text-blue-400 hover:text-blue-500 cursor-help"
+                >
+                  Radar:</span
+                >
+              </strong>
+              Included with watchlist.
+            </li>
+            <li><strong>In-person:</strong> Optional by request.</li>
+            <li><strong>Outcome:</strong> Confident leadership decisions.</li>
           </ul>
         </div>
       </div>
     </section>
 
-    <section class="mt-20 max-w-5xl mx-auto px-4 text-center mb-12">
+    <section
+      id="price-comparison"
+      class="mt-20 max-w-5xl mx-auto px-4 text-center mb-12"
+    >
       <h2 class="text-3xl font-bold mb-6" id="clarityRateChart">
         Clarity. vs. Traditional Consultancy
       </h2>
@@ -303,7 +411,10 @@ import BarChart from "../components/BarChart.jsx";
       </p>
     </section>
 
-    <section class="mt-20 flex flex-col mx-auto px-4 py-10 max-w-5xl mb-12">
+    <section
+      id="planQuiz"
+      class="mt-20 flex flex-col mx-auto px-4 py-10 max-w-5xl mb-12"
+    >
       <h2 class="text-3xl font-bold mb-6">
         Not sure which plan is right for you?
       </h2>
@@ -312,7 +423,6 @@ import BarChart from "../components/BarChart.jsx";
       </p>
 
       <form
-        id="planQuiz"
         class="flex flex-col mx-auto space-y-8 bg-white dark:bg-gray-900 p-6 rounded-2xl shadow-md"
       >
         <!-- Question 1 -->
@@ -379,7 +489,7 @@ import BarChart from "../components/BarChart.jsx";
                 class="accent-[#429EDB]"
               />
               <span class="text-base"
-                >A thought partner for product/delivery</span
+                >Clarity around a specific product, team, or question</span
               >
             </label>
             <label
@@ -391,7 +501,9 @@ import BarChart from "../components/BarChart.jsx";
                 value="B"
                 class="accent-[#429EDB]"
               />
-              <span class="text-base">A lens across multiple squads</span>
+              <span class="text-base"
+                >A thought partner across multiple workstreams</span
+              >
             </label>
             <label
               class="flex justify-start items-center gap-3 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-xl px-4 py-2 cursor-pointer transition"
@@ -412,7 +524,7 @@ import BarChart from "../components/BarChart.jsx";
         <!-- Question 3 -->
         <fieldset>
           <legend class="block text-left font-semibold mb-3"
-            >3. How often do you want input from Clarity.?</legend
+            >3. How often do you want feedback from Clarity.?</legend
           >
           <div class="space-y-2">
             <label
@@ -447,8 +559,7 @@ import BarChart from "../components/BarChart.jsx";
                 value="C"
                 class="accent-[#429EDB]"
               />
-              <span class="text-base">Frequently - sessions, briefs, radar</span
-              >
+              <span class="text-base">Frequently</span>
             </label>
           </div>
         </fieldset>
@@ -528,7 +639,7 @@ import BarChart from "../components/BarChart.jsx";
           a[1] > b[1] ? a : b,
         );
         const planMap = {
-          A: `<strong>Base Plan:</strong> Best for focused support with a single delivery team. Gives you faster, clearer decisions when momentum stalls.`,
+          A: `<strong>Base Plan:</strong> Best for targeted discovery around one team, product, or project. Surfaces insight and options quickly so you can move forward with confidence.`,
           B: `<strong>Plus Plan:</strong> Ideal for multi-team strategy and alignment. Keeps priorities joined up so decisions stay confident and on course.`,
           C: `<strong>Partner Plan:</strong> Built for execs and portfolios needing confident, joined-up decisions. Brings strategic clarity to the moments that matter most.`,
         };
@@ -581,5 +692,56 @@ import BarChart from "../components/BarChart.jsx";
     <script
       src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
       defer></script>
+    <!-- Section 4: Navigation -->
+    <section class="my-8 flex flex-col items-center gap-4 text-center">
+      <p class="text-lg text-gray-600 dark:text-gray-400">
+        Still got some unanswered questions? Check out the FAQ.
+      </p>
+      <div class="flex gap-12 justify-center items-center">
+        <!-- Left Arrow Link -->
+        <a
+          href="/daas"
+          aria-label="Previous page"
+          class="hover:text-blue-600 transition"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="64"
+            height="64"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M15 19l-7-7 7-7"></path>
+          </svg>
+        </a>
+
+        <!-- Right Arrow Link -->
+        <a
+          href="/faq"
+          aria-label="Next page"
+          class="hover:text-blue-600 transition"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="64"
+            height="64"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M9 5l7 7-7 7"></path>
+          </svg>
+        </a>
+      </div>
+    </section>
   </main>
 </Base>
