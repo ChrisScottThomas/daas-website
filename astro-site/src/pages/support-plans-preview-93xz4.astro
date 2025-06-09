@@ -7,644 +7,676 @@ import BarChart from "../components/BarChart.jsx";
 <Base title="Support Plans — Clarity.">
   <main class="max-w-5xl mx-auto px-4 py-24 text-center">
     <h1 class="text-5xl font-bold mb-4 leading-tight">Support Plans</h1>
-    <p class="text-xl text-gray-600 dark:text-gray-300 mb-12">
+    <p class="text-xl text-gray-600 dark:text-gray-300 mb-6">
       Get clarity on what matters most. Through expert insight that helps you
       move faster, focus better, and make decisions you trust.
-    </p>
+      <br /><br />
+      <p
+        class="mt-8 text-lg text-center text-gray-600 dark:text-gray-300 max-w-4xl mx-auto
+      mb-12">
+        Every plan includes Discovery-as-a-Service (DaaS). How you use it just
+        depends on what you need.
+      </p>
 
-    <!-- Microcopy + Toggle -->
-    <div x-data="{ billing: 'monthly' }">
-      <!-- Toggle -->
-      <div class="mb-6 flex flex-col items-center">
-        <div class="flex justify-center gap-2 mb-2">
-          <button
-            :class="billing === 'monthly' ? 'bg-black text-white' : 'bg-gray-200 dark:bg-gray-700 dark:text-white'"
-            @click="billing = 'monthly'"
-            class="px-4 py-2 rounded-l font-medium"
-          >
-            Monthly
-          </button>
-          <button
-            :class="billing === 'quarterly' ? 'bg-black text-white' : 'bg-gray-200 dark:bg-gray-700 dark:text-white'"
-            @click="billing = 'quarterly'"
-            class="px-4 py-2 font-medium"
-          >
-            Quarterly
-          </button>
-          <button
-            :class="billing === 'annually' ? 'bg-black text-white' : 'bg-gray-200 dark:bg-gray-700 dark:text-white'"
-            @click="billing = 'annually'"
-            class="px-4 py-2 rounded-r font-medium"
-          >
-            Annually
-          </button>
+      <!-- Microcopy + Toggle -->
+      <div x-data="{ billing: 'monthly' }">
+        <!-- Toggle -->
+        <div class="mb-6 flex flex-col items-center">
+          <div class="flex justify-center gap-2 mb-2">
+            <button
+              :class="billing === 'monthly' ? 'bg-black text-white' : 'bg-gray-200 dark:bg-gray-700 dark:text-white'"
+              @click="billing = 'monthly'"
+              class="px-4 py-2 rounded-l font-medium"
+            >
+              Monthly
+            </button>
+            <button
+              :class="billing === 'quarterly' ? 'bg-black text-white' : 'bg-gray-200 dark:bg-gray-700 dark:text-white'"
+              @click="billing = 'quarterly'"
+              class="px-4 py-2 font-medium"
+            >
+              Quarterly
+            </button>
+            <button
+              :class="billing === 'annually' ? 'bg-black text-white' : 'bg-gray-200 dark:bg-gray-700 dark:text-white'"
+              @click="billing = 'annually'"
+              class="px-4 py-2 rounded-r font-medium"
+            >
+              Annually
+            </button>
+          </div>
+          <p x-show="billing === 'annually'" class="text-sm text-blue-400">
+            Annual pricing: Save 16% and get 12 months for the price of 10
+          </p>
+          <p x-show="billing === 'quarterly'" class="text-sm text-blue-400">
+            Quarterly pricing: Pay less. Save 8%, billed every 3 months.
+          </p>
         </div>
-        <p x-show="billing === 'annually'" class="text-sm text-blue-400">
-          Annual pricing: Save 16% and get 12 months for the price of 10
-        </p>
-        <p x-show="billing === 'quarterly'" class="text-sm text-blue-400">
-          Quarterly pricing: Pay less. Save 8%, billed every 3 months.
-        </p>
+
+        <!-- Plans Grid -->
+        <div
+          id="support-plans"
+          class="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch"
+        >
+          <!-- Clarity. Base -->
+          <div
+            class="flex flex-col h-full border border-gray-300 dark:border-gray-600 rounded-lg p-6 text-left shadow-sm bg-white dark:bg-gray-900"
+          >
+            <h2 class="text-2xl font-bold mb-2">Clarity. Base</h2>
+            <p class="text-gray-600 dark:text-gray-400 mb-4">
+              Discovery-as-a-Service support, focused on one team or initiative.
+              Ideal when you need clarity around one product, project, or
+              question. Surfaces insight and options without spinning up a full
+              engagement.
+            </p>
+            <!-- Annual -->
+            <div x-show="billing === 'annually'" class="mb-4">
+              <p class="text-3xl font-extrabold">
+                £59,990
+                <span class="text-base text-gray-500 line-through ml-2"
+                  >£71,988</span
+                >
+              </p>
+              <p x-show="billing === 'annually'" class="text-sm text-blue-400">
+                Save £11,998 annually
+              </p>
+            </div>
+
+            <!-- Quarterly -->
+            <div x-show="billing === 'quarterly'" class="mb-4">
+              <p class="text-3xl font-extrabold">
+                £16,497
+                <span class="text-base text-gray-500 line-through ml-2"
+                  >£17,997</span
+                >
+              </p>
+              <p x-show="billing === 'quarterly'" class="text-sm text-blue-400">
+                Save £1,500 quarterly
+              </p>
+            </div>
+
+            <!-- Monthly -->
+            <p
+              x-show="billing === 'monthly'"
+              class="text-3xl font-extrabold mb-4"
+            >
+              £5,999
+            </p>
+
+            <ul
+              class="flex-1 list-disc list-outside pl-6 space-y-2 text-left text-gray-700 dark:text-gray-300"
+            >
+              <li>Insight on demand — shaped by experience, not templates</li>
+              <li>Trusted input from people who've solved it before</li>
+              <li>One priority at a time, explored with pace and precision</li>
+            </ul>
+            <div class="mt-6 text-center">
+              <a
+                href="#waitlist"
+                class="inline-block bg-black text-white px-4 py-2 rounded hover:bg-gray-800 transition text-center"
+                >Join Waitlist</a
+              >
+            </div>
+          </div>
+
+          <!-- Clarity. Plus -->
+          <div
+            class="flex flex-col h-full border border-gray-300 dark:border-gray-600 rounded-lg p-6 text-left shadow-sm bg-white dark:bg-gray-900"
+          >
+            <h2 class="text-2xl font-bold mb-2">Clarity. Plus</h2>
+            <p class="text-gray-600 dark:text-gray-400 mb-4">
+              Trusted support across multiple teams or workstreams. Ideal when
+              you need joined-up thinking across multiple teams. Keeps strategy
+              aligned while work moves forward.
+            </p>
+            <!-- Annual -->
+            <div x-show="billing === 'annually'" class="mb-4">
+              <p class="text-3xl font-extrabold">
+                £99,990
+                <span class="text-base text-gray-500 line-through ml-2"
+                  >£119,988</span
+                >
+              </p>
+              <p class="text-sm text-blue-400">Save £19,998 annually</p>
+            </div>
+
+            <!-- Quarterly -->
+            <div x-show="billing === 'quarterly'" class="mb-4">
+              <p class="text-3xl font-extrabold">
+                £27,497
+                <span class="text-base text-gray-500 line-through ml-2"
+                  >£29,997</span
+                >
+              </p>
+              <p class="text-sm text-blue-400">Save £2,500 quarterly</p>
+            </div>
+
+            <!-- Monthly -->
+            <p
+              x-show="billing === 'monthly'"
+              class="text-3xl font-extrabold mb-4"
+            >
+              £9,999
+            </p>
+
+            <ul
+              class="flex-1 list-disc list-outside pl-6 space-y-2 text-left text-gray-700 dark:text-gray-300"
+            >
+              <li>
+                Everything in Base, including DaaS when it's the right tool
+              </li>
+              <li>Context-aware input across multiple decision points</li>
+              <li>Regular rhythm of sessions, insight, and briefings</li>
+              <li>Strategy stays joined-up even as priorities shift</li>
+            </ul>
+            <div class="mt-6 text-center">
+              <a
+                href="#waitlist"
+                class="inline-block bg-black text-white px-4 py-2 rounded hover:bg-gray-800 transition"
+                >Join Waitlist</a
+              >
+            </div>
+          </div>
+
+          <!-- Clarity. Partner -->
+          <div
+            class="flex flex-col h-full border border-gray-300 dark:border-gray-600 rounded-lg p-6 text-left shadow-sm bg-white dark:bg-gray-900"
+          >
+            <h2 class="text-2xl font-bold mb-2">Clarity. Partner</h2>
+            <p class="text-gray-600 dark:text-gray-400 mb-4">
+              Strategic partnership embedded at the leadership level. Built for
+              high-stakes portfolios and exec teams. Brings structure, pace, and
+              strategic confidence to your leadership rhythm.
+            </p>
+            <!-- Annual -->
+            <div x-show="billing === 'annually'" class="mb-4">
+              <p class="text-3xl font-extrabold">
+                £149,990
+                <span class="text-base text-gray-500 line-through ml-2"
+                  >£179,988</span
+                >
+              </p>
+              <p class="text-sm text-blue-400">Save £29,998 annually</p>
+            </div>
+
+            <!-- Quarterly -->
+            <div x-show="billing === 'quarterly'" class="mb-4">
+              <p class="text-3xl font-extrabold">
+                £41,397
+                <span class="text-base text-gray-500 line-through ml-2"
+                  >£44,997</span
+                >
+              </p>
+              <p class="text-sm text-blue-400">Save £3,600 quarterly</p>
+            </div>
+
+            <!-- Monthly -->
+            <p
+              x-show="billing === 'monthly'"
+              class="text-3xl font-extrabold mb-4"
+            >
+              £14,999
+            </p>
+
+            <ul
+              class="flex-1 list-disc list-outside pl-6 space-y-2 text-left text-gray-700 dark:text-gray-300"
+            >
+              <li>
+                Everything in Plus, with long-range thinking and leadership
+                alignment
+              </li>
+              <li>Clarity. lead embedded across your leadership rhythm</li>
+              <li>Proactive thinking, not just reactive input</li>
+              <li>Decisions feel coordinated, timely, and confident</li>
+            </ul>
+            <div class="mt-6 text-center">
+              <a
+                href="#waitlist"
+                class="inline-block bg-black text-white px-4 py-2 rounded hover:bg-gray-800 transition"
+                >Join Waitlist</a
+              >
+            </div>
+          </div>
+        </div>
       </div>
 
-      <!-- Plans Grid -->
-      <div
-        id="support-plans"
-        class="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch"
+      <hr class="my-8 border-gray-300 dark:border-gray-700" />
+
+      <p
+        class="mt-8 text-sm text-center text-gray-500 dark:text-gray-400 max-w-xl mx-auto"
       >
-        <!-- Clarity. Base -->
-        <div
-          class="flex flex-col h-full border border-gray-300 dark:border-gray-600 rounded-lg p-6 text-left shadow-sm bg-white dark:bg-gray-900"
-        >
-          <h2 class="text-2xl font-bold mb-2">Clarity. Base</h2>
-          <p class="text-gray-600 dark:text-gray-400 mb-4">
-            Discovery-as-a-Service support, focused on one team or initiative.
-            Ideal when you need clarity around one product, project, or
-            question. Surfaces insight and options without spinning up a full
-            engagement.
-          </p>
-          <!-- Annual -->
-          <div x-show="billing === 'annually'" class="mb-4">
-            <p class="text-3xl font-extrabold">
-              £59,990
-              <span class="text-base text-gray-500 line-through ml-2"
-                >£71,988</span
-              >
-            </p>
-            <p x-show="billing === 'annually'" class="text-sm text-blue-400">
-              Save £11,998 annually
-            </p>
-          </div>
+        <em>
+          Discovery-as-a-Service (DaaS) is included in all plans. On <strong
+            >Base</strong
+          >, it's the core focus. On <strong>Plus</strong> and <strong
+            >Partner</strong
+          >, it's one of several ways we help you move forward with confidence.
+        </em>
+      </p>
 
-          <!-- Quarterly -->
-          <div x-show="billing === 'quarterly'" class="mb-4">
-            <p class="text-3xl font-extrabold">
-              £16,497
-              <span class="text-base text-gray-500 line-through ml-2"
-                >£17,997</span
-              >
-            </p>
-            <p x-show="billing === 'quarterly'" class="text-sm text-blue-400">
-              Save £1,500 quarterly
-            </p>
-          </div>
-
-          <!-- Monthly -->
-          <p
-            x-show="billing === 'monthly'"
-            class="text-3xl font-extrabold mb-4"
-          >
-            £5,999
-          </p>
-
-          <ul
-            class="flex-1 list-disc list-outside pl-6 space-y-2 text-left text-gray-700 dark:text-gray-300"
-          >
-            <li>Insight on demand — shaped by experience, not templates</li>
-            <li>Trusted input from people who've solved it before</li>
-            <li>One priority at a time, explored with pace and precision</li>
-          </ul>
-          <div class="mt-6 text-center">
-            <a
-              href="#waitlist"
-              class="inline-block bg-black text-white px-4 py-2 rounded hover:bg-gray-800 transition text-center"
-              >Join Waitlist</a
-            >
-          </div>
-        </div>
-
-        <!-- Clarity. Plus -->
-        <div
-          class="flex flex-col h-full border border-gray-300 dark:border-gray-600 rounded-lg p-6 text-left shadow-sm bg-white dark:bg-gray-900"
-        >
-          <h2 class="text-2xl font-bold mb-2">Clarity. Plus</h2>
-          <p class="text-gray-600 dark:text-gray-400 mb-4">
-            Trusted support across multiple teams or workstreams. Ideal when you
-            need joined-up thinking across multiple teams. Keeps strategy
-            aligned while work moves forward.
-          </p>
-          <!-- Annual -->
-          <div x-show="billing === 'annually'" class="mb-4">
-            <p class="text-3xl font-extrabold">
-              £99,990
-              <span class="text-base text-gray-500 line-through ml-2"
-                >£119,988</span
-              >
-            </p>
-            <p class="text-sm text-blue-400">Save £19,998 annually</p>
-          </div>
-
-          <!-- Quarterly -->
-          <div x-show="billing === 'quarterly'" class="mb-4">
-            <p class="text-3xl font-extrabold">
-              £27,497
-              <span class="text-base text-gray-500 line-through ml-2"
-                >£29,997</span
-              >
-            </p>
-            <p class="text-sm text-blue-400">Save £2,500 quarterly</p>
-          </div>
-
-          <!-- Monthly -->
-          <p
-            x-show="billing === 'monthly'"
-            class="text-3xl font-extrabold mb-4"
-          >
-            £9,999
-          </p>
-
-          <ul
-            class="flex-1 list-disc list-outside pl-6 space-y-2 text-left text-gray-700 dark:text-gray-300"
-          >
-            <li>Context-aware input across multiple decision points</li>
-            <li>Regular rhythm of sessions, insight, and briefings</li>
-            <li>Strategy stays joined-up even as priorities shift</li>
-          </ul>
-          <div class="mt-6 text-center">
-            <a
-              href="#waitlist"
-              class="inline-block bg-black text-white px-4 py-2 rounded hover:bg-gray-800 transition"
-              >Join Waitlist</a
-            >
-          </div>
-        </div>
-
-        <!-- Clarity. Partner -->
-        <div
-          class="flex flex-col h-full border border-gray-300 dark:border-gray-600 rounded-lg p-6 text-left shadow-sm bg-white dark:bg-gray-900"
-        >
-          <h2 class="text-2xl font-bold mb-2">Clarity. Partner</h2>
-          <p class="text-gray-600 dark:text-gray-400 mb-4">
-            Strategic partnership embedded at the leadership level. Built for
-            high-stakes portfolios and exec teams. Brings structure, pace, and
-            strategic confidence to your leadership rhythm.
-          </p>
-          <!-- Annual -->
-          <div x-show="billing === 'annually'" class="mb-4">
-            <p class="text-3xl font-extrabold">
-              £149,990
-              <span class="text-base text-gray-500 line-through ml-2"
-                >£179,988</span
-              >
-            </p>
-            <p class="text-sm text-blue-400">Save £29,998 annually</p>
-          </div>
-
-          <!-- Quarterly -->
-          <div x-show="billing === 'quarterly'" class="mb-4">
-            <p class="text-3xl font-extrabold">
-              £41,397
-              <span class="text-base text-gray-500 line-through ml-2"
-                >£44,997</span
-              >
-            </p>
-            <p class="text-sm text-blue-400">Save £3,600 quarterly</p>
-          </div>
-
-          <!-- Monthly -->
-          <p
-            x-show="billing === 'monthly'"
-            class="text-3xl font-extrabold mb-4"
-          >
-            £14,999
-          </p>
-
-          <ul
-            class="flex-1 list-disc list-outside pl-6 space-y-2 text-left text-gray-700 dark:text-gray-300"
-          >
-            <li>Clarity. lead embedded across your leadership rhythm</li>
-            <li>Proactive thinking, not just reactive input</li>
-            <li>Decisions feel coordinated, timely, and confident</li>
-          </ul>
-          <div class="mt-6 text-center">
-            <a
-              href="#waitlist"
-              class="inline-block bg-black text-white px-4 py-2 rounded hover:bg-gray-800 transition"
-              >Join Waitlist</a
-            >
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <section
-      id="compare-plans"
-      class="mt-20 max-w-5xl mx-auto px-4 text-center mb-12"
-    >
-      <h2 class="text-3xl font-bold mb-10">Compare the Plans</h2>
-
-      <div
-        class="flex-1 grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch text-left"
+      <section
+        id="compare-plans"
+        class="mt-20 max-w-5xl mx-auto px-4 text-center mb-12"
       >
-        <!-- Base Plan -->
-        <div
-          class="flex flex-col h-full border border-gray-300 dark:border-gray-600 rounded-lg p-6 text-left shadow-sm bg-white dark:bg-gray-900"
-        >
-          <h2 class="text-2xl font-bold mb-2">Clarity. Base</h2>
-          <ul
-            class="flex-1 list-disc list-outside pl-6 space-y-2 text-left text-gray-700 dark:text-gray-300"
-          >
-            <li>
-              <strong>Best for:</strong> One high-priority question or area.
-            </li>
-            <li><strong>Presence:</strong> Expert input, mostly async.</li>
-            <li>
-              <strong>
-                <span
-                  title="A short, focused conversation where we walk through what we've found and what it means for your next steps."
-                  class="underline text-blue-400 hover:text-blue-500 cursor-help"
-                >
-                  Playback:</span
-                >
-              </strong>
-              Fortnightly (optional).
-            </li>
-            <li>
-              <strong>
-                <span
-                  title="A concise summary of insight or options, tailored to help you move forward with confidence."
-                  class="underline text-blue-400 hover:text-blue-500 cursor-help"
-                >
-                  Briefs:</span
-                >
-              </strong>
-              Around 1 per month.
-            </li>
-            <li>
-              <strong>
-                <span
-                  title="A rolling view of emerging risks, trends, and signals to keep on your strategic horizon."
-                  class="underline text-blue-400 hover:text-blue-500 cursor-help"
-                >
-                  Radar:</span
-                >
-              </strong>Available on request.
-            </li>
-            <li><strong>In-person:</strong> Remote only.</li>
-            <li><strong>Outcome:</strong> Options surfaced. Decisions made.</li>
-          </ul>
-        </div>
+        <h2 class="text-3xl font-bold mb-10">Compare the Plans</h2>
 
-        <!-- Plus Plan -->
         <div
-          class="flex flex-col h-full border border-gray-300 dark:border-gray-600 rounded-lg p-6 text-left shadow-sm bg-white dark:bg-gray-900"
+          class="flex-1 grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch text-left"
         >
-          <!-- <span
+          <!-- Base Plan -->
+          <div
+            class="flex flex-col h-full border border-gray-300 dark:border-gray-600 rounded-lg p-6 text-left shadow-sm bg-white dark:bg-gray-900"
+          >
+            <h2 class="text-2xl font-bold mb-2">Clarity. Base</h2>
+            <ul
+              class="flex-1 list-disc list-outside pl-6 space-y-2 text-left text-gray-700 dark:text-gray-300"
+            >
+              <li>
+                <strong>Best for:</strong> One high-priority question or area.
+              </li>
+              <li><strong>Presence:</strong> Expert input, mostly async.</li>
+              <li>
+                <strong>
+                  <span
+                    title="A short, focused conversation where we walk through what we've found and what it means for your next steps."
+                    class="underline text-blue-400 hover:text-blue-500 cursor-help"
+                  >
+                    Playback:</span
+                  >
+                </strong>
+                Fortnightly (optional).
+              </li>
+              <li>
+                <strong>
+                  <span
+                    title="A concise summary of insight or options, tailored to help you move forward with confidence."
+                    class="underline text-blue-400 hover:text-blue-500 cursor-help"
+                  >
+                    Briefs:</span
+                  >
+                </strong>
+                Around 1 per month.
+              </li>
+              <li>
+                <strong>
+                  <span
+                    title="A rolling view of emerging risks, trends, and signals to keep on your strategic horizon."
+                    class="underline text-blue-400 hover:text-blue-500 cursor-help"
+                  >
+                    Radar:</span
+                  >
+                </strong>Available on request.
+              </li>
+              <li><strong>In-person:</strong> Remote only.</li>
+              <li>
+                <strong>Outcome:</strong> Options surfaced. Decisions made.
+              </li>
+            </ul>
+          </div>
+
+          <!-- Plus Plan -->
+          <div
+            class="flex flex-col h-full border border-gray-300 dark:border-gray-600 rounded-lg p-6 text-left shadow-sm bg-white dark:bg-gray-900"
+          >
+            <!-- <span
             class="absolute top-4 right-4 px-2 py-1 text-xs font-semibold bg-[#429EDB] text-white rounded"
           >
             Most chosen
           </span> -->
-          <h2 class="text-2xl font-bold mb-2">Clarity. Plus</h2>
-          <ul
-            class="flex-1 list-disc list-outside pl-6 space-y-2 text-left text-gray-700 dark:text-gray-300"
+            <h2 class="text-2xl font-bold mb-2">Clarity. Plus</h2>
+            <ul
+              class="flex-1 list-disc list-outside pl-6 space-y-2 text-left text-gray-700 dark:text-gray-300"
+            >
+              <li><strong>Includes:</strong> Everything in Base</li>
+              <li><strong>Best for:</strong> Multi-team initiatives.</li>
+              <li><strong>Presence:</strong> Multi-stakeholder engagement.</li>
+              <li>
+                <strong>
+                  <span
+                    title="A short, focused conversation where we walk through what we've found and what it means for your next steps."
+                    class="underline text-blue-400 hover:text-blue-500 cursor-help"
+                  >
+                    Playback:</span
+                  >
+                </strong>
+                Weekly.
+              </li>
+              <li>
+                <strong>
+                  <span
+                    title="A concise summary of insight or options, tailored to help you move forward with confidence."
+                    class="underline text-blue-400 hover:text-blue-500 cursor-help"
+                  >
+                    Briefs:</span
+                  >
+                </strong>
+                2-3 per month.
+              </li>
+              <li>
+                <strong>
+                  <span
+                    title="A rolling view of emerging risks, trends, and signals to keep on your strategic horizon."
+                    class="underline text-blue-400 hover:text-blue-500 cursor-help"
+                  >
+                    Radar:</span
+                  >
+                </strong>
+                Included
+              </li>
+              <li><strong>In-person:</strong> Optional by request.</li>
+              <li><strong>Outcome:</strong> Aligned teams. Faster strategy.</li>
+            </ul>
+          </div>
+
+          <!-- Partner Plan -->
+          <div
+            class="flex flex-col h-full border border-gray-300 dark:border-gray-600 rounded-lg p-6 text-left shadow-sm bg-white dark:bg-gray-900"
           >
-            <li><strong>Best for:</strong> Multi-team initiatives.</li>
-            <li><strong>Presence:</strong> Multi-stakeholder engagement.</li>
-            <li>
-              <strong>
-                <span
-                  title="A short, focused conversation where we walk through what we've found and what it means for your next steps."
-                  class="underline text-blue-400 hover:text-blue-500 cursor-help"
-                >
-                  Playback:</span
-                >
-              </strong>
-              Weekly.
-            </li>
-            <li>
-              <strong>
-                <span
-                  title="A concise summary of insight or options, tailored to help you move forward with confidence."
-                  class="underline text-blue-400 hover:text-blue-500 cursor-help"
-                >
-                  Briefs:</span
-                >
-              </strong>
-              2-3 per month.
-            </li>
-            <li>
-              <strong>
-                <span
-                  title="A rolling view of emerging risks, trends, and signals to keep on your strategic horizon."
-                  class="underline text-blue-400 hover:text-blue-500 cursor-help"
-                >
-                  Radar:</span
-                >
-              </strong>
-              Included
-            </li>
-            <li><strong>In-person:</strong> Optional by request.</li>
-            <li><strong>Outcome:</strong> Aligned teams. Faster strategy.</li>
-          </ul>
+            <h2 class="text-2xl font-bold mb-2">Clarity. Partner</h2>
+            <ul
+              class="flex-1 list-disc list-outside pl-6 space-y-2 text-left text-gray-700 dark:text-gray-300"
+            >
+              <li><strong>Includes:</strong> Everything in Plus</li>
+              <li>
+                <strong>Best for:</strong> Executive-level support or portfolios.
+              </li>
+              <li>
+                <strong>Presence:</strong> Strategic partner across leadership.
+              </li>
+              <li>
+                <strong>
+                  <span
+                    title="A short, focused conversation where we walk through what we've found and what it means for your next steps."
+                    class="underline text-blue-400 hover:text-blue-500 cursor-help"
+                  >
+                    Playback:</span
+                  >
+                </strong>
+                Weekly or as needed.
+              </li>
+              <li>
+                <strong>
+                  <span
+                    title="A concise summary of insight or options, tailored to help you move forward with confidence."
+                    class="underline text-blue-400 hover:text-blue-500 cursor-help"
+                  >
+                    Briefs:</span
+                  >
+                </strong>
+                As required, tailored to audience.
+              </li>
+              <li>
+                <strong>
+                  <span
+                    title="A rolling view of emerging risks, trends, and signals to keep on your strategic horizon."
+                    class="underline text-blue-400 hover:text-blue-500 cursor-help"
+                  >
+                    Radar:</span
+                  >
+                </strong>
+                Included with watchlist.
+              </li>
+              <li><strong>In-person:</strong> Optional by request.</li>
+              <li><strong>Outcome:</strong> Confident leadership decisions.</li>
+            </ul>
+          </div>
         </div>
+      </section>
 
-        <!-- Partner Plan -->
-        <div
-          class="flex flex-col h-full border border-gray-300 dark:border-gray-600 rounded-lg p-6 text-left shadow-sm bg-white dark:bg-gray-900"
-        >
-          <h2 class="text-2xl font-bold mb-2">Clarity. Partner</h2>
-          <ul
-            class="flex-1 list-disc list-outside pl-6 space-y-2 text-left text-gray-700 dark:text-gray-300"
-          >
-            <li>
-              <strong>Best for:</strong> Executive-level support or portfolios.
-            </li>
-            <li>
-              <strong>Presence:</strong> Strategic partner across leadership.
-            </li>
-            <li>
-              <strong>
-                <span
-                  title="A short, focused conversation where we walk through what we've found and what it means for your next steps."
-                  class="underline text-blue-400 hover:text-blue-500 cursor-help"
-                >
-                  Playback:</span
-                >
-              </strong>
-              Weekly or as needed.
-            </li>
-            <li>
-              <strong>
-                <span
-                  title="A concise summary of insight or options, tailored to help you move forward with confidence."
-                  class="underline text-blue-400 hover:text-blue-500 cursor-help"
-                >
-                  Briefs:</span
-                >
-              </strong>
-              As required, tailored to audience.
-            </li>
-            <li>
-              <strong>
-                <span
-                  title="A rolling view of emerging risks, trends, and signals to keep on your strategic horizon."
-                  class="underline text-blue-400 hover:text-blue-500 cursor-help"
-                >
-                  Radar:</span
-                >
-              </strong>
-              Included with watchlist.
-            </li>
-            <li><strong>In-person:</strong> Optional by request.</li>
-            <li><strong>Outcome:</strong> Confident leadership decisions.</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section
-      id="price-comparison"
-      class="mt-20 max-w-5xl mx-auto px-4 text-center mb-12"
-    >
-      <h2 class="text-3xl font-bold mb-6" id="clarityRateChart">
-        Clarity. vs. Traditional Consultancy
-      </h2>
-      <p class="text-xl text-gray-600 dark:text-gray-300 mb-4">
-        Compare average daily costs and see how Clarity. stacks up.
-      </p>
-
-      <BarChart client:only="react" />
-
-      <p class="text-sm text-gray-500 dark:text-gray-400 mt-4">
-        Data from: ITJobsWatch, Malt, LinkedIn. Clarity. daily rates assume 22
-        working days/month.
-      </p>
-    </section>
-
-    <section
-      id="planQuiz"
-      class="mt-20 flex flex-col mx-auto px-4 py-10 max-w-5xl mb-12"
-    >
-      <h2 class="text-3xl font-bold mb-6">
-        Not sure which plan is right for you?
-      </h2>
-      <p class="mb-4">
-        Answer a few quick questions to help guide your choice.
-      </p>
-
-      <form
-        class="flex flex-col mx-auto space-y-8 bg-white dark:bg-gray-900 p-6 rounded-2xl shadow-md"
+      <section
+        id="price-comparison"
+        class="mt-20 max-w-5xl mx-auto px-4 text-center mb-12"
       >
-        <!-- Question 1 -->
-        <fieldset>
-          <legend class="block text-left font-semibold mb-3"
-            >1. How many teams or workstreams do you want support across?</legend
-          >
-          <div class="space-y-2">
-            <label
-              class="flex justify-start items-center gap-3 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-xl px-4 py-2 cursor-pointer transition"
-            >
-              <input
-                type="radio"
-                name="q1"
-                value="A"
-                required
-                class="accent-[#429EDB]"
-              />
-              <span class="text-base">Just one team</span>
-            </label>
-            <label
-              class="flex justify-start items-center gap-3 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-xl px-4 py-2 cursor-pointer transition"
-            >
-              <input
-                type="radio"
-                name="q1"
-                value="B"
-                class="accent-[#429EDB]"
-              />
-              <span class="text-base"
-                >A few related teams or a strategic area</span
-              >
-            </label>
-            <label
-              class="flex justify-start items-center gap-3 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-xl px-4 py-2 cursor-pointer transition"
-            >
-              <input
-                type="radio"
-                name="q1"
-                value="C"
-                class="accent-[#429EDB]"
-              />
-              <span class="text-base"
-                >Multiple teams, execs, or shifting priorities</span
-              >
-            </label>
-          </div>
-        </fieldset>
+        <h2 class="text-3xl font-bold mb-6" id="clarityRateChart">
+          Clarity. vs. Traditional Consultancy
+        </h2>
+        <p class="text-xl text-gray-600 dark:text-gray-300 mb-4">
+          Why Clarity. delivers more, for less. Compare what you get, not just
+          what you pay.
+        </p>
 
-        <!-- Question 2 -->
-        <fieldset>
-          <legend class="block text-left font-semibold mb-3"
-            >2. What kind of support are you looking for?</legend
-          >
-          <div class="space-y-2">
-            <label
-              class="flex justify-start items-center gap-3 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-xl px-4 py-2 cursor-pointer transition"
-            >
-              <input
-                type="radio"
-                name="q2"
-                value="A"
-                required
-                class="accent-[#429EDB]"
-              />
-              <span class="text-base"
-                >Clarity around a specific product, team, or question</span
-              >
-            </label>
-            <label
-              class="flex justify-start items-center gap-3 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-xl px-4 py-2 cursor-pointer transition"
-            >
-              <input
-                type="radio"
-                name="q2"
-                value="B"
-                class="accent-[#429EDB]"
-              />
-              <span class="text-base"
-                >A thought partner across multiple workstreams</span
-              >
-            </label>
-            <label
-              class="flex justify-start items-center gap-3 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-xl px-4 py-2 cursor-pointer transition"
-            >
-              <input
-                type="radio"
-                name="q2"
-                value="C"
-                class="accent-[#429EDB]"
-              />
-              <span class="text-base"
-                >Strategic presence at leadership level</span
-              >
-            </label>
-          </div>
-        </fieldset>
+        <BarChart client:only="react" />
 
-        <!-- Question 3 -->
-        <fieldset>
-          <legend class="block text-left font-semibold mb-3"
-            >3. How often do you want feedback from Clarity.?</legend
-          >
-          <div class="space-y-2">
-            <label
-              class="flex justify-start items-center gap-3 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-xl px-4 py-2 cursor-pointer transition"
-            >
-              <input
-                type="radio"
-                name="q3"
-                value="A"
-                required
-                class="accent-[#429EDB]"
-              />
-              <span class="text-base">A couple of times a month</span>
-            </label>
-            <label
-              class="flex justify-start items-center gap-3 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-xl px-4 py-2 cursor-pointer transition"
-            >
-              <input
-                type="radio"
-                name="q3"
-                value="B"
-                class="accent-[#429EDB]"
-              />
-              <span class="text-base">Weekly</span>
-            </label>
-            <label
-              class="flex justify-start items-center gap-3 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-xl px-4 py-2 cursor-pointer transition"
-            >
-              <input
-                type="radio"
-                name="q3"
-                value="C"
-                class="accent-[#429EDB]"
-              />
-              <span class="text-base">Frequently</span>
-            </label>
-          </div>
-        </fieldset>
+        <p class="text-sm text-gray-500 dark:text-gray-400 mt-4">
+          Data from: ITJobsWatch, Malt, LinkedIn. Clarity. daily rates assume 22
+          working days/month.
+        </p>
+      </section>
 
-        <!-- Question 4 -->
-        <fieldset>
-          <legend class="block text-left font-semibold mb-3"
-            >4. Who will we be working with day-to-day?</legend
-          >
-          <div class="space-y-2">
-            <label
-              class="flex justify-start items-center gap-3 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-xl px-4 py-2 cursor-pointer transition"
-            >
-              <input
-                type="radio"
-                name="q4"
-                value="A"
-                required
-                class="accent-[#429EDB]"
-              />
-              <span class="text-base">Product Owner / Team Lead</span>
-            </label>
-            <label
-              class="flex justify-start items-center gap-3 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-xl px-4 py-2 cursor-pointer transition"
-            >
-              <input
-                type="radio"
-                name="q4"
-                value="B"
-                class="accent-[#429EDB]"
-              />
-              <span class="text-base">Heads of Product / Tech</span>
-            </label>
-            <label
-              class="flex justify-start items-center gap-3 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-xl px-4 py-2 cursor-pointer transition"
-            >
-              <input
-                type="radio"
-                name="q4"
-                value="C"
-                class="accent-[#429EDB]"
-              />
-              <span class="text-base">Director / CPO / Exec Team</span>
-            </label>
-          </div>
-        </fieldset>
+      <section
+        id="planQuiz"
+        class="mt-20 flex flex-col mx-auto px-4 py-10 max-w-5xl mb-12"
+      >
+        <h2 class="text-3xl font-bold mb-6">
+          Not sure which plan is right for you?
+        </h2>
+        <p class="mb-4">
+          Answer a few quick questions to help guide your choice.
+        </p>
 
-        <!-- Submit -->
-        <button
-          type="submit"
-          class="bg-[#429EDB] text-white font-bold px-6 py-2 rounded-xl hover:bg-[#1F78C1] transition"
+        <form
+          class="flex flex-col mx-auto space-y-8 bg-white dark:bg-gray-900 p-6 rounded-2xl shadow-md"
         >
-          Show My Match
-        </button>
-      </form>
-    </section>
+          <!-- Question 1 -->
+          <fieldset>
+            <legend class="block text-left font-semibold mb-3"
+              >1. How many teams or workstreams do you want support across?</legend
+            >
+            <div class="space-y-2">
+              <label
+                class="flex justify-start items-center gap-3 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-xl px-4 py-2 cursor-pointer transition"
+              >
+                <input
+                  type="radio"
+                  name="q1"
+                  value="A"
+                  required
+                  class="accent-[#429EDB]"
+                />
+                <span class="text-base">Just one team</span>
+              </label>
+              <label
+                class="flex justify-start items-center gap-3 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-xl px-4 py-2 cursor-pointer transition"
+              >
+                <input
+                  type="radio"
+                  name="q1"
+                  value="B"
+                  class="accent-[#429EDB]"
+                />
+                <span class="text-base"
+                  >A few related teams or a strategic area</span
+                >
+              </label>
+              <label
+                class="flex justify-start items-center gap-3 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-xl px-4 py-2 cursor-pointer transition"
+              >
+                <input
+                  type="radio"
+                  name="q1"
+                  value="C"
+                  class="accent-[#429EDB]"
+                />
+                <span class="text-base"
+                  >Multiple teams, execs, or shifting priorities</span
+                >
+              </label>
+            </div>
+          </fieldset>
 
-    <Modal id="quizResultModal">
-      <div id="quizResultContent"></div>
-    </Modal>
+          <!-- Question 2 -->
+          <fieldset>
+            <legend class="block text-left font-semibold mb-3"
+              >2. What kind of support are you looking for?</legend
+            >
+            <div class="space-y-2">
+              <label
+                class="flex justify-start items-center gap-3 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-xl px-4 py-2 cursor-pointer transition"
+              >
+                <input
+                  type="radio"
+                  name="q2"
+                  value="A"
+                  required
+                  class="accent-[#429EDB]"
+                />
+                <span class="text-base"
+                  >Clarity around a specific product, team, or question</span
+                >
+              </label>
+              <label
+                class="flex justify-start items-center gap-3 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-xl px-4 py-2 cursor-pointer transition"
+              >
+                <input
+                  type="radio"
+                  name="q2"
+                  value="B"
+                  class="accent-[#429EDB]"
+                />
+                <span class="text-base"
+                  >A thought partner across multiple workstreams</span
+                >
+              </label>
+              <label
+                class="flex justify-start items-center gap-3 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-xl px-4 py-2 cursor-pointer transition"
+              >
+                <input
+                  type="radio"
+                  name="q2"
+                  value="C"
+                  class="accent-[#429EDB]"
+                />
+                <span class="text-base"
+                  >Strategic presence at leadership level</span
+                >
+              </label>
+            </div>
+          </fieldset>
 
-    <script type="text/javascript">
-      const form = document.getElementById("planQuiz");
-      const resultModal = document.getElementById("quizResultModal");
-      const modalContent = document.getElementById("quizResultContent");
+          <!-- Question 3 -->
+          <fieldset>
+            <legend class="block text-left font-semibold mb-3"
+              >3. How often do you want feedback from Clarity.?</legend
+            >
+            <div class="space-y-2">
+              <label
+                class="flex justify-start items-center gap-3 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-xl px-4 py-2 cursor-pointer transition"
+              >
+                <input
+                  type="radio"
+                  name="q3"
+                  value="A"
+                  required
+                  class="accent-[#429EDB]"
+                />
+                <span class="text-base">A couple of times a month</span>
+              </label>
+              <label
+                class="flex justify-start items-center gap-3 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-xl px-4 py-2 cursor-pointer transition"
+              >
+                <input
+                  type="radio"
+                  name="q3"
+                  value="B"
+                  class="accent-[#429EDB]"
+                />
+                <span class="text-base">Weekly</span>
+              </label>
+              <label
+                class="flex justify-start items-center gap-3 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-xl px-4 py-2 cursor-pointer transition"
+              >
+                <input
+                  type="radio"
+                  name="q3"
+                  value="C"
+                  class="accent-[#429EDB]"
+                />
+                <span class="text-base">Frequently</span>
+              </label>
+            </div>
+          </fieldset>
 
-      form.addEventListener("submit", function (e) {
-        e.preventDefault();
-        const formData = new FormData(form);
-        const counts = { A: 0, B: 0, C: 0 };
+          <!-- Question 4 -->
+          <fieldset>
+            <legend class="block text-left font-semibold mb-3"
+              >4. Who will we be working with day-to-day?</legend
+            >
+            <div class="space-y-2">
+              <label
+                class="flex justify-start items-center gap-3 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-xl px-4 py-2 cursor-pointer transition"
+              >
+                <input
+                  type="radio"
+                  name="q4"
+                  value="A"
+                  required
+                  class="accent-[#429EDB]"
+                />
+                <span class="text-base">Product Owner / Team Lead</span>
+              </label>
+              <label
+                class="flex justify-start items-center gap-3 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-xl px-4 py-2 cursor-pointer transition"
+              >
+                <input
+                  type="radio"
+                  name="q4"
+                  value="B"
+                  class="accent-[#429EDB]"
+                />
+                <span class="text-base">Heads of Product / Tech</span>
+              </label>
+              <label
+                class="flex justify-start items-center gap-3 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-xl px-4 py-2 cursor-pointer transition"
+              >
+                <input
+                  type="radio"
+                  name="q4"
+                  value="C"
+                  class="accent-[#429EDB]"
+                />
+                <span class="text-base">Director / CPO / Exec Team</span>
+              </label>
+            </div>
+          </fieldset>
 
-        for (const [, value] of formData.entries()) {
-          counts[value]++;
-        }
+          <!-- Submit -->
+          <button
+            type="submit"
+            class="bg-[#429EDB] text-white font-bold px-6 py-2 rounded-xl hover:bg-[#1F78C1] transition"
+          >
+            Reveal My Plan
+          </button>
+        </form>
+      </section>
 
-        const max = Object.entries(counts).reduce((a, b) =>
-          a[1] > b[1] ? a : b,
-        );
-        const planMap = {
-          A: `<strong>Base Plan:</strong> Best for targeted discovery around one team, product, or project. Surfaces insight and options quickly so you can move forward with confidence.`,
-          B: `<strong>Plus Plan:</strong> Ideal for multi-team strategy and alignment. Keeps priorities joined up so decisions stay confident and on course.`,
-          C: `<strong>Partner Plan:</strong> Built for execs and portfolios needing confident, joined-up decisions. Brings strategic clarity to the moments that matter most.`,
-        };
+      <Modal id="quizResultModal">
+        <div id="quizResultContent"></div>
+      </Modal>
 
-        modalContent.innerHTML = `
+      <script type="text/javascript">
+        const form = document.getElementById("planQuiz");
+        const resultModal = document.getElementById("quizResultModal");
+        const modalContent = document.getElementById("quizResultContent");
+
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+          const formData = new FormData(form);
+          const counts = { A: 0, B: 0, C: 0 };
+
+          for (const [, value] of formData.entries()) {
+            counts[value]++;
+          }
+
+          const max = Object.entries(counts).reduce((a, b) =>
+            a[1] > b[1] ? a : b,
+          );
+          const planMap = {
+            A: `<strong>Base Plan:</strong> Best for targeted discovery around one team, product, or project. Surfaces insight and options quickly so you can move forward with confidence.`,
+            B: `<strong>Plus Plan:</strong> Ideal for multi-team strategy and alignment. Keeps priorities joined up so decisions stay confident and on course.`,
+            C: `<strong>Partner Plan:</strong> Built for execs and portfolios needing confident, joined-up decisions. Brings strategic clarity to the moments that matter most.`,
+          };
+
+          modalContent.innerHTML = `
   <div class="text-center">
     <h3 class="text-2xl font-bold mb-2">Your Match</h3>
     <p class="mb-4">${planMap[max[0]]}</p>
@@ -659,89 +691,90 @@ import BarChart from "../components/BarChart.jsx";
   </div>
 `;
 
-        document
-          .getElementById("viewPlanDetailsLink")
-          .addEventListener("click", () => {
-            // Delay modal close slightly to allow anchor jump
-            setTimeout(() => {
-              resultModal.classList.add("hidden");
-              document.body.style.overflow = "";
-            }, 100); // 100ms gives time for scroll to occur
-          });
+          document
+            .getElementById("viewPlanDetailsLink")
+            .addEventListener("click", () => {
+              // Delay modal close slightly to allow anchor jump
+              setTimeout(() => {
+                resultModal.classList.add("hidden");
+                document.body.style.overflow = "";
+              }, 100); // 100ms gives time for scroll to occur
+            });
 
-        resultModal.classList.remove("hidden");
-        document.body.style.overflow = "hidden";
-      });
+          resultModal.classList.remove("hidden");
+          document.body.style.overflow = "hidden";
+        });
 
-      window.addEventListener("keydown", (e) => {
-        if (e.key === "Escape") {
-          document.getElementById("quizResultModal").classList.add("hidden");
-          document.body.style.overflow = "";
-        }
-      });
+        window.addEventListener("keydown", (e) => {
+          if (e.key === "Escape") {
+            document.getElementById("quizResultModal").classList.add("hidden");
+            document.body.style.overflow = "";
+          }
+        });
 
-      document.addEventListener("click", (e) => {
-        if (e.target.id === "quizResultModal") {
-          resultModal.classList.add("hidden");
-          document.body.style.overflow = "";
-        }
-      });
-    </script>
+        document.addEventListener("click", (e) => {
+          if (e.target.id === "quizResultModal") {
+            resultModal.classList.add("hidden");
+            document.body.style.overflow = "";
+          }
+        });
+      </script>
 
-    <!-- AlpineJS for toggling -->
-    <script
-      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
-      defer></script>
-    <!-- Section 4: Navigation -->
-    <section class="my-8 flex flex-col items-center gap-4 text-center">
-      <p class="text-lg text-gray-600 dark:text-gray-400">
-        Still got some unanswered questions? Check out the FAQ.
-      </p>
-      <div class="flex gap-12 justify-center items-center">
-        <!-- Left Arrow Link -->
-        <a
-          href="/daas"
-          aria-label="Previous page"
-          class="hover:text-blue-600 transition"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            viewBox="0 0 24 24"
-            width="64"
-            height="64"
+      <!-- AlpineJS for toggling -->
+      <script
+        src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+        defer></script>
+      <!-- Section 4: Navigation -->
+      <section class="my-8 flex flex-col items-center gap-4 text-center">
+        <p class="text-lg text-gray-600 dark:text-gray-400">
+          Still got some unanswered questions? Check out the FAQ.
+        </p>
+        <div class="flex gap-12 justify-center items-center">
+          <!-- Left Arrow Link -->
+          <a
+            href="/daas"
+            aria-label="Previous page"
+            class="hover:text-blue-600 transition"
           >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M15 19l-7-7 7-7"></path>
-          </svg>
-        </a>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              width="64"
+              height="64"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M15 19l-7-7 7-7"></path>
+            </svg>
+          </a>
 
-        <!-- Right Arrow Link -->
-        <a
-          href="/faq"
-          aria-label="Next page"
-          class="hover:text-blue-600 transition"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            viewBox="0 0 24 24"
-            width="64"
-            height="64"
+          <!-- Right Arrow Link -->
+          <a
+            href="/faq"
+            aria-label="Next page"
+            class="hover:text-blue-600 transition"
           >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M9 5l7 7-7 7"></path>
-          </svg>
-        </a>
-      </div>
-    </section>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              width="64"
+              height="64"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M9 5l7 7-7 7"></path>
+            </svg>
+          </a>
+        </div>
+      </section>
+    </p>
   </main>
 </Base>
