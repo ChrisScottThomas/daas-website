@@ -53,14 +53,17 @@ resource "aws_route53_record" "dkim" {
   ]
 }
 
-resource "aws_route53_record" "spf" {
+resource "aws_route53_record" "root_txt" {
   zone_id = aws_route53_zone.clarity.zone_id
-  name    = "_spf.getclarity.win"
+  name    = aws_route53_zone.clarity.name
   type    = "TXT"
   ttl     = 300
   records = [
+    "google-site-verification=3lFFbJbfvZLdQS1LKuxAYhF4kCMNGGyEMtNhkzysSfo",
+    "MS=ms73991829",
     "v=spf1 include:spf.protection.outlook.com include:amazonses.com ~all"
   ]
+  depends_on = [aws_route53_zone.clarity]
 }
 
 resource "aws_route53_record" "dmarc" {
@@ -104,18 +107,6 @@ resource "aws_route53_record" "mail_from_mx" {
   records = [
     "10 feedback-smtp.eu-west-2.amazonses.com"
   ]
-}
-
-resource "aws_route53_record" "google_verification" {
-  zone_id = aws_route53_zone.clarity.zone_id
-  name    = aws_route53_zone.clarity.name
-  type    = "TXT"
-  ttl     = 300
-  records = [
-    "google-site-verification=3lFFbJbfvZLdQS1LKuxAYhF4kCMNGGyEMtNhkzysSfo",
-    "MS=ms73991829"
-  ]
-  depends_on = [aws_route53_zone.clarity]
 }
 
 resource "aws_route53_record" "ses_verification" {
