@@ -13,7 +13,8 @@ import BarChart from "../components/BarChart.jsx";
       <br /><br />
       <p
         class="mt-8 text-lg text-center text-gray-600 dark:text-gray-300 max-w-4xl mx-auto
-      mb-12">
+      mb-12"
+      >
         Every plan includes Discovery-as-a-Service (DaaS). How you use it just
         depends on what you need.
       </p>
@@ -64,10 +65,10 @@ import BarChart from "../components/BarChart.jsx";
           >
             <h2 class="text-2xl font-bold mb-2">Clarity. Base</h2>
             <p class="text-gray-600 dark:text-gray-400 mb-4">
-              Discovery-as-a-Service support, focused on one team or initiative.
-              Ideal when you need clarity around one product, project, or
-              question. Surfaces insight and options without spinning up a full
-              engagement.
+              Strategic clarity when you need it, without spinning up a full
+              engagement. Designed for one product, project, or priority. Ideal
+              when you're trying to move forward with confidence, but the path
+              feels unclear or noisy.
             </p>
             <!-- Annual -->
             <div x-show="billing === 'annually'" class="mb-4">
@@ -106,9 +107,15 @@ import BarChart from "../components/BarChart.jsx";
             <ul
               class="flex-1 list-disc list-outside pl-6 space-y-2 text-left text-gray-700 dark:text-gray-300"
             >
-              <li>Insight on demand — shaped by experience, not templates</li>
-              <li>Trusted input from people who've solved it before</li>
-              <li>One priority at a time, explored with pace and precision</li>
+              <li>
+                Focused Discovery-as-a-Service support around a single priority
+              </li>
+              <li>Rapid input on high-value decisions, without heavy setup</li>
+              <li>
+                Async-first collaboration with optional sessions to clarify your
+                thinking
+              </li>
+              <li>Surfaces insight, not just information — so you can act</li>
             </ul>
             <div class="mt-6 text-center">
               <a
@@ -125,9 +132,9 @@ import BarChart from "../components/BarChart.jsx";
           >
             <h2 class="text-2xl font-bold mb-2">Clarity. Plus</h2>
             <p class="text-gray-600 dark:text-gray-400 mb-4">
-              Trusted support across multiple teams or workstreams. Ideal when
-              you need joined-up thinking across multiple teams. Keeps strategy
-              aligned while work moves forward.
+              For when one question leads to another. Built for cross-team
+              clarity and joined-up strategy. Helps you stay aligned while work
+              moves fast, without dropping the strategic thread.
             </p>
             <!-- Annual -->
             <div x-show="billing === 'annually'" class="mb-4">
@@ -162,12 +169,14 @@ import BarChart from "../components/BarChart.jsx";
             <ul
               class="flex-1 list-disc list-outside pl-6 space-y-2 text-left text-gray-700 dark:text-gray-300"
             >
+              <li>Trusted support across multiple teams or initiatives</li>
               <li>
-                Everything in Base, including DaaS when it's the right tool
+                Regular sessions and briefs to connect insight to delivery
               </li>
-              <li>Context-aware input across multiple decision points</li>
-              <li>Regular rhythm of sessions, insight, and briefings</li>
-              <li>Strategy stays joined-up even as priorities shift</li>
+              <li>
+                Clear input at multiple levels — from delivery to direction
+              </li>
+              <li>Keeps your strategy coherent, even when priorities shift</li>
             </ul>
             <div class="mt-6 text-center">
               <a
@@ -184,9 +193,9 @@ import BarChart from "../components/BarChart.jsx";
           >
             <h2 class="text-2xl font-bold mb-2">Clarity. Partner</h2>
             <p class="text-gray-600 dark:text-gray-400 mb-4">
-              Strategic partnership embedded at the leadership level. Built for
-              high-stakes portfolios and exec teams. Brings structure, pace, and
-              strategic confidence to your leadership rhythm.
+              A strategic partner embedded at leadership level. For high-stakes
+              environments where decisions need to be timely, coordinated, and
+              confident, without adding layers or overhead.
             </p>
             <!-- Annual -->
             <div x-show="billing === 'annually'" class="mb-4">
@@ -222,12 +231,13 @@ import BarChart from "../components/BarChart.jsx";
               class="flex-1 list-disc list-outside pl-6 space-y-2 text-left text-gray-700 dark:text-gray-300"
             >
               <li>
-                Everything in Plus, with long-range thinking and leadership
-                alignment
+                Deep, flexible support across portfolios or leadership teams
               </li>
-              <li>Clarity. lead embedded across your leadership rhythm</li>
-              <li>Proactive thinking, not just reactive input</li>
-              <li>Decisions feel coordinated, timely, and confident</li>
+              <li>Long-range thinking anchored in day-to-day decisions</li>
+              <li>Briefings and radar updates shaped to board or exec needs</li>
+              <li>
+                Ensures decisions are connected, sequenced, and deliberate
+              </li>
             </ul>
             <div class="mt-6 text-center">
               <a
@@ -272,44 +282,45 @@ import BarChart from "../components/BarChart.jsx";
               class="flex-1 list-disc list-outside pl-6 space-y-2 text-left text-gray-700 dark:text-gray-300"
             >
               <li>
-                <strong>Best for:</strong> One high-priority question or area.
+                <strong>Best for:</strong> One priority that needs clarity and momentum
               </li>
-              <li><strong>Presence:</strong> Expert input, mostly async.</li>
               <li>
-                <strong>
-                  <span
-                    title="A short, focused conversation where we walk through what we've found and what it means for your next steps."
+                <strong>Presence:</strong> Mostly async with optional sessions
+              </li>
+              <li>
+                <strong
+                  ><span
+                    title="Walkthrough of findings and what they mean"
                     class="underline text-blue-400 hover:text-blue-500 cursor-help"
-                  >
-                    Playback:</span
-                  >
-                </strong>
-                Fortnightly (optional).
+                    >Playback:</span
+                  ></strong
+                >
+                Fortnightly (optional)
               </li>
               <li>
-                <strong>
-                  <span
-                    title="A concise summary of insight or options, tailored to help you move forward with confidence."
+                <strong
+                  ><span
+                    title="Concise, high-value summaries to guide action"
                     class="underline text-blue-400 hover:text-blue-500 cursor-help"
-                  >
-                    Briefs:</span
-                  >
-                </strong>
-                Around 1 per month.
+                    >Briefs:</span
+                  ></strong
+                >
+                ~1 per month
               </li>
               <li>
-                <strong>
-                  <span
-                    title="A rolling view of emerging risks, trends, and signals to keep on your strategic horizon."
+                <strong
+                  ><span
+                    title="Risks, signals, and watch items surfaced on request"
                     class="underline text-blue-400 hover:text-blue-500 cursor-help"
-                  >
-                    Radar:</span
-                  >
-                </strong>Available on request.
+                    >Radar:</span
+                  ></strong
+                >
+                On request
               </li>
-              <li><strong>In-person:</strong> Remote only.</li>
+              <li><strong>In-person:</strong> Remote only</li>
               <li>
-                <strong>Outcome:</strong> Options surfaced. Decisions made.
+                <strong>Outcome:</strong> Clarity on what matters now and what to
+                do next
               </li>
             </ul>
           </div>
@@ -328,43 +339,47 @@ import BarChart from "../components/BarChart.jsx";
               class="flex-1 list-disc list-outside pl-6 space-y-2 text-left text-gray-700 dark:text-gray-300"
             >
               <li><strong>Includes:</strong> Everything in Base</li>
-              <li><strong>Best for:</strong> Multi-team initiatives.</li>
-              <li><strong>Presence:</strong> Multi-stakeholder engagement.</li>
               <li>
-                <strong>
-                  <span
-                    title="A short, focused conversation where we walk through what we've found and what it means for your next steps."
-                    class="underline text-blue-400 hover:text-blue-500 cursor-help"
-                  >
-                    Playback:</span
-                  >
-                </strong>
-                Weekly.
+                <strong>Best for:</strong> Multi-team clarity and ongoing strategy
+                input
               </li>
               <li>
-                <strong>
-                  <span
-                    title="A concise summary of insight or options, tailored to help you move forward with confidence."
-                    class="underline text-blue-400 hover:text-blue-500 cursor-help"
-                  >
-                    Briefs:</span
-                  >
-                </strong>
-                2-3 per month.
+                <strong>Presence:</strong> Sessions and insight across multiple levels
               </li>
               <li>
-                <strong>
-                  <span
-                    title="A rolling view of emerging risks, trends, and signals to keep on your strategic horizon."
+                <strong
+                  ><span
+                    title="Walkthrough of findings and what they mean"
                     class="underline text-blue-400 hover:text-blue-500 cursor-help"
-                  >
-                    Radar:</span
-                  >
-                </strong>
+                    >Playback:</span
+                  ></strong
+                >
+                Weekly
+              </li>
+              <li>
+                <strong
+                  ><span
+                    title="Concise, high-value summaries to guide action"
+                    class="underline text-blue-400 hover:text-blue-500 cursor-help"
+                    >Briefs:</span
+                  ></strong
+                >
+                2–3 per month
+              </li>
+              <li>
+                <strong
+                  ><span
+                    title="Risks, signals, and watch items surfaced on request"
+                    class="underline text-blue-400 hover:text-blue-500 cursor-help"
+                    >Radar:</span
+                  ></strong
+                >
                 Included
               </li>
-              <li><strong>In-person:</strong> Optional by request.</li>
-              <li><strong>Outcome:</strong> Aligned teams. Faster strategy.</li>
+              <li><strong>In-person:</strong> Optional by request</li>
+              <li>
+                <strong>Outcome:</strong> Joined-up delivery with strategic coherence
+              </li>
             </ul>
           </div>
 
@@ -378,46 +393,48 @@ import BarChart from "../components/BarChart.jsx";
             >
               <li><strong>Includes:</strong> Everything in Plus</li>
               <li>
-                <strong>Best for:</strong> Executive-level support or portfolios.
+                <strong>Best for:</strong> Exec teams or portfolios needing cohesive
+                direction
               </li>
               <li>
-                <strong>Presence:</strong> Strategic partner across leadership.
+                <strong>Presence:</strong> Embedded thought partner at leadership
+                level
               </li>
               <li>
-                <strong>
-                  <span
-                    title="A short, focused conversation where we walk through what we've found and what it means for your next steps."
+                <strong
+                  ><span
+                    title="Walkthrough of findings and what they mean"
                     class="underline text-blue-400 hover:text-blue-500 cursor-help"
-                  >
-                    Playback:</span
-                  >
-                </strong>
-                Weekly or as needed.
+                    >Playback:</span
+                  ></strong
+                >
+                Weekly or as needed
               </li>
               <li>
-                <strong>
-                  <span
-                    title="A concise summary of insight or options, tailored to help you move forward with confidence."
+                <strong
+                  ><span
+                    title="Concise, high-value summaries to guide action"
                     class="underline text-blue-400 hover:text-blue-500 cursor-help"
-                  >
-                    Briefs:</span
-                  >
-                </strong>
-                As required, tailored to audience.
+                    >Briefs:</span
+                  ></strong
+                >
+                As required — shaped to audience
               </li>
               <li>
-                <strong>
-                  <span
-                    title="A rolling view of emerging risks, trends, and signals to keep on your strategic horizon."
+                <strong
+                  ><span
+                    title="Risks, signals, and watch items surfaced on request"
                     class="underline text-blue-400 hover:text-blue-500 cursor-help"
-                  >
-                    Radar:</span
-                  >
-                </strong>
-                Included with watchlist.
+                    >Radar:</span
+                  ></strong
+                >
+                Included with watchlist
               </li>
-              <li><strong>In-person:</strong> Optional by request.</li>
-              <li><strong>Outcome:</strong> Confident leadership decisions.</li>
+              <li><strong>In-person:</strong> Optional by request</li>
+              <li>
+                <strong>Outcome:</strong> Confident, coordinated decisions at the
+                moments that matter
+              </li>
             </ul>
           </div>
         </div>
@@ -671,9 +688,9 @@ import BarChart from "../components/BarChart.jsx";
             a[1] > b[1] ? a : b,
           );
           const planMap = {
-            A: `<strong>Base Plan:</strong> Best for targeted discovery around one team, product, or project. Surfaces insight and options quickly so you can move forward with confidence.`,
-            B: `<strong>Plus Plan:</strong> Ideal for multi-team strategy and alignment. Keeps priorities joined up so decisions stay confident and on course.`,
-            C: `<strong>Partner Plan:</strong> Built for execs and portfolios needing confident, joined-up decisions. Brings strategic clarity to the moments that matter most.`,
+            A: `<strong>Clarity. Base:</strong> Best for focused clarity on one team, product, or question. Surfaces options fast so you can move forward with confidence.`,
+            B: `<strong>Clarity. Plus:</strong> Ideal for multi-team strategy and alignment. Keeps thinking joined-up so priorities stay clear and delivery stays on course.`,
+            C: `<strong>Clarity. Partner:</strong> Designed for execs and portfolios where decisions carry weight. Brings structure, pace, and strategic certainty across your leadership rhythm.`,
           };
 
           modalContent.innerHTML = `
