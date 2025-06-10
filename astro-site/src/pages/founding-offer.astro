@@ -3,19 +3,26 @@ import Base from "../layouts/base.astro";
 ---
 
 <Base
-  title="Founding Member Offer"
+  title="Founding Member Access to Discovery-as-a-Service"
   description="Early access to Clarity. Support Plans with added benefits and limited seats"
   type="WebPage"
   canonicalURL="https://getclarity.win/founding-offer"
 >
+  <!-- Page Header -->
   <section class="max-w-4xl mx-auto text-center mb-16">
-    <h1 class="text-4xl font-extrabold mb-4">Founding Member Offer</h1>
+    <h1 class="text-4xl font-extrabold mb-4">
+      Founding Member Access to<br> Discovery-as-a-Service
+    </h1>
     <p class="text-lg text-gray-600 dark:text-gray-300">
       A limited opportunity to shape Clarity. from the inside, and get even more
       value from your first 90 days.
     </p>
+    <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">
+      Only 10 places available · Onboarding starts June 2025
+    </p>
   </section>
 
+  <!-- Invitation Block -->
   <section
     class="mb-24 max-w-4xl mx-auto bg-gray-900 text-white dark:bg-black/50 rounded-lg px-8 py-12 text-center"
   >
@@ -26,12 +33,10 @@ import Base from "../layouts/base.astro";
           Support Plans before public release, and help shape the service as it
           grows.
         </p>
-
         <p class="text-center text-lg">
           Founding Members get more support, earlier input, and direct access to
           the people behind Clarity.
         </p>
-
         <p class="text-center text-lg">
           You'll receive priority onboarding, extended async input, and a
           private channel to share feedback and ideas.
@@ -46,53 +51,48 @@ import Base from "../layouts/base.astro";
     </div>
   </section>
 
-  <h2 class="text-2xl font-bold mb-6 text-center">What Founding Members Get</h2>
+  <!-- Grand Slam Value Block -->
   <section
-    class="max-w-5xl mx-auto grid md:grid-cols-2 gap-6 text-left mb-24 px-4"
+    class="max-w-3xl mx-auto px-4 mb-20 mt-16 bg-[#75C1E8] dark:bg-[#429EDB] text-white px-8 py-10 rounded-xl text-center mb-24"
   >
+    <h2 class="text-2xl font-bold mb-4">Founding Members Get More</h2>
     <div
-      class="flex flex-col h-full p-6 border rounded-lg bg-white dark:bg-black/20 text-left"
+      class="flex flex-col h-full p-6 rounded-lg text-left items-center justify-center mb-12"
     >
-      <ul class="list-disc list-outside pl-5 space-y-2">
-        <li>Priority onboarding and early session slots</li>
-        <li>Extended async support in your first 90 days</li>
-        <li>Access to new tools before public release</li>
+      <ul
+        class="list-disc list-inside text-left max-w-xl mx-auto space-y-2 text-lg"
+      >
+        <li>Priority access to strategic support sessions.</li>
+        <li>Extended async input. 1:1 response within 24 hours.</li>
+        <li>First look at new tools and decision frameworks.</li>
+        <li>Locked-in pricing for 12 months. Even if rates increase.</li>
+        <li>Option to remain fully anonymous.</li>
       </ul>
     </div>
+    <p class="mt-6 text-xl font-semibold">
+      Only 10 seats.<br /> Enrolment closes 30 June.
+    </p>
+  </section>
 
+  <!-- Co-Creation Ask -->
+  <h2 class="text-2xl font-bold mb-6 text-center">
+    How You'll Help Shape Clarity.
+  </h2>
+  <section
+    class="max-w-lg mx-auto grid md:grid-cols-1 gap-6 text-center justify-center items-center mb-24 px-4"
+  >
     <div
-      class="flex flex-col h-full p-6 border rounded-lg bg-white dark:bg-black/20 text-left"
+      class="flex flex-col h-full p-6 border rounded-lg bg-white dark:bg-black/20 text-left items-center justify-center"
     >
       <ul class="list-disc list-outside pl-5 space-y-2">
-        <li>Private feedback channel to shape the service</li>
-        <li>Locked-in pricing for your first year</li>
-        <li>
-          Option to remain fully anonymous<br />
-          <span class="text-sm text-gray-500 dark:text-gray-400">
-            If you're in a sensitive role or organisation, we can keep your
-            identity private. You'll still get the full experience without being
-            named anywhere.
-          </span>
-        </li>
+        <li>Willingness to share short feedback at key points.</li>
+        <li>Input into how Clarity. evolves over time.</li>
+        <li>Optional testimonial to help build future trust.</li>
       </ul>
     </div>
   </section>
 
-  <h2 class="text-2xl font-bold mb-6 text-center">What We Ask in Return</h2>
-  <section
-    class="max-w-xl mx-auto grid md:grid-cols-1 gap-6 text-center justify-center items-center mb-24 px-4"
-  >
-    <div
-      class="flex flex-col h-full p-6 border rounded-lg bg-white dark:bg-black/20 text-left"
-    >
-      <ul class="list-disc list-outside pl-5 space-y-2">
-        <li>Willingness to share short feedback at key points</li>
-        <li>Input into how Clarity. evolves over time</li>
-        <li>Optional testimonial to help build future trust</li>
-      </ul>
-    </div>
-  </section>
-
+  <!-- When It Starts -->
   <section class="max-w-4xl mx-auto mb-6 text-center">
     <h2 class="text-2xl font-bold mb-6">When It Starts</h2>
     <p class="text-lg text-gray-600 dark:text-gray-400">
@@ -101,6 +101,7 @@ import Base from "../layouts/base.astro";
     </p>
   </section>
 
+  <!-- CTA -->
   <section class="my-16 flex flex-col items-center gap-4 text-center">
     <p class="text-lg text-gray-600 dark:text-gray-400">
       Want to shape the future of Clarity.?
@@ -111,5 +112,8 @@ import Base from "../layouts/base.astro";
     >
       Join the Waitlist
     </a>
+    <p class="text-sm text-gray-500 mt-2">
+      Deadline: 30 June · Limited to 10 members
+    </p>
   </section>
 </Base>
