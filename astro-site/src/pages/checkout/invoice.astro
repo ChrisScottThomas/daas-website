@@ -1,31 +1,23 @@
 ---
-// src/pages/checkout/invoice.astro
-export const prerender = false;
 import Base from "../../layouts/base.astro";
-import { plans } from "../utils/plans";
-
-const url = new URL(Astro.request.url);
-const planId = url.searchParams.get("plan");
-const selectedPlan = planId ? plans[planId] : null;
-
-if (!selectedPlan) {
-  throw new Error("Invalid or missing plan.");
-}
 ---
 
 <Base title="Request Invoice — Clarity.">
   <main class="max-w-3xl mx-auto px-4 py-24 text-left">
     <h1 class="text-4xl font-bold mb-6 text-center">Request an Invoice</h1>
 
-    <p class="text-base text-gray-600 dark:text-gray-300 mb-6 text-center">
-      For: <strong>{selectedPlan.name}</strong>
+    <p
+      id="planName"
+      class="text-base text-gray-600 dark:text-gray-300 mb-6 text-center"
+    >
+      Loading selected plan…
     </p>
 
     <form
       id="invoiceForm"
       class="space-y-6 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-xl p-8 shadow-sm"
     >
-      <input type="hidden" name="planId" value={planId} />
+      <input type="hidden" name="planId" id="planIdInput" />
 
       <!-- Full Name -->
       <div>
@@ -114,9 +106,29 @@ if (!selectedPlan) {
   </main>
 
   <script type="module">
+    const params = new URLSearchParams(window.location.search);
+    const planId = params.get("plan");
+
+    const plans = {
+      clarity_base_monthly: { name: "Clarity. Base — Monthly" },
+      clarity_plus_quarterly: { name: "Clarity. Plus — Quarterly" },
+      // Add more here as needed
+    };
+
+    const plan = plans[planId];
+    const planNameEl = document.getElementById("planName");
     const form = document.getElementById("invoiceForm");
+    const planIdInput = document.getElementById("planIdInput");
     const successMsg = document.getElementById("formSuccess");
     const errorMsg = document.getElementById("formError");
+
+    if (!plan) {
+      planNameEl.textContent = "Invalid or missing plan.";
+      form.style.display = "none";
+    } else {
+      planNameEl.innerHTML = `For: <strong>${plan.name}</strong>`;
+      planIdInput.value = planId;
+    }
 
     form.addEventListener("submit", async (e) => {
       e.preventDefault();

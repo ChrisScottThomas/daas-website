@@ -3,8 +3,8 @@ resource "aws_lambda_function" "waitlist" {
   role             = aws_iam_role.lambda_exec.arn
   handler          = "index.handler"
   runtime          = "nodejs18.x"
-  filename         = "../../waitlist-lambda.zip"
-  source_code_hash = filebase64sha256("../../waitlist-lambda.zip")
+  filename         = "../waitlist-lambda.zip"
+  source_code_hash = filebase64sha256("../waitlist-lambda.zip")
 
   environment {
     variables = {
@@ -29,8 +29,8 @@ resource "aws_lambda_function" "waitlist_retry" {
   handler       = "retry.handler"
   runtime       = "nodejs18.x"
 
-  filename         = "../../retry-lambda.zip"
-  source_code_hash = filebase64sha256("../../retry-lambda.zip")
+  filename         = "../retry-lambda.zip"
+  source_code_hash = filebase64sha256("../retry-lambda.zip")
 
   environment {
     variables = {
@@ -53,8 +53,8 @@ resource "aws_lambda_function" "invoice_request" {
   role             = aws_iam_role.lambda_exec.arn
   handler          = "handler.handler"
   runtime          = "nodejs18.x"
-  filename         = "../../invoice-lambda.zip"
-  source_code_hash = filebase64sha256("../../invoice-lambda.zip")
+  filename         = "../invoice-lambda.zip"
+  source_code_hash = filebase64sha256("../invoice-lambda.zip")
 
   environment {
     variables = {
@@ -75,8 +75,8 @@ resource "aws_lambda_function" "card_payment" {
   role             = aws_iam_role.lambda_exec.arn
   handler          = "index.handler"
   runtime          = "nodejs18.x"
-  filename         = "../../card-lambda.zip"
-  source_code_hash = filebase64sha256("../../card-lambda.zip")
+  filename         = "../card-lambda.zip"
+  source_code_hash = filebase64sha256("../card-lambda.zip")
 
   environment {
     variables = {

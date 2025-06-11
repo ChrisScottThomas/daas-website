@@ -1,7 +1,13 @@
 ---
-// src/pages/select-plan/[plan].astro
-import { plans } from "../utils/plans";
+import { plans } from "../../data/plans";
 import Base from "../../layouts/base.astro";
+
+// Export getStaticPaths so Astro knows which routes to build
+export async function getStaticPaths() {
+  return Object.keys(plans).map((planId) => ({
+    params: { plan: planId },
+  }));
+}
 
 const { plan } = Astro.params;
 const selectedPlan = plans[plan];

@@ -1,11 +1,6 @@
 ---
 // src/pages/checkout/success.astro
-import { plans } from "../utils/plans";
 import Base from "../../layouts/base.astro";
-
-const url = new URL(Astro.request.url);
-const planId = url.searchParams.get("plan");
-const selectedPlan = planId ? plans[planId] : null;
 ---
 
 <Base title="You're In — Clarity.">
@@ -18,17 +13,12 @@ const selectedPlan = planId ? plans[planId] : null;
       We're excited to work with you.
     </p>
 
-    {
-      selectedPlan ? (
-        <p class="text-md font-medium mb-4">
-          <>
-            <span class="text-gray-500 dark:text-gray-400">Plan selected:</span>
-            <br />
-          </>
-          {selectedPlan.name}
-        </p>
-      ) : null
-    }
+    <p
+      id="selectedPlan"
+      class="text-md font-medium mb-4 text-gray-700 dark:text-gray-300"
+    >
+      Loading selected plan...
+    </p>
 
     <p class="text-base text-gray-600 dark:text-gray-300 mb-6">
       What happens now:
@@ -62,4 +52,27 @@ const selectedPlan = planId ? plans[planId] : null;
       Return to Homepage
     </a>
   </main>
+
+  <script type="module">
+    const params = new URLSearchParams(window.location.search);
+    const planId = params.get("plan");
+
+    const plans = {
+      clarity_base_monthly: { name: "Clarity. Base — Monthly" },
+      clarity_plus_quarterly: { name: "Clarity. Plus — Quarterly" },
+      // Add other plans here if needed
+    };
+
+    const selected = plans[planId];
+    const planDisplay = document.getElementById("selectedPlan");
+
+    if (selected) {
+      planDisplay.innerHTML = `
+        <span class="text-gray-500 dark:text-gray-400">Plan selected:</span><br />
+        ${selected.name}
+      `;
+    } else {
+      planDisplay.textContent = "No plan selected.";
+    }
+  </script>
 </Base>
