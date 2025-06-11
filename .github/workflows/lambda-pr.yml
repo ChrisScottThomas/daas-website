@@ -24,7 +24,7 @@ jobs:
         npm ci
         zip -r ../../waitlist-lambda.zip .
       working-directory: lambdas/waitlist
-  
+
     - name: Package Retry Lambda Function
       run: |
         npm ci
@@ -36,3 +36,9 @@ jobs:
         npm ci
         zip -r ../../invoice-lambda.zip .
       working-directory: lambdas/invoice
+
+    - name: Package Card Lambda Function
+      run: |
+        npm ci
+        zip -r ../../card-lambda.zip .
+      working-directory: lambdas/card-handler

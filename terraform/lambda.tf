@@ -69,3 +69,24 @@ resource "aws_lambda_function" "invoice_request" {
     Purpose = "InvoiceRequests"
   }
 }
+
+resource "aws_lambda_function" "card_payment" {
+  function_name    = "cardPaymentHandler"
+  role             = aws_iam_role.lambda_exec.arn
+  handler          = "index.handler"
+  runtime          = "nodejs18.x"
+  filename         = "../../card-lambda.zip"
+  source_code_hash = filebase64sha256("../../card-lambda.zip")
+
+  environment {
+    variables = {
+      STRIPE_SECRET_KEY = data.aws_secretsmanager_secret.stripe_key.arn
+      SITE_URL          = "https://getclarity.win"
+    }
+  }
+
+  tags = {
+    Project = "Clarity"
+    Purpose = "CardPayment"
+  }
+}

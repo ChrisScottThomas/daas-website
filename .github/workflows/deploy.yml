@@ -49,6 +49,12 @@ jobs:
         npm ci
         zip -r ../../invoice-lambda.zip .
       working-directory: lambdas/invoice
+    
+    - name: Package Card Lambda Function
+      run: |
+        npm ci
+        zip -r ../../card-lambda.zip .
+      working-directory: lambdas/card-handler
 
     - name: Terraform Init & Apply
       run: |
@@ -63,8 +69,10 @@ jobs:
         npm ci
         API_URL=$(terraform -chdir=../terraform output -raw api_endpoint)
         INVOICE_API_URL=$(terraform -chdir=../terraform output -raw invoice_api_endpoint)
+        CARD_API_URL=$(terraform -chdir=../terraform output -raw card_api_endpoint)
         sed -i "s|API_URL_HERE|$API_URL|g" src/pages/index.astro
         sed -i "s|API_URL_HERE|$INVOICE_API_URL|g" src/pages/invoice.astro
+        sed -i "s|API_URL_HERE|$CARD_API_URL|g" src/pages/select-plan/[plan].astro
         npm run build
       continue-on-error: false
       working-directory: astro-site

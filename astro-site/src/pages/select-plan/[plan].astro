@@ -46,7 +46,7 @@ if (!selectedPlan) {
     document
       .getElementById("cardPaymentBtn")
       .addEventListener("click", async () => {
-        const res = await fetch("/checkout/card", {
+        const res = await fetch("API_URL_HERE", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ planId: "{plan}" }),
