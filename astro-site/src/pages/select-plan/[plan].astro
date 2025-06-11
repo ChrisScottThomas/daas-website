@@ -4,8 +4,8 @@ import Base from "../../layouts/base.astro";
 
 // Export getStaticPaths so Astro knows which routes to build
 export async function getStaticPaths() {
-  return Object.keys(plans).map((planId) => ({
-    params: { plan: planId },
+  return Object.keys(plans).map((key) => ({
+    params: { plan: key },
   }));
 }
 
