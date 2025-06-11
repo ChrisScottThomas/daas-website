@@ -18,5 +18,4 @@
 
 # node
 
-/waitlist-lambda/node_modules
-/retry-lambda/node_modules
+/lambdas/*/node_modules

@@ -35,14 +35,20 @@ jobs:
     - name: Package Waitlist Lambda Function
       run: |
         npm ci
-        zip -r ../waitlist-lambda.zip .
-      working-directory: waitlist-lambda
+        zip -r ../../waitlist-lambda.zip .
+      working-directory: lambdas/waitlist
   
     - name: Package Retry Lambda Function
       run: |
         npm ci
-        zip -r ../retry-lambda.zip .
-      working-directory: retry-lambda
+        zip -r ../../retry-lambda.zip .
+      working-directory: lambdas/retry
+
+    - name: Package Invoice Lambda Function
+      run: |
+        npm ci
+        zip -r ../../invoice-lambda.zip .
+      working-directory: lambdas/invoice
 
     - name: Terraform Init & Apply
       run: |
@@ -56,7 +62,9 @@ jobs:
       run: |
         npm ci
         API_URL=$(terraform -chdir=../terraform output -raw api_endpoint)
+        INVOICE_API_URL=$(terraform -chdir=../terraform output -raw invoice_api_endpoint)
         sed -i "s|API_URL_HERE|$API_URL|g" src/pages/index.astro
+        sed -i "s|API_URL_HERE|$INVOICE_API_URL|g" src/pages/invoice.astro
         npm run build
       continue-on-error: false
       working-directory: astro-site

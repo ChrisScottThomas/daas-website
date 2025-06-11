@@ -1,0 +1,65 @@
+---
+// src/pages/checkout/success.astro
+import { plans } from "../utils/plans";
+import Base from "../../layouts/base.astro";
+
+const url = new URL(Astro.request.url);
+const planId = url.searchParams.get("plan");
+const selectedPlan = planId ? plans[planId] : null;
+---
+
+<Base title="You're In — Clarity.">
+  <main class="max-w-3xl mx-auto px-4 py-24 text-center">
+    <h1 class="text-4xl font-bold mb-6 text-[#429EDB]">You're in.</h1>
+
+    <p class="text-lg text-gray-600 dark:text-gray-300 mb-6">
+      Thanks for confirming your Clarity. Support Plan.
+      <br />
+      We're excited to work with you.
+    </p>
+
+    {
+      selectedPlan ? (
+        <p class="text-md font-medium mb-4">
+          <>
+            <span class="text-gray-500 dark:text-gray-400">Plan selected:</span>
+            <br />
+          </>
+          {selectedPlan.name}
+        </p>
+      ) : null
+    }
+
+    <p class="text-base text-gray-600 dark:text-gray-300 mb-6">
+      What happens now:
+    </p>
+
+    <ul
+      class="text-left list-disc list-outside space-y-4 pl-6 text-gray-700 dark:text-gray-300 mb-8"
+    >
+      <li>
+        You'll receive a confirmation email with your reference number and
+        onboarding details.
+      </li>
+      <li>
+        Your first Clarity. session or briefing will be scheduled within the
+        next few days.
+      </li>
+      <li>
+        A dedicated contact will reach out to tailor support to your needs.
+      </li>
+    </ul>
+
+    <p class="text-sm text-gray-400 italic mb-12">
+      If you have any questions or change your mind, just reply to your
+      confirmation email or contact us directly. We're here to help.
+    </p>
+
+    <a
+      href="/"
+      class="inline-block bg-[#429EDB] text-white font-semibold px-6 py-3 rounded-xl hover:bg-[#1F78C1] transition"
+    >
+      Return to Homepage
+    </a>
+  </main>
+</Base>

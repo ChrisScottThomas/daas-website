@@ -3,8 +3,8 @@ resource "aws_lambda_function" "waitlist" {
   role             = aws_iam_role.lambda_exec.arn
   handler          = "index.handler"
   runtime          = "nodejs18.x"
-  filename         = "../waitlist-lambda.zip"
-  source_code_hash = filebase64sha256("../waitlist-lambda.zip")
+  filename         = "../../waitlist-lambda.zip"
+  source_code_hash = filebase64sha256("../../waitlist-lambda.zip")
 
   environment {
     variables = {
@@ -29,8 +29,8 @@ resource "aws_lambda_function" "waitlist_retry" {
   handler       = "retry.handler"
   runtime       = "nodejs18.x"
 
-  filename         = "../retry-lambda.zip"
-  source_code_hash = filebase64sha256("../retry-lambda.zip")
+  filename         = "../../retry-lambda.zip"
+  source_code_hash = filebase64sha256("../../retry-lambda.zip")
 
   environment {
     variables = {
@@ -45,5 +45,27 @@ resource "aws_lambda_function" "waitlist_retry" {
   tags = {
     Project = "Clarity"
     Purpose = "RetryFailedEmails"
+  }
+}
+
+resource "aws_lambda_function" "invoice_request" {
+  function_name    = "invoiceRequestHandler"
+  role             = aws_iam_role.lambda_exec.arn
+  handler          = "handler.handler"
+  runtime          = "nodejs18.x"
+  filename         = "../../invoice-lambda.zip"
+  source_code_hash = filebase64sha256("../../invoice-lambda.zip")
+
+  environment {
+    variables = {
+      AIRTABLE_SECRET_ARN = data.aws_secretsmanager_secret.airtable_token.arn
+      AIRTABLE_BASE_ID    = "appyAQqBEfEwyFKlH"
+      AIRTABLE_TABLE_NAME = "Invoices"
+    }
+  }
+
+  tags = {
+    Project = "Clarity"
+    Purpose = "InvoiceRequests"
   }
 }
