@@ -71,7 +71,7 @@ jobs:
         INVOICE_API_URL=$(terraform -chdir=../terraform output -raw invoice_api_endpoint)
         CARD_API_URL=$(terraform -chdir=../terraform output -raw card_api_endpoint)
         sed -i "s|API_URL_HERE|$API_URL|g" src/pages/index.astro
-        sed -i "s|API_URL_HERE|$INVOICE_API_URL|g" src/pages/invoice.astro
+        sed -i "s|API_URL_HERE|$INVOICE_API_URL|g" src/pages/checkout/invoice.astro
         sed -i "s|API_URL_HERE|$CARD_API_URL|g" src/pages/select-plan/[plan].astro
         npm run build
       continue-on-error: false
