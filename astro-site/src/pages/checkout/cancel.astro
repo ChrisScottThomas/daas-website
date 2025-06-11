@@ -1,0 +1,39 @@
+---
+// src/pages/checkout/cancel.astro
+import Base from "../../layouts/base.astro";
+---
+
+<Base title="Checkout Cancelled — Clarity.">
+  <main class="max-w-3xl mx-auto px-4 py-24 text-center">
+    <h1 class="text-4xl font-bold mb-6 text-[#EF5974]">No worries.</h1>
+
+    <p class="text-lg text-gray-600 dark:text-gray-300 mb-6">
+      You didn't complete checkout — and that's completely fine.
+    </p>
+
+    <p class="text-base text-gray-600 dark:text-gray-300 mb-8">
+      Your secure payment session may have expired or you might have chosen to
+      pause. If you're not ready yet, we'll still be here when you are.
+    </p>
+
+    <div class="flex flex-col gap-4 md:flex-row justify-center items-center">
+      <a
+        href="/support-plans"
+        class="bg-[#429EDB] hover:bg-[#1F78C1] text-white font-semibold px-6 py-3 rounded-xl transition"
+      >
+        Browse Plans Again
+      </a>
+
+      <a href="/faq" class="text-[#429EDB] hover:underline text-sm">
+        Still got questions?
+      </a>
+    </div>
+
+    <p class="text-sm text-gray-400 mt-8">
+      You haven't been charged. If something went wrong, or you need help
+      deciding, just <a href="/contact" class="underline hover:text-[#429EDB]"
+        >get in touch</a
+      >.
+    </p>
+  </main>
+</Base>

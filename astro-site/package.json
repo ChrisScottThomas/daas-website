@@ -15,7 +15,8 @@
     "astro": "^5.7.12",
     "chart.js": "^4.4.9",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "stripe": "^18.2.1"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.19",

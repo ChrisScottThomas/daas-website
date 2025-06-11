@@ -1,0 +1,159 @@
+---
+import Base from "../../layouts/base.astro";
+---
+
+<Base title="Request Invoice — Clarity.">
+  <main class="max-w-3xl mx-auto px-4 py-24 text-left">
+    <h1 class="text-4xl font-bold mb-6 text-center">Request an Invoice</h1>
+
+    <p
+      id="planName"
+      class="text-base text-gray-600 dark:text-gray-300 mb-6 text-center"
+    >
+      Loading selected plan…
+    </p>
+
+    <form
+      id="invoiceForm"
+      class="space-y-6 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-xl p-8 shadow-sm"
+    >
+      <input type="hidden" name="planId" id="planIdInput" />
+
+      <!-- Full Name -->
+      <div>
+        <label class="block text-sm font-medium mb-1" for="name"
+          >Full Name</label
+        >
+        <input
+          required
+          type="text"
+          id="name"
+          name="name"
+          class="w-full px-4 py-2 border rounded dark:bg-gray-800"
+        />
+      </div>
+
+      <!-- Email -->
+      <div>
+        <label class="block text-sm font-medium mb-1" for="email"
+          >Work Email</label
+        >
+        <input
+          required
+          type="email"
+          id="email"
+          name="email"
+          class="w-full px-4 py-2 border rounded dark:bg-gray-800"
+        />
+      </div>
+
+      <!-- Organisation -->
+      <div>
+        <label class="block text-sm font-medium mb-1" for="org"
+          >Organisation Name</label
+        >
+        <input
+          required
+          type="text"
+          id="org"
+          name="org"
+          class="w-full px-4 py-2 border rounded dark:bg-gray-800"
+        />
+      </div>
+
+      <!-- Billing Address -->
+      <div>
+        <label class="block text-sm font-medium mb-1" for="billing"
+          >Billing Address</label
+        >
+        <textarea
+          required
+          id="billing"
+          name="billing"
+          rows="3"
+          class="w-full px-4 py-2 border rounded dark:bg-gray-800"></textarea>
+      </div>
+
+      <!-- Optional PO Number -->
+      <div>
+        <label class="block text-sm font-medium mb-1" for="po"
+          >PO Number (optional)</label
+        >
+        <input
+          type="text"
+          id="po"
+          name="po"
+          class="w-full px-4 py-2 border rounded dark:bg-gray-800"
+        />
+      </div>
+
+      <!-- Submit -->
+      <button
+        type="submit"
+        class="bg-[#429EDB] hover:bg-[#1F78C1] text-white font-semibold px-6 py-3 rounded-xl transition w-full"
+      >
+        Request Invoice
+      </button>
+    </form>
+
+    <p id="formSuccess" class="text-green-600 mt-6 hidden text-center">
+      Your request has been received. We'll be in touch shortly.
+    </p>
+
+    <p id="formError" class="text-red-600 mt-6 hidden text-center">
+      Something went wrong. Please try again or contact support.
+    </p>
+  </main>
+
+  <script type="module">
+    const params = new URLSearchParams(window.location.search);
+    const planId = params.get("plan");
+
+    const plans = {
+      clarity_base_monthly: { name: "Clarity. Base — Monthly" },
+      clarity_plus_quarterly: { name: "Clarity. Plus — Quarterly" },
+      // Add more here as needed
+    };
+
+    const plan = plans[planId];
+    const planNameEl = document.getElementById("planName");
+    const form = document.getElementById("invoiceForm");
+    const planIdInput = document.getElementById("planIdInput");
+    const successMsg = document.getElementById("formSuccess");
+    const errorMsg = document.getElementById("formError");
+
+    if (!plan) {
+      planNameEl.textContent = "Invalid or missing plan.";
+      form.style.display = "none";
+    } else {
+      planNameEl.innerHTML = `For: <strong>${plan.name}</strong>`;
+      planIdInput.value = planId;
+    }
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      successMsg.classList.add("hidden");
+      errorMsg.classList.add("hidden");
+
+      const data = Object.fromEntries(new FormData(form));
+      data.timestamp = new Date().toISOString();
+
+      try {
+        const res = await fetch("API_URL_HERE", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        });
+
+        if (res.ok) {
+          form.reset();
+          successMsg.classList.remove("hidden");
+        } else {
+          errorMsg.classList.remove("hidden");
+        }
+      } catch (err) {
+        errorMsg.classList.remove("hidden");
+      }
+    });
+  </script>
+</Base>

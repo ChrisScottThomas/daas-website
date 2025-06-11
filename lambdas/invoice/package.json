@@ -1,0 +1,9 @@
+{
+  "name": "invoice-request",
+  "version": "1.0.0",
+  "main": "handler.js",
+  "dependencies": {
+    "@aws-sdk/client-secrets-manager": "^3.500.0",
+    "@aws-sdk/client-ses": "^3.500.0"
+  }
+}
