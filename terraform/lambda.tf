@@ -61,6 +61,7 @@ resource "aws_lambda_function" "invoice_request" {
       AIRTABLE_SECRET_ARN = data.aws_secretsmanager_secret.airtable_token.arn
       AIRTABLE_BASE_ID    = "appyAQqBEfEwyFKlH"
       AIRTABLE_TABLE_NAME = "Invoices"
+      SENDER_EMAIL        = "hello@getclarity.win"
     }
   }
 

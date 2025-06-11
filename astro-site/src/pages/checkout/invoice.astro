@@ -1,4 +1,5 @@
 ---
+// src/pages/checkout/invoice.astro
 import Base from "../../layouts/base.astro";
 ---
 
@@ -22,7 +23,7 @@ import Base from "../../layouts/base.astro";
       <!-- Full Name -->
       <div>
         <label class="block text-sm font-medium mb-1" for="name"
-          >Full Name</label
+          >Full Name*</label
         >
         <input
           required
@@ -33,10 +34,10 @@ import Base from "../../layouts/base.astro";
         />
       </div>
 
-      <!-- Email -->
+      <!-- Work Email -->
       <div>
         <label class="block text-sm font-medium mb-1" for="email"
-          >Work Email</label
+          >Work Email*</label
         >
         <input
           required
@@ -47,10 +48,10 @@ import Base from "../../layouts/base.astro";
         />
       </div>
 
-      <!-- Organisation -->
+      <!-- Organisation Name -->
       <div>
         <label class="block text-sm font-medium mb-1" for="org"
-          >Organisation Name</label
+          >Organisation Name*</label
         >
         <input
           required
@@ -62,23 +63,100 @@ import Base from "../../layouts/base.astro";
       </div>
 
       <!-- Billing Address -->
-      <div>
-        <label class="block text-sm font-medium mb-1" for="billing"
-          >Billing Address</label
-        >
-        <textarea
-          required
-          id="billing"
-          name="billing"
-          rows="3"
-          class="w-full px-4 py-2 border rounded dark:bg-gray-800"></textarea>
+      <div class="space-y-4">
+        <div>
+          <label for="premise" class="block text-sm font-medium mb-1"
+            >Address Line 1*</label
+          >
+          <input
+            required
+            type="text"
+            id="premise"
+            name="premise"
+            class="w-full px-4 py-2 border rounded dark:bg-gray-800"
+          />
+        </div>
+
+        <div>
+          <label for="street" class="block text-sm font-medium mb-1"
+            >Address Line 2</label
+          >
+          <input
+            type="text"
+            id="street"
+            name="street"
+            class="w-full px-4 py-2 border rounded dark:bg-gray-800"
+          />
+        </div>
+
+        <div>
+          <label for="locality" class="block text-sm font-medium mb-1"
+            >Address Line 3</label
+          >
+          <input
+            type="text"
+            id="locality"
+            name="locality"
+            class="w-full px-4 py-2 border rounded dark:bg-gray-800"
+          />
+        </div>
+
+        <div>
+          <label for="town" class="block text-sm font-medium mb-1"
+            >City/Town*</label
+          >
+          <input
+            required
+            type="text"
+            id="town"
+            name="town"
+            class="w-full px-4 py-2 border rounded dark:bg-gray-800"
+          />
+        </div>
+
+        <div>
+          <label for="county" class="block text-sm font-medium mb-1"
+            >County</label
+          >
+          <input
+            type="text"
+            id="county"
+            name="county"
+            class="w-full px-4 py-2 border rounded dark:bg-gray-800"
+          />
+        </div>
+
+        <div>
+          <label for="postcode" class="block text-sm font-medium mb-1"
+            >Postcode*</label
+          >
+          <input
+            required
+            type="text"
+            id="postcode"
+            name="postcode"
+            title="Enter a valid UK postcode"
+            class="w-full px-4 py-2 border rounded dark:bg-gray-800 uppercase"
+          />
+        </div>
+
+        <div>
+          <label for="country" class="block text-sm font-medium mb-1"
+            >Country</label
+          >
+          <input
+            type="text"
+            id="country"
+            name="country"
+            value="UNITED KINGDOM"
+            class="w-full px-4 py-2 border rounded dark:bg-gray-800"
+          />
+        </div>
       </div>
 
-      <!-- Optional PO Number -->
+      <!-- PO Number (Optional) -->
       <div>
-        <label class="block text-sm font-medium mb-1" for="po"
-          >PO Number (optional)</label
-        >
+        <label class="block text-sm font-medium mb-1" for="po">PO Number</label>
         <input
           type="text"
           id="po"
@@ -90,7 +168,8 @@ import Base from "../../layouts/base.astro";
       <!-- Submit -->
       <button
         type="submit"
-        class="bg-[#429EDB] hover:bg-[#1F78C1] text-white font-semibold px-6 py-3 rounded-xl transition w-full"
+        disabled
+        class="bg-[#429EDB] hover:bg-[#1F78C1] text-white font-semibold px-6 py-3 rounded-xl transition w-full disabled:opacity-50 disabled:cursor-not-allowed"
       >
         Request Invoice
       </button>
@@ -112,7 +191,7 @@ import Base from "../../layouts/base.astro";
     const plans = {
       clarity_base_monthly: { name: "Clarity. Base — Monthly" },
       clarity_plus_quarterly: { name: "Clarity. Plus — Quarterly" },
-      // Add more here as needed
+      clarity_partner_annually: { name: "Clarity. Partner — Annually" },
     };
 
     const plan = plans[planId];
@@ -121,6 +200,7 @@ import Base from "../../layouts/base.astro";
     const planIdInput = document.getElementById("planIdInput");
     const successMsg = document.getElementById("formSuccess");
     const errorMsg = document.getElementById("formError");
+    const submitBtn = form.querySelector("button[type='submit']");
 
     if (!plan) {
       planNameEl.textContent = "Invalid or missing plan.";
@@ -130,13 +210,122 @@ import Base from "../../layouts/base.astro";
       planIdInput.value = planId;
     }
 
+    // Create and show inline error messages
+    function showInlineError(input, message) {
+      let errorEl = input.parentElement.querySelector(".inline-error");
+      if (!errorEl) {
+        errorEl = document.createElement("p");
+        errorEl.className = "inline-error text-sm text-red-600 mt-1";
+        input.parentElement.appendChild(errorEl);
+      }
+      errorEl.textContent = message;
+    }
+
+    function clearInlineError(input) {
+      const errorEl = input.parentElement.querySelector(".inline-error");
+      if (errorEl) errorEl.remove();
+    }
+
+    // Validation logic
+    function validateField(input) {
+      clearInlineError(input);
+      const value = input.value.trim();
+      const name = input.name;
+
+      if (input.required && !value) {
+        showInlineError(input, "This field is required.");
+        return false;
+      }
+
+      if (name === "email" && !/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(value)) {
+        showInlineError(input, "Please enter a valid email address.");
+        return false;
+      }
+
+      if (name === "postcode") {
+        const original = input.value.trim().toUpperCase();
+        const normalised = original.replace(
+          /^([A-Z]{1,2}\d{1,2}[A-Z]?)\s?(\d[A-Z]{2})$/,
+          "$1 $2",
+        );
+
+        input.value = normalised;
+
+        const postcodePattern = /^[A-Z]{1,2}\d{1,2}[A-Z]?\s\d[A-Z]{2}$/;
+        const isValidPostcode = postcodePattern.test(normalised);
+
+        console.log("Validating postcode:", {
+          original,
+          normalised,
+          isValidPostcode,
+        });
+
+        if (!isValidPostcode) {
+          showInlineError(input, "Enter a valid UK postcode.");
+          return false;
+        }
+      }
+
+      return true;
+    }
+
+    function validateForm() {
+      let isValid = true;
+      form.querySelectorAll("input, textarea").forEach((input) => {
+        if (!validateField(input)) isValid = false;
+      });
+      submitBtn.disabled = !isValid;
+      return isValid;
+    }
+
+    // Debounce helper
+    function debounce(fn, delay = 300) {
+      let timeout;
+      return (...args) => {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => fn(...args), delay);
+      };
+    }
+
+    // Watch input changes
+    form.querySelectorAll("input, textarea").forEach((input) => {
+      input.addEventListener(
+        "input",
+        debounce(() => validateForm()),
+      );
+      input.addEventListener("blur", () => validateField(input)); // Validate on blur for UX
+    });
+
+    // Form submission
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
       successMsg.classList.add("hidden");
       errorMsg.classList.add("hidden");
 
+      if (!validateForm()) return;
+
       const data = Object.fromEntries(new FormData(form));
       data.timestamp = new Date().toISOString();
+
+      const addressLines = [
+        data.premise,
+        data.street,
+        data.locality,
+        data.town,
+        data.county,
+        data.postcode,
+        data.country,
+      ].filter(Boolean);
+
+      data.billingAddress = addressLines.join(", ");
+
+      delete data.premise;
+      delete data.street;
+      delete data.locality;
+      delete data.town;
+      delete data.county;
+      delete data.postcode;
+      delete data.country;
 
       try {
         const res = await fetch("API_URL_HERE", {
@@ -147,11 +336,12 @@ import Base from "../../layouts/base.astro";
 
         if (res.ok) {
           form.reset();
+          submitBtn.disabled = true;
           successMsg.classList.remove("hidden");
         } else {
           errorMsg.classList.remove("hidden");
         }
-      } catch (err) {
+      } catch {
         errorMsg.classList.remove("hidden");
       }
     });
