@@ -3,11 +3,11 @@ terraform {
 
 
   backend "s3" {
-    bucket       = "daas-site-state"
-    key          = "terraform/daas/daas-site-state.tfstate"
-    region       = "eu-west-2"
-    encrypt      = true
-    use_lockfile = "terraform-locks"
+    bucket         = "daas-site-state"
+    key            = "terraform/daas/daas-site-state.tfstate"
+    region         = "eu-west-2"
+    encrypt        = true
+    dynamodb_table = "terraform-locks"
   }
 
   required_providers {
