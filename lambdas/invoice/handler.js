@@ -1,54 +1,55 @@
-const {
-  SecretsManagerClient,
-  GetSecretValueCommand,
-} = require("@aws-sdk/client-secrets-manager");
-const {
-  SESClient,
-  SendEmailCommand,
-} = require("@aws-sdk/client-ses");
-const https = require("https");
+const AWS = require('aws-sdk');
+const https = require('https');
 
-const secretsClient = new SecretsManagerClient({ region: "eu-west-2" });
-const sesClient = new SESClient({ region: "eu-west-2" });
+const ses = new AWS.SES();
+const secretsManager = new AWS.SecretsManager();
 
-async function getSecrets(secretArn) {
-  const result = await secretsClient.send(
-    new GetSecretValueCommand({ SecretId: secretArn })
-  );
-  return JSON.parse(result.SecretString || "{}");
+const SENDER_EMAIL = process.env.SENDER_EMAIL;
+const AIRTABLE_SECRET_ARN = process.env.AIRTABLE_SECRET_ARN;
+const AIRTABLE_BASE_ID = process.env.AIRTABLE_BASE_ID;
+const AIRTABLE_TABLE_NAME = process.env.AIRTABLE_TABLE_NAME;
+
+let airtableToken;
+
+async function getAirtableToken() {
+  if (airtableToken) return airtableToken;
+
+  const secret = await secretsManager.getSecretValue({
+    SecretId: AIRTABLE_SECRET_ARN,
+  }).promise();
+
+  airtableToken = secret.SecretString;
+  return airtableToken;
 }
 
-function postToAirtable({ apiKey, baseId, tableName, data }) {
-  const postData = JSON.stringify({ records: [{ fields: data }] });
+const postToAirtable = async (fields) => {
+  const token = await getAirtableToken();
+  const url = `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${encodeURIComponent(AIRTABLE_TABLE_NAME)}`;
 
-  const options = {
-    hostname: "api.airtable.com",
-    path: `/v0/${baseId}/${encodeURIComponent(tableName)}`,
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      "Content-Type": "application/json",
-      "Content-Length": Buffer.byteLength(postData),
-    },
+  const body = {
+    records: [
+      {
+        fields,
+      },
+    ],
   };
 
-  return new Promise((resolve, reject) => {
-    const req = https.request(options, (res) => {
-      let responseData = "";
-      res.on("data", (chunk) => (responseData += chunk));
-      res.on("end", () => {
-        res.statusCode < 300 ? resolve(responseData) : reject(responseData);
-      });
-    });
-
-    req.on("error", reject);
-    req.write(postData);
-    req.end();
+  const res = await fetch(url, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body),
   });
-}
+
+  if (!res.ok) {
+    const errText = await res.text();
+    throw new Error(`Airtable API Error: ${errText}`);
+  }
+};
 
 exports.handler = async (event) => {
-  // Always return CORS headers
   const defaultHeaders = {
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Headers": "Content-Type",
@@ -73,45 +74,34 @@ exports.handler = async (event) => {
     };
   }
 
-  const body = JSON.parse(event.body || "{}");
-  const {
-    name,
-    email,
-    org,
-    billingAddress,
-    po,
-    planId,
-    timestamp,
-  } = body;
+  try {
+    const body = JSON.parse(event.body || "{}");
+    const {
+      name,
+      email,
+      org,
+      billingAddress,
+      po,
+      planId,
+      timestamp,
+    } = body;
 
-  if (!name || !email || !org || !billingAddress || !planId || !timestamp) {
-    return {
-      statusCode: 400,
-      headers: defaultHeaders,
-      body: "Missing required fields",
-    };
-  }
+    if (!name || !email || !org || !billingAddress || !planId || !timestamp) {
+      return {
+        statusCode: 400,
+        headers: defaultHeaders,
+        body: "Missing required fields",
+      };
+    }
 
-  const secretArn = process.env.AIRTABLE_SECRET_ARN;
-  const baseId = process.env.AIRTABLE_BASE_ID;
-  const tableName = process.env.AIRTABLE_TABLE_NAME;
-  const senderEmail = process.env.SENDER_EMAIL;
+    const formattedAddress = billingAddress
+      .split("\n")
+      .map((line) => line.trim())
+      .filter(Boolean)
+      .join("<br />");
 
-  const secrets = await getSecrets(secretArn);
-  const airtableApiKey = secrets.AIRTABLE_API_KEY;
-
-  const formattedAddress = billingAddress
-    .split("\n")
-    .map((line) => line.trim())
-    .filter(Boolean)
-    .join("<br />");
-
-  // 1. Save to Airtable
-  await postToAirtable({
-    apiKey: airtableApiKey,
-    baseId,
-    tableName,
-    data: {
+    // 1. Save to Airtable
+    await postToAirtable({
       Name: name,
       Email: email,
       Organisation: org,
@@ -120,34 +110,41 @@ exports.handler = async (event) => {
       "PO Number": po || "",
       "Plan ID": planId,
       "Submitted At": timestamp,
-    },
-  });
+    });
 
-  // 2. Send confirmation email
-  const emailBody = `
-    <html><body>
-      <h2>Thanks for your request</h2>
-      <p>You requested: <strong>${planId}</strong></p>
-      <p><strong>Organisation:</strong> ${org}</p>
-      <p><strong>Billing Address:</strong><br />${formattedAddress}</p>
-      <p><strong>PO Number:</strong> ${po || "—"}</p>
-    </body></html>
-  `;
+    // 2. Send confirmation email
+    const emailBody = `
+      <html><body>
+        <h2>Thanks for your request</h2>
+        <p>You requested: <strong>${planId}</strong></p>
+        <p><strong>Organisation:</strong> ${org}</p>
+        <p><strong>Billing Address:</strong><br />${formattedAddress}</p>
+        <p><strong>PO Number:</strong> ${po || "—"}</p>
+      </body></html>
+    `;
 
-  await sesClient.send(
-    new SendEmailCommand({
+    await ses.sendEmail({
+      Source: SENDER_EMAIL,
       Destination: { ToAddresses: [email] },
       Message: {
         Subject: { Data: "Clarity. Invoice Request Confirmation" },
-        Body: { Html: { Data: emailBody } },
+        Body: {
+          Html: { Data: emailBody },
+        },
       },
-      Source: senderEmail,
-    })
-  );
+    }).promise();
 
-  return {
-    statusCode: 200,
-    headers: defaultHeaders,
-    body: JSON.stringify({ success: true }),
-  };
+    return {
+      statusCode: 200,
+      headers: defaultHeaders,
+      body: JSON.stringify({ success: true }),
+    };
+  } catch (err) {
+    console.error("Invoice Lambda error:", err);
+    return {
+      statusCode: 500,
+      headers: defaultHeaders,
+      body: JSON.stringify({ error: "Internal Server Error" }),
+    };
+  }
 };
