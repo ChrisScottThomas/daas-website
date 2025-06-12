@@ -55,10 +55,6 @@ resource "aws_api_gateway_deployment" "deployment" {
     aws_api_gateway_integration_response.invoice_options,
     aws_api_gateway_integration_response.card_options,
   ]
-
-  triggers = {
-    redeployment = timestamp()
-  }
 }
 
 resource "aws_api_gateway_stage" "prod_stage" {
