@@ -36,15 +36,22 @@ resource "aws_api_gateway_deployment" "deployment" {
   depends_on = [
     aws_api_gateway_integration.lambda,
     aws_api_gateway_integration.invoice_lambda,
-    aws_api_gateway_method.invoice_options,
-    aws_api_gateway_integration.invoice_options,
-    aws_api_gateway_method_response.invoice_options,
-    aws_api_gateway_integration_response.invoice_options,
     aws_api_gateway_integration.card_lambda,
+
+    aws_api_gateway_method.waitlist_post,
+    aws_api_gateway_method.invoice_post,
+    aws_api_gateway_method.invoice_options,
+    aws_api_gateway_method.card_post,
     aws_api_gateway_method.card_options,
+
+    aws_api_gateway_integration.invoice_options,
     aws_api_gateway_integration.card_options,
+
+    aws_api_gateway_method_response.invoice_options,
     aws_api_gateway_method_response.card_options,
-    aws_api_gateway_integration_response.card_options
+
+    aws_api_gateway_integration_response.invoice_options,
+    aws_api_gateway_integration_response.card_options,
   ]
   rest_api_id = aws_api_gateway_rest_api.waitlist_api.id
 }
