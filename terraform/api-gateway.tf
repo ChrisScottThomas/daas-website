@@ -113,6 +113,10 @@ resource "aws_api_gateway_integration_response" "invoice_options" {
   http_method = aws_api_gateway_method.invoice_options.http_method
   status_code = "200"
 
+  depends_on = [
+    aws_api_gateway_integration.invoice_options
+  ]
+
   response_parameters = {
     "method.response.header.Access-Control-Allow-Headers" = "'Content-Type,X-Amz-Date,Authorization,X-Api-Key'"
     "method.response.header.Access-Control-Allow-Methods" = "'OPTIONS,POST'"
@@ -123,6 +127,7 @@ resource "aws_api_gateway_integration_response" "invoice_options" {
     "application/json" = ""
   }
 }
+
 
 resource "aws_api_gateway_resource" "card_payment" {
   rest_api_id = aws_api_gateway_rest_api.waitlist_api.id
@@ -190,6 +195,10 @@ resource "aws_api_gateway_integration_response" "card_options" {
   resource_id = aws_api_gateway_resource.card_payment.id
   http_method = aws_api_gateway_method.card_options.http_method
   status_code = "200"
+
+  depends_on = [
+    aws_api_gateway_integration.card_options
+  ]
 
   response_parameters = {
     "method.response.header.Access-Control-Allow-Headers" = "'Content-Type,X-Amz-Date,Authorization,X-Api-Key'"
