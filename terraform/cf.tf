@@ -20,11 +20,12 @@ resource "aws_cloudfront_distribution" "cdn" {
   default_cache_behavior {
     target_origin_id           = "s3-site"
     viewer_protocol_policy     = "redirect-to-https"
-    allowed_methods            = ["GET", "HEAD"]
-    cached_methods             = ["GET", "HEAD"]
+    allowed_methods            = ["GET", "HEAD", "OPTIONS", "PUT", "POST"]
+    cached_methods             = ["GET", "HEAD", "OPTIONS"]
     response_headers_policy_id = aws_cloudfront_response_headers_policy.security_headers.id
     forwarded_values {
       query_string = false
+      headers      = ["Origin", "Access-Control-Request-Headers", "Access-Control-Request-Method"]
       cookies {
         forward = "none"
       }
