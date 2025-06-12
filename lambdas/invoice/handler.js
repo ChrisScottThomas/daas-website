@@ -1,5 +1,5 @@
 const AWS = require('aws-sdk');
-const https = require('https');
+const fetch = require('node-fetch');
 
 const ses = new AWS.SES();
 const secretsManager = new AWS.SecretsManager();
@@ -114,12 +114,13 @@ exports.handler = async (event) => {
 
     // 2. Send confirmation email
     const emailBody = `
-      <html><body>
-        <h2>Thanks for your request</h2>
+      <html><body style="font-family: Inter, sans-serif; line-height: 1.6; color: #333;">
+        <h2 style="color: #0753AD;">Thanks for your request</h2>
         <p>You requested: <strong>${planId}</strong></p>
         <p><strong>Organisation:</strong> ${org}</p>
         <p><strong>Billing Address:</strong><br />${formattedAddress}</p>
         <p><strong>PO Number:</strong> ${po || "—"}</p>
+        <p style="margin-top: 2em;">— The Clarity. Team</p>
       </body></html>
     `;
 
