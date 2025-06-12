@@ -1,3 +1,52 @@
+const {
+  SecretsManagerClient,
+  GetSecretValueCommand,
+} = require("@aws-sdk/client-secrets-manager");
+const {
+  SESClient,
+  SendEmailCommand,
+} = require("@aws-sdk/client-ses");
+const https = require("https");
+
+const secretsClient = new SecretsManagerClient({ region: "eu-west-2" });
+const sesClient = new SESClient({ region: "eu-west-2" });
+
+async function getSecrets(secretArn) {
+  const result = await secretsClient.send(
+    new GetSecretValueCommand({ SecretId: secretArn })
+  );
+  return JSON.parse(result.SecretString || "{}");
+}
+
+function postToAirtable({ apiKey, baseId, tableName, data }) {
+  const postData = JSON.stringify({ records: [{ fields: data }] });
+
+  const options = {
+    hostname: "api.airtable.com",
+    path: `/v0/${baseId}/${encodeURIComponent(tableName)}`,
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      "Content-Type": "application/json",
+      "Content-Length": Buffer.byteLength(postData),
+    },
+  };
+
+  return new Promise((resolve, reject) => {
+    const req = https.request(options, (res) => {
+      let responseData = "";
+      res.on("data", (chunk) => (responseData += chunk));
+      res.on("end", () => {
+        res.statusCode < 300 ? resolve(responseData) : reject(responseData);
+      });
+    });
+
+    req.on("error", reject);
+    req.write(postData);
+    req.end();
+  });
+}
+
 exports.handler = async (event) => {
   // Always return CORS headers
   const defaultHeaders = {
