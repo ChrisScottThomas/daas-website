@@ -48,8 +48,29 @@ function postToAirtable({ apiKey, baseId, tableName, data }) {
 }
 
 exports.handler = async (event) => {
+  // Always return CORS headers
+  const defaultHeaders = {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Headers": "Content-Type",
+  };
+
+  if (event.httpMethod === "OPTIONS") {
+    return {
+      statusCode: 200,
+      headers: {
+        ...defaultHeaders,
+        "Access-Control-Allow-Methods": "POST, OPTIONS",
+      },
+      body: "",
+    };
+  }
+
   if (event.httpMethod !== "POST") {
-    return { statusCode: 405, body: "Method Not Allowed" };
+    return {
+      statusCode: 405,
+      headers: defaultHeaders,
+      body: "Method Not Allowed",
+    };
   }
 
   const body = JSON.parse(event.body || "{}");
@@ -64,7 +85,11 @@ exports.handler = async (event) => {
   } = body;
 
   if (!name || !email || !org || !billingAddress || !planId || !timestamp) {
-    return { statusCode: 400, body: "Missing required fields" };
+    return {
+      statusCode: 400,
+      headers: defaultHeaders,
+      body: "Missing required fields",
+    };
   }
 
   const secretArn = process.env.AIRTABLE_SECRET_ARN;
@@ -122,6 +147,7 @@ exports.handler = async (event) => {
 
   return {
     statusCode: 200,
+    headers: defaultHeaders,
     body: JSON.stringify({ success: true }),
   };
 };
