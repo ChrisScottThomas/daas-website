@@ -33,6 +33,8 @@ resource "aws_lambda_permission" "apigw" {
 }
 
 resource "aws_api_gateway_deployment" "deployment" {
+  rest_api_id = aws_api_gateway_rest_api.waitlist_api.id
+
   depends_on = [
     aws_api_gateway_integration.lambda,
     aws_api_gateway_integration.invoice_lambda,
@@ -53,7 +55,10 @@ resource "aws_api_gateway_deployment" "deployment" {
     aws_api_gateway_integration_response.invoice_options,
     aws_api_gateway_integration_response.card_options,
   ]
-  rest_api_id = aws_api_gateway_rest_api.waitlist_api.id
+
+  triggers = {
+    redeployment = timestamp()
+  }
 }
 
 resource "aws_api_gateway_stage" "prod_stage" {
