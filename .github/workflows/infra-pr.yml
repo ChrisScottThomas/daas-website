@@ -34,26 +34,58 @@ jobs:
       with:
         terraform_version: 1.12.0
 
+    # Waitlist Lambda
+    - name: Cache NPM for Waitlist Lambda
+      uses: actions/cache@v3
+      with:
+        path: lambdas/waitlist/node_modules
+        key: waitlist-${{ runner.os }}-${{ hashFiles('lambdas/waitlist/package-lock.json') }}
+
     - name: Package Waitlist Lambda Function
       run: |
+        npm config set registry https://registry.npmmirror.com
         npm ci
         zip -r ../../waitlist-lambda.zip .
       working-directory: lambdas/waitlist
-  
+
+    # Retry Lambda
+    - name: Cache NPM for Retry Lambda
+      uses: actions/cache@v3
+      with:
+        path: lambdas/retry/node_modules
+        key: retry-${{ runner.os }}-${{ hashFiles('lambdas/retry/package-lock.json') }}
+
     - name: Package Retry Lambda Function
       run: |
+        npm config set registry https://registry.npmmirror.com
         npm ci
         zip -r ../../retry-lambda.zip .
       working-directory: lambdas/retry
 
+    # Invoice Lambda
+    - name: Cache NPM for Invoice Lambda
+      uses: actions/cache@v3
+      with:
+        path: lambdas/invoice/node_modules
+        key: invoice-${{ runner.os }}-${{ hashFiles('lambdas/invoice/package-lock.json') }}
+
     - name: Package Invoice Lambda Function
       run: |
+        npm config set registry https://registry.npmmirror.com
         npm ci
         zip -r ../../invoice-lambda.zip .
       working-directory: lambdas/invoice
-    
+
+    # Card Lambda
+    - name: Cache NPM for Card Lambda
+      uses: actions/cache@v3
+      with:
+        path: lambdas/card-handler/node_modules
+        key: card-${{ runner.os }}-${{ hashFiles('lambdas/card-handler/package-lock.json') }}
+
     - name: Package Card Lambda Function
       run: |
+        npm config set registry https://registry.npmmirror.com
         npm ci
         zip -r ../../card-lambda.zip .
       working-directory: lambdas/card-handler
