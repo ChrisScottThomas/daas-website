@@ -76,17 +76,52 @@ resource "aws_lambda_permission" "invoice_apigw" {
   source_arn    = "${aws_api_gateway_rest_api.waitlist_api.execution_arn}/*/*"
 }
 
-resource "aws_api_gateway_resource" "card_payment" {
-  rest_api_id = aws_api_gateway_rest_api.waitlist_api.id
-  parent_id   = aws_api_gateway_rest_api.waitlist_api.root_resource_id
-  path_part   = "card-payment"
+resource "aws_api_gateway_method" "invoice_options" {
+  rest_api_id   = aws_api_gateway_rest_api.waitlist_api.id
+  resource_id   = aws_api_gateway_resource.invoice.id
+  http_method   = "OPTIONS"
+  authorization = "NONE"
 }
 
-resource "aws_api_gateway_method" "card_post" {
-  rest_api_id   = aws_api_gateway_rest_api.waitlist_api.id
-  resource_id   = aws_api_gateway_resource.card_payment.id
-  http_method   = "POST"
-  authorization = "NONE"
+resource "aws_api_gateway_integration" "invoice_options" {
+  rest_api_id = aws_api_gateway_rest_api.waitlist_api.id
+  resource_id = aws_api_gateway_resource.invoice.id
+  http_method = aws_api_gateway_method.invoice_options.http_method
+  type        = "MOCK"
+
+  request_templates = {
+    "application/json" = "{\"statusCode\": 200}"
+  }
+}
+
+resource "aws_api_gateway_method_response" "invoice_options" {
+  rest_api_id = aws_api_gateway_rest_api.waitlist_api.id
+  resource_id = aws_api_gateway_resource.invoice.id
+  http_method = aws_api_gateway_method.invoice_options.http_method
+  status_code = "200"
+
+  response_parameters = {
+    "method.response.header.Access-Control-Allow-Headers" = true
+    "method.response.header.Access-Control-Allow-Methods" = true
+    "method.response.header.Access-Control-Allow-Origin"  = true
+  }
+}
+
+resource "aws_api_gateway_integration_response" "invoice_options" {
+  rest_api_id = aws_api_gateway_rest_api.waitlist_api.id
+  resource_id = aws_api_gateway_resource.invoice.id
+  http_method = aws_api_gateway_method.invoice_options.http_method
+  status_code = "200"
+
+  response_parameters = {
+    "method.response.header.Access-Control-Allow-Headers" = "'Content-Type,X-Amz-Date,Authorization,X-Api-Key'"
+    "method.response.header.Access-Control-Allow-Methods" = "'OPTIONS,POST'"
+    "method.response.header.Access-Control-Allow-Origin"  = "'*'"
+  }
+
+  response_templates = {
+    "application/json" = ""
+  }
 }
 
 resource "aws_api_gateway_integration" "card_lambda" {
@@ -104,4 +139,52 @@ resource "aws_lambda_permission" "card_apigw" {
   function_name = aws_lambda_function.card_payment.function_name
   principal     = "apigateway.amazonaws.com"
   source_arn    = "${aws_api_gateway_rest_api.waitlist_api.execution_arn}/*/*"
+}
+
+resource "aws_api_gateway_method" "card_options" {
+  rest_api_id   = aws_api_gateway_rest_api.waitlist_api.id
+  resource_id   = aws_api_gateway_resource.card_payment.id
+  http_method   = "OPTIONS"
+  authorization = "NONE"
+}
+
+resource "aws_api_gateway_integration" "card_options" {
+  rest_api_id = aws_api_gateway_rest_api.waitlist_api.id
+  resource_id = aws_api_gateway_resource.card_payment.id
+  http_method = aws_api_gateway_method.card_options.http_method
+  type        = "MOCK"
+
+  request_templates = {
+    "application/json" = "{\"statusCode\": 200}"
+  }
+}
+
+resource "aws_api_gateway_method_response" "card_options" {
+  rest_api_id = aws_api_gateway_rest_api.waitlist_api.id
+  resource_id = aws_api_gateway_resource.card_payment.id
+  http_method = aws_api_gateway_method.card_options.http_method
+  status_code = "200"
+
+  response_parameters = {
+    "method.response.header.Access-Control-Allow-Headers" = true
+    "method.response.header.Access-Control-Allow-Methods" = true
+    "method.response.header.Access-Control-Allow-Origin"  = true
+  }
+}
+
+resource "aws_api_gateway_integration_response" "card_options" {
+  rest_api_id = aws_api_gateway_rest_api.waitlist_api.id
+  resource_id = aws_api_gateway_resource.card_payment.id
+  http_method = aws_api_gateway_method.card_options.http_method
+  status_code = "200"
+
+  response_parameters = {
+    "method.response.header.Access-Control-Allow-Headers" = "'Content-Type,X-Amz-Date,Authorization,X-Api-Key'"
+    "method.response.header.Access-Control-Allow-Methods" = "'OPTIONS,POST'"
+    "method.response.header.Access-Control-Allow-Origin"  = "'*'"
+  }
+
+  response_templates = {
+    "application/json" = ""
+  }
 }
