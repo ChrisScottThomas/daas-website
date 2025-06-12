@@ -65,6 +65,7 @@ resource "aws_api_gateway_stage" "prod_stage" {
   deployment_id = aws_api_gateway_deployment.deployment.id
   rest_api_id   = aws_api_gateway_rest_api.waitlist_api.id
   stage_name    = "prod"
+  depends_on    = [aws_api_gateway_deployment.deployment]
 }
 
 resource "aws_api_gateway_resource" "invoice" {
