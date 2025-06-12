@@ -41,6 +41,7 @@ jobs:
 
     - name: Package Waitlist Lambda Function
       run: |
+        npm config set registry https://registry.npmmirror.com
         npm ci
         zip -r ../../waitlist-lambda.zip .
       working-directory: lambdas/waitlist
@@ -54,6 +55,7 @@ jobs:
 
     - name: Package Retry Lambda Function
       run: |
+        npm config set registry https://registry.npmmirror.com
         npm ci
         zip -r ../../retry-lambda.zip .
       working-directory: lambdas/retry
@@ -67,6 +69,7 @@ jobs:
 
     - name: Package Invoice Lambda Function
       run: |
+        npm config set registry https://registry.npmmirror.com
         npm ci
         zip -r ../../invoice-lambda.zip .
       working-directory: lambdas/invoice
@@ -80,6 +83,7 @@ jobs:
 
     - name: Package Card Lambda Function
       run: |
+        npm config set registry https://registry.npmmirror.com
         npm ci
         zip -r ../../card-lambda.zip .
       working-directory: lambdas/card-handler
