@@ -1,0 +1,112 @@
+---
+import Base from "../layouts/base.astro";
+---
+
+<Base
+  title="Privacy Policy"
+  description="How Clarity. collects, uses, and protects your data."
+  type="WebPage"
+  canonicalURL="https://getclarity.win/privacy-policy"
+>
+  <section class="max-w-4xl mx-auto px-4 py-20">
+    <h1 class="text-4xl font-bold mb-8 text-center">Privacy Policy</h1>
+
+    <p class="mb-6 text-gray-600 dark:text-gray-300">
+      Effective date: <strong>13 June 2025</strong><br />
+      Last updated: <strong>13 June 2025</strong>
+    </p>
+
+    <h2 class="text-2xl font-semibold mt-10 mb-4">
+      1. What information we collect
+    </h2>
+    <p class="mb-4">We collect the following personal data:</p>
+    <ul class="list-disc list-outside pl-6 space-y-2 mb-6">
+      <li>Email address when you join the waitlist or request a proposal</li>
+      <li>Name and organisation details if voluntarily provided</li>
+      <li>Billing information (handled via Stripe)</li>
+      <li>Communication history via email</li>
+      <li>Technical info (IP address, browser type, etc.) from logs</li>
+    </ul>
+    <p class="mb-6">We do not use cookies or tracking pixels at this time.</p>
+
+    <h2 class="text-2xl font-semibold mt-10 mb-4">
+      2. How we use your information
+    </h2>
+    <p class="mb-6">
+      We use your data to:
+      <ul class="list-disc list-outside pl-6 space-y-2">
+        <li>Register you on our waitlist and send confirmation emails</li>
+        <li>Respond to your requests and provide early access</li>
+        <li>Fulfil billing and invoicing requirements</li>
+        <li>Improve our services based on anonymised data</li>
+      </ul>
+    </p>
+
+    <h2 class="text-2xl font-semibold mt-10 mb-4">
+      3. Legal basis for processing
+    </h2>
+    <p class="mb-6">
+      We process your data based on:
+      <ul class="list-disc list-outside pl-6 space-y-2">
+        <li><strong>Consent</strong> – when you sign up or submit a form</li>
+        <li><strong>Contract</strong> – when delivering services to you</li>
+        <li>
+          <strong>Legitimate interest</strong> – for site operations and improvement
+        </li>
+      </ul>
+    </p>
+
+    <h2 class="text-2xl font-semibold mt-10 mb-4">
+      4. How your data is stored
+    </h2>
+    <p class="mb-6">
+      Your data is securely stored using:
+      <ul class="list-disc list-outside pl-6 space-y-2">
+        <li>AWS DynamoDB for waitlist and form data</li>
+        <li>AWS SES for email delivery</li>
+        <li>Airtable for internal tracking</li>
+        <li>Stripe for secure payment processing</li>
+      </ul>
+      Access is limited to the Clarity. team only.
+    </p>
+
+    <h2 class="text-2xl font-semibold mt-10 mb-4">5. Data retention</h2>
+    <p class="mb-6">
+      We retain data only as long as needed:
+      <ul class="list-disc list-outside pl-6 space-y-2">
+        <li>
+          Waitlist data: deleted after 12 months of inactivity or upon request
+        </li>
+        <li>Billing records: retained for legal and accounting requirements</li>
+      </ul>
+    </p>
+
+    <h2 class="text-2xl font-semibold mt-10 mb-4">6. Your rights</h2>
+    <p class="mb-6">
+      Under the UK and EU GDPR, you have the right to:
+      <ul class="list-disc list-outside pl-6 space-y-2">
+        <li>Access the data we hold about you</li>
+        <li>Request corrections</li>
+        <li>Request deletion</li>
+        <li>Object to processing in certain cases</li>
+      </ul>
+      To make a request, email <strong>privacy@getclarity.win</strong>.
+    </p>
+
+    <h2 class="text-2xl font-semibold mt-10 mb-4">
+      7. International transfers
+    </h2>
+    <p class="mb-6">
+      Data is hosted in UK/EU-compliant AWS regions. If transfers outside these
+      regions occur, we ensure safeguards are in place.
+    </p>
+
+    <h2 class="text-2xl font-semibold mt-10 mb-4">8. Contact us</h2>
+    <p class="mb-6">
+      For any questions or concerns:
+      <br />
+      <strong>Clarity. Privacy Team</strong><br />
+      Email: privacy@getclarity.win
+    </p>
+  </section>
+</Base>
