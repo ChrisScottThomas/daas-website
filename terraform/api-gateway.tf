@@ -56,9 +56,9 @@ resource "aws_api_gateway_deployment" "deployment" {
 
     aws_api_gateway_method.stripe_checkout_post,
     aws_api_gateway_method.stripe_checkout_options,
-    aws_api_gateway_integration.checkout_options,
-    aws_api_gateway_method_response.checkout_options,
-    aws_api_gateway_integration_response.checkout_options,
+    aws_api_gateway_integration.stripe_checkout_options,
+    aws_api_gateway_method_response.stripe_checkout_options,
+    aws_api_gateway_integration_response.stripe_checkout_options,
   ]
 }
 
