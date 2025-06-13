@@ -102,7 +102,7 @@ resource "aws_lambda_function" "stripe_checkout" {
 
   environment {
     variables = {
-      STRIPE_SECRET_KEY = data.aws_secretsmanager_secret.stripe_key.arn
+      STRIPE_SECRET_KEY = data.aws_secretsmanager_secret_version.stripe_key.secret_string
       SITE_URL          = "https://getclarity.win"
     }
   }
