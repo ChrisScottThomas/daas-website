@@ -105,11 +105,10 @@ exports.handler = async (event) => {
       Name: name,
       Email: email,
       Organisation: org,
-      "Billing Address": billingAddress,
-      "Formatted Billing": formattedAddress,
+      "Billing Address": formattedAddress,
       "PO Number": po || "",
       "Plan ID": planId,
-      "Submitted At": timestamp,
+      "Timestamp": timestamp,
     });
 
     // 2. Send confirmation email
