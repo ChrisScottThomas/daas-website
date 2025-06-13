@@ -341,7 +341,8 @@ import Base from "../../layouts/base.astro";
         });
 
         if (res.ok) {
-          window.location.href = `/checkout/success?plan=${encodeURIComponent(data.planId)}`;
+          const planId = data.planId;
+          window.location.href = `/checkout/success?plan=${encodeURIComponent(planId)}`;
         } else {
           errorMsg.classList.remove("hidden");
         }
