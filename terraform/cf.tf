@@ -38,7 +38,7 @@ resource "aws_cloudfront_distribution" "cdn" {
     response_headers_policy_id = aws_cloudfront_response_headers_policy.security_headers.id
 
     forwarded_values {
-      query_string = false
+      query_string = true
       headers      = ["Origin", "Access-Control-Request-Headers", "Access-Control-Request-Method"]
       cookies {
         forward = "none"
