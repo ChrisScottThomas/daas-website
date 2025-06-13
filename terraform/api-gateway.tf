@@ -46,20 +46,26 @@ resource "aws_api_gateway_deployment" "deployment" {
     aws_api_gateway_integration.invoice_options,
     aws_api_gateway_method_response.invoice_options,
     aws_api_gateway_integration_response.invoice_options,
-    aws_api_gateway_integration.card_lambda,
 
+    aws_api_gateway_integration.card_lambda,
     aws_api_gateway_method.card_post,
     aws_api_gateway_method.card_options,
     aws_api_gateway_integration.card_options,
     aws_api_gateway_method_response.card_options,
     aws_api_gateway_integration_response.card_options,
 
+    aws_api_gateway_integration.stripe_checkout,
     aws_api_gateway_method.stripe_checkout_post,
     aws_api_gateway_method.stripe_checkout_options,
     aws_api_gateway_integration.stripe_checkout_options,
     aws_api_gateway_method_response.stripe_checkout_options_response,
     aws_api_gateway_integration_response.stripe_checkout_options_response,
   ]
+
+  triggers = {
+    version = "redeploy-20240613"
+  }
+
 }
 
 resource "aws_api_gateway_stage" "prod_stage" {
