@@ -95,7 +95,7 @@ resource "aws_lambda_function" "card_payment" {
 resource "aws_lambda_function" "stripe_checkout" {
   function_name    = "stripe-checkout"
   role             = aws_iam_role.lambda_exec.arn
-  handler          = "stripe-checkout.handler"
+  handler          = "index.handler"
   runtime          = "nodejs18.x"
   filename         = "../stripe-checkout-lambda.zip"
   source_code_hash = filebase64sha256("../stripe-checkout-lambda.zip")
