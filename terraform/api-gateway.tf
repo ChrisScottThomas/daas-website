@@ -54,6 +54,7 @@ resource "aws_api_gateway_deployment" "deployment" {
 
     aws_api_gateway_integration_response.invoice_options,
     aws_api_gateway_integration_response.card_options,
+    aws_api_gateway_method.stripe_checkout_post,
   ]
 }
 
@@ -227,4 +228,34 @@ resource "aws_api_gateway_integration_response" "card_options" {
   response_templates = {
     "application/json" = ""
   }
+}
+
+resource "aws_api_gateway_resource" "stripe_checkout" {
+  rest_api_id = aws_api_gateway_rest_api.waitlist_api.id
+  parent_id   = aws_api_gateway_rest_api.waitlist_api.root_resource_id
+  path_part   = "stripe-checkout"
+}
+
+resource "aws_api_gateway_method" "stripe_checkout_post" {
+  rest_api_id   = aws_api_gateway_rest_api.waitlist_api.id
+  resource_id   = aws_api_gateway_resource.stripe_checkout.id
+  http_method   = "POST"
+  authorization = "NONE"
+}
+
+resource "aws_api_gateway_integration" "stripe_checkout" {
+  rest_api_id             = aws_api_gateway_rest_api.waitlist_api.id
+  resource_id             = aws_api_gateway_resource.stripe_checkout.id
+  http_method             = aws_api_gateway_method.stripe_checkout_post.http_method
+  integration_http_method = "POST"
+  type                    = "AWS_PROXY"
+  uri                     = aws_lambda_function.stripe_checkout.invoke_arn
+}
+
+resource "aws_lambda_permission" "stripe_checkout_apigw" {
+  statement_id  = "AllowAPIGatewayInvokeStripeCheckout"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.stripe_checkout.function_name
+  principal     = "apigateway.amazonaws.com"
+  source_arn    = "${aws_api_gateway_rest_api.waitlist_api.execution_arn}/*/*"
 }
