@@ -37,24 +37,28 @@ resource "aws_api_gateway_deployment" "deployment" {
 
   depends_on = [
     aws_api_gateway_integration.lambda,
-    aws_api_gateway_integration.invoice_lambda,
-    aws_api_gateway_integration.card_lambda,
 
     aws_api_gateway_method.waitlist_post,
+
+    aws_api_gateway_integration.invoice_lambda,
     aws_api_gateway_method.invoice_post,
     aws_api_gateway_method.invoice_options,
+    aws_api_gateway_integration.invoice_options,
+    aws_api_gateway_method_response.invoice_options,
+    aws_api_gateway_integration_response.invoice_options,
+    aws_api_gateway_integration.card_lambda,
+
     aws_api_gateway_method.card_post,
     aws_api_gateway_method.card_options,
-
-    aws_api_gateway_integration.invoice_options,
     aws_api_gateway_integration.card_options,
-
-    aws_api_gateway_method_response.invoice_options,
     aws_api_gateway_method_response.card_options,
-
-    aws_api_gateway_integration_response.invoice_options,
     aws_api_gateway_integration_response.card_options,
+
     aws_api_gateway_method.stripe_checkout_post,
+    aws_api_gateway_method.stripe_checkout_options,
+    aws_api_gateway_integration.checkout_options,
+    aws_api_gateway_method_response.checkout_options,
+    aws_api_gateway_integration_response.checkout_options,
   ]
 }
 
@@ -258,4 +262,49 @@ resource "aws_lambda_permission" "stripe_checkout_apigw" {
   function_name = aws_lambda_function.stripe_checkout.function_name
   principal     = "apigateway.amazonaws.com"
   source_arn    = "${aws_api_gateway_rest_api.waitlist_api.execution_arn}/*/*"
+}
+
+resource "aws_api_gateway_method" "stripe_checkout_options" {
+  rest_api_id   = aws_api_gateway_rest_api.waitlist_api.id
+  resource_id   = aws_api_gateway_resource.stripe_checkout.id
+  http_method   = "OPTIONS"
+  authorization = "NONE"
+}
+
+resource "aws_api_gateway_integration" "stripe_checkout_options" {
+  rest_api_id             = aws_api_gateway_rest_api.waitlist_api.id
+  resource_id             = aws_api_gateway_resource.stripe_checkout.id
+  http_method             = aws_api_gateway_method.stripe_checkout_options.http_method
+  type                    = "MOCK"
+  integration_http_method = "OPTIONS"
+
+  request_templates = {
+    "application/json" = "{\"statusCode\": 200}"
+  }
+}
+
+resource "aws_api_gateway_method_response" "stripe_checkout_options_response" {
+  rest_api_id = aws_api_gateway_rest_api.waitlist_api.id
+  resource_id = aws_api_gateway_resource.stripe_checkout.id
+  http_method = "OPTIONS"
+  status_code = "200"
+
+  response_parameters = {
+    "method.response.header.Access-Control-Allow-Headers" = true
+    "method.response.header.Access-Control-Allow-Methods" = true
+    "method.response.header.Access-Control-Allow-Origin"  = true
+  }
+}
+
+resource "aws_api_gateway_integration_response" "stripe_checkout_options_response" {
+  rest_api_id = aws_api_gateway_rest_api.waitlist_api.id
+  resource_id = aws_api_gateway_resource.stripe_checkout.id
+  http_method = aws_api_gateway_method.stripe_checkout_options.http_method
+  status_code = "200"
+
+  response_parameters = {
+    "method.response.header.Access-Control-Allow-Headers" = "'Content-Type'"
+    "method.response.header.Access-Control-Allow-Methods" = "'OPTIONS,POST'"
+    "method.response.header.Access-Control-Allow-Origin"  = "'*'"
+  }
 }

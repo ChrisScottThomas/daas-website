@@ -20,6 +20,11 @@ exports.handler = async (event) => {
   if (!priceId) {
     return {
       statusCode: 400,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "Content-Type",
+        "Access-Control-Allow-Methods": "POST,OPTIONS",
+      },
       body: JSON.stringify({ error: "Invalid plan or billing cycle." }),
     };
   }
@@ -34,6 +39,12 @@ exports.handler = async (event) => {
 
   return {
     statusCode: 200,
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Headers": "Content-Type",
+      "Access-Control-Allow-Methods": "POST,OPTIONS",
+    },
     body: JSON.stringify({ url: session.url }),
   };
+  
 };
