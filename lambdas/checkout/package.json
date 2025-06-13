@@ -1,0 +1,9 @@
+{
+  "name": "stripe-checkout",
+  "version": "1.0.0",
+  "type": "commonjs",
+  "main": "index.js",
+  "dependencies": {
+    "stripe": "^12.0.0"
+  }
+}

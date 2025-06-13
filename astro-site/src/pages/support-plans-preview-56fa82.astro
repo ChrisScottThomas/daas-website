@@ -118,11 +118,12 @@ import BarChart from "../components/BarChart.jsx";
               <li>Surfaces insight, not just information — so you can act</li>
             </ul>
             <div class="mt-6 text-center">
-              <a
-                :href="`/select-plan/clarity_base_${billing}`"
+              <button
+                @click="startCheckout('clarity_base', billing)"
                 class="inline-block bg-[#429EDB] text-white font-semibold px-6 py-3 rounded hover:bg-[#1F78C1] transition"
-                >Select</a
               >
+                Buy Now
+              </button>
             </div>
           </div>
 
@@ -179,11 +180,12 @@ import BarChart from "../components/BarChart.jsx";
               <li>Keeps your strategy coherent, even when priorities shift</li>
             </ul>
             <div class="mt-6 text-center">
-              <a
-                :href="`/select-plan/clarity_plus_${billing}`"
+              <button
+                @click="startCheckout('clarity_plus', billing)"
                 class="inline-block bg-[#429EDB] text-white font-semibold px-6 py-3 rounded hover:bg-[#1F78C1] transition"
-                >Select</a
               >
+                Buy Now
+              </button>
             </div>
           </div>
 
@@ -240,11 +242,12 @@ import BarChart from "../components/BarChart.jsx";
               </li>
             </ul>
             <div class="mt-6 text-center">
-              <a
-                :href="`/select-plan/clarity_partner_${billing}`"
+              <button
+                @click="startCheckout('clarity_partner', billing)"
                 class="inline-block bg-[#429EDB] text-white font-semibold px-6 py-3 rounded hover:bg-[#1F78C1] transition"
-                >Select</a
               >
+                Buy Now
+              </button>
             </div>
           </div>
         </div>
@@ -735,6 +738,23 @@ import BarChart from "../components/BarChart.jsx";
             document.body.style.overflow = "";
           }
         });
+      </script>
+
+      <script>
+        window.startCheckout = async function (plan, billing) {
+          const res = await fetch("/api/stripe-checkout", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ plan, billing }),
+          });
+
+          const { url } = await res.json();
+          if (url) {
+            window.location.href = url;
+          } else {
+            alert("Something went wrong. Please try again.");
+          }
+        };
       </script>
 
       <!-- AlpineJS for toggling -->

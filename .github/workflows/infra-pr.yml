@@ -89,6 +89,20 @@ jobs:
         npm ci
         zip -r ../../card-lambda.zip .
       working-directory: lambdas/card-handler
+    
+    # Checkout Lambda
+    - name: Cache NPM for Checkout Lambda
+      uses: actions/cache@v3
+      with:
+        path: lambdas/checkout/node_modules
+        key: card-${{ runner.os }}-${{ hashFiles('lambdas/card-handler/package-lock.json') }}
+
+    - name: Package Checkout Lambda Function
+      run: |
+        npm config set registry https://registry.npmmirror.com
+        npm ci
+        zip -r ../../stripe-checkout-lambda.zip .
+      working-directory: lambdas/checkout
 
     - name: Terraform Init & Apply
       run: |
