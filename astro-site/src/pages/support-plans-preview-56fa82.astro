@@ -742,7 +742,7 @@ import BarChart from "../components/BarChart.jsx";
 
       <script>
         window.startCheckout = async function (plan, billing) {
-          const res = await fetch("/api/stripe-checkout", {
+          const res = await fetch("API_URL_HERE", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ plan, billing }),
