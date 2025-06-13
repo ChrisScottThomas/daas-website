@@ -100,6 +100,21 @@ exports.handler = async (event) => {
       .filter(Boolean)
       .join("<br />");
 
+    const plans = {
+      clarity_base_monthly: { name: "Clarity. Base — Monthly" },
+      clarity_base_quarterly: { name: "Clarity. Base — Quarterly" },
+      clarity_base_annually: { name: "Clarity. Base — Annually" },
+      clarity_plus_monthly: { name: "Clarity. Plus — Monthly" },
+      clarity_plus_quarterly: { name: "Clarity. Plus — Quarterly" },
+      clarity_plus_annually: { name: "Clarity. Plus — Annually" },
+      clarity_partner_annually: { name: "Clarity. Partner — Annually" },
+      clarity_partner_quarterly: { name: "Clarity. Partner — Quarterly" },
+      clarity_partner_monthly: { name: "Clarity. Partner — Monthly" },
+      };
+    const selected = plans[planId];
+    const planName = selected.name;
+
+
     // 1. Save to Airtable
     await postToAirtable({
       Name: name,
@@ -107,7 +122,7 @@ exports.handler = async (event) => {
       Organisation: org,
       "Billing Address": formattedAddress,
       "PO Number": po || "",
-      "Plan ID": planId,
+      "Plan ID": planName,
       "Timestamp": timestamp,
     });
 
