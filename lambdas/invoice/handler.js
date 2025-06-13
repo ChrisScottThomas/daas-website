@@ -130,7 +130,7 @@ exports.handler = async (event) => {
     const emailBody = `
       <html><body style="font-family: Inter, sans-serif; line-height: 1.6; color: #333;">
         <h2 style="color: #0753AD;">Thanks for your request</h2>
-        <p>You requested: <strong>${planId}</strong></p>
+        <p>You requested: <strong>${planName}</strong></p>
         <p><strong>Organisation:</strong> ${org}</p>
         <p><strong>Billing Address:</strong><br />${formattedAddress}</p>
         <p><strong>PO Number:</strong> ${po || "—"}</p>
