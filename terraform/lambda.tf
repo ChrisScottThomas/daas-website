@@ -123,7 +123,7 @@ resource "aws_lambda_function" "sign_token" {
 
   environment {
     variables = {
-      TOKEN_SECRET = data.aws_secretsmanager_secret_version.token_secret_version.secret_string
+      TOKEN_SECRET = data.aws_secretsmanager_secret.token_secret.arn
       SITE_URL     = "https://getclarity.win"
     }
   }
