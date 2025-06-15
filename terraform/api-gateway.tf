@@ -61,7 +61,7 @@ resource "aws_api_gateway_deployment" "deployment" {
     aws_api_gateway_method_response.stripe_checkout_options_response,
     aws_api_gateway_integration_response.stripe_checkout_options_response,
 
-    aws_api_gateway_integration.sign_token_post,
+    aws_api_gateway_integration.sign_token,
     aws_api_gateway_method.sign_token_post,
     aws_api_gateway_method.sign_token_options,
     aws_api_gateway_integration.sign_token_options,
@@ -350,7 +350,7 @@ resource "aws_api_gateway_method" "sign_token_post" {
   authorization = "NONE"
 }
 
-resource "aws_api_gateway_integration" "sign_token_post" {
+resource "aws_api_gateway_integration" "sign_token" {
   rest_api_id             = aws_api_gateway_rest_api.waitlist_api.id
   resource_id             = aws_api_gateway_resource.sign_token.id
   http_method             = aws_api_gateway_method.sign_token_post.http_method
@@ -367,7 +367,26 @@ resource "aws_lambda_permission" "allow_api_gateway_sign_token" {
   source_arn    = "${aws_api_gateway_rest_api.waitlist_api.execution_arn}/*/POST/sign-token"
 }
 
-resource "aws_api_gateway_method_response" "sign_token_cors" {
+resource "aws_api_gateway_method" "sign_token_options" {
+  rest_api_id   = aws_api_gateway_rest_api.waitlist_api.id
+  resource_id   = aws_api_gateway_resource.sign_token.id
+  http_method   = "OPTIONS"
+  authorization = "NONE"
+}
+
+resource "aws_api_gateway_integration" "sign_token_options" {
+  rest_api_id             = aws_api_gateway_rest_api.waitlist_api.id
+  resource_id             = aws_api_gateway_resource.sign_token.id
+  http_method             = aws_api_gateway_method.sign_token_options.http_method
+  type                    = "MOCK"
+  integration_http_method = "OPTIONS"
+
+  request_templates = {
+    "application/json" = "{\"statusCode\": 200}"
+  }
+}
+
+resource "aws_api_gateway_method_response" "sign_token_options" {
   rest_api_id = aws_api_gateway_rest_api.waitlist_api.id
   resource_id = aws_api_gateway_resource.sign_token.id
   http_method = "OPTIONS"
@@ -380,7 +399,7 @@ resource "aws_api_gateway_method_response" "sign_token_cors" {
   }
 }
 
-resource "aws_api_gateway_integration_response" "sign_token_cors" {
+resource "aws_api_gateway_integration_response" "sign_token_options" {
   rest_api_id = aws_api_gateway_rest_api.waitlist_api.id
   resource_id = aws_api_gateway_resource.sign_token.id
   http_method = "OPTIONS"
