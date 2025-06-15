@@ -1,6 +1,5 @@
-// utils/token.js
-import crypto from "crypto";
-import AWS from "aws-sdk";
+const crypto = require("crypto");
+const AWS = require("aws-sdk");
 
 const secretsManager = new AWS.SecretsManager({ region: "eu-west-2" });
 
@@ -15,10 +14,8 @@ async function getSigningSecret() {
   return cachedSecret;
 }
 
-export async function verifyToken(token) {
-  if (!token || !token.includes(".")) {
-    throw new Error("Invalid token format.");
-  }
+async function verifyToken(token) {
+  if (!token || !token.includes(".")) throw new Error("Invalid token format.");
 
   const [encodedPayload, receivedSig] = token.split(".");
   const payloadJson = Buffer.from(encodedPayload, "base64").toString("utf-8");
@@ -31,18 +28,12 @@ export async function verifyToken(token) {
   }
 
   const secret = await getSigningSecret();
-  const expectedSig = crypto
-    .createHmac("sha256", secret)
-    .update(payloadJson)
-    .digest("hex");
+  const expectedSig = crypto.createHmac("sha256", secret).update(payloadJson).digest("hex");
 
-  if (receivedSig !== expectedSig) {
-    throw new Error("Signature mismatch.");
-  }
-
-  if (!payload.exp || Date.now() > payload.exp) {
-    throw new Error("Token expired.");
-  }
+  if (receivedSig !== expectedSig) throw new Error("Signature mismatch.");
+  if (!payload.exp || Date.now() > payload.exp) throw new Error("Token expired.");
 
   return payload;
 }
+
+module.exports = { verifyToken };
