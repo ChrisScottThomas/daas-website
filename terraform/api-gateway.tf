@@ -71,7 +71,7 @@ resource "aws_api_gateway_deployment" "deployment" {
   ]
 
   triggers = {
-    version = "redeploy-20250615"
+    version = "redeploy-20250615-1"
   }
 
 }
@@ -364,7 +364,7 @@ resource "aws_lambda_permission" "allow_api_gateway_sign_token" {
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.sign_token.function_name
   principal     = "apigateway.amazonaws.com"
-  source_arn    = "${aws_api_gateway_rest_api.waitlist_api.execution_arn}/*/POST/sign-token"
+  source_arn    = "${aws_api_gateway_rest_api.waitlist_api.execution_arn}/*/*"
 }
 
 resource "aws_api_gateway_method" "sign_token_options" {
@@ -392,6 +392,10 @@ resource "aws_api_gateway_method_response" "sign_token_options" {
   http_method = "OPTIONS"
   status_code = "200"
 
+  depends_on = [
+    aws_api_gateway_method.sign_token_options
+  ]
+
   response_parameters = {
     "method.response.header.Access-Control-Allow-Origin"  = true,
     "method.response.header.Access-Control-Allow-Methods" = true,
@@ -404,6 +408,11 @@ resource "aws_api_gateway_integration_response" "sign_token_options" {
   resource_id = aws_api_gateway_resource.sign_token.id
   http_method = "OPTIONS"
   status_code = "200"
+
+  depends_on = [
+    aws_api_gateway_integration.sign_token_options,
+    aws_api_gateway_method_response.sign_token_options_response
+  ]
 
   response_parameters = {
     "method.response.header.Access-Control-Allow-Origin"  = "'*'",
