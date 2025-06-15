@@ -1,15 +1,12 @@
 resource "aws_cloudfront_distribution" "cdn" {
-  depends_on = [aws_s3_bucket_website_configuration.site]
+  depends_on = [aws_s3_bucket.site]
 
   origin {
-    domain_name = aws_s3_bucket_website_configuration.site.website_endpoint
+    domain_name = aws_s3_bucket.site.bucket_regional_domain_name
     origin_id   = "s3-site"
 
-    custom_origin_config {
-      http_port              = 80
-      https_port             = 443
-      origin_protocol_policy = "http-only"
-      origin_ssl_protocols   = ["TLSv1.2"]
+    s3_origin_config {
+      origin_access_identity = aws_cloudfront_origin_access_identity.oai.cloudfront_access_identity_path
     }
   }
 
@@ -48,23 +45,6 @@ resource "aws_cloudfront_distribution" "cdn" {
 
   ordered_cache_behavior {
     path_pattern               = "/prod/*"
-    target_origin_id           = "api-gateway"
-    viewer_protocol_policy     = "redirect-to-https"
-    allowed_methods            = ["GET", "HEAD", "OPTIONS", "PUT", "POST", "DELETE", "PATCH"]
-    cached_methods             = ["GET", "HEAD", "OPTIONS"]
-    response_headers_policy_id = aws_cloudfront_response_headers_policy.security_headers.id
-
-    forwarded_values {
-      query_string = true
-      headers      = ["Origin", "Access-Control-Request-Headers", "Access-Control-Request-Method"]
-      cookies {
-        forward = "none"
-      }
-    }
-  }
-
-  ordered_cache_behavior {
-    path_pattern               = "/prod/select-plan*"
     target_origin_id           = "api-gateway"
     viewer_protocol_policy     = "redirect-to-https"
     allowed_methods            = ["GET", "HEAD", "OPTIONS", "PUT", "POST", "DELETE", "PATCH"]
