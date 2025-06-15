@@ -1,5 +1,6 @@
-const crypto = require("crypto");
-const AWS = require("aws-sdk");
+// utils/token.js
+import crypto from "crypto";
+import AWS from "aws-sdk";
 
 const secretsManager = new AWS.SecretsManager({ region: "eu-west-2" });
 
@@ -14,7 +15,7 @@ async function getSigningSecret() {
   return cachedSecret;
 }
 
-async function verifyToken(token) {
+export async function verifyToken(token) {
   if (!token || !token.includes(".")) {
     throw new Error("Invalid token format.");
   }
@@ -45,7 +46,3 @@ async function verifyToken(token) {
 
   return payload;
 }
-
-module.exports = {
-  verifyToken
-};
