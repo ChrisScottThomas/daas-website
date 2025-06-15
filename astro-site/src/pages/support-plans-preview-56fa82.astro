@@ -768,7 +768,7 @@ import BarChart from "../components/BarChart.jsx";
           const data = await response.json();
 
           if (data.token) {
-            window.location.href = `/select-plan/${plan}?token=${data.token}`;
+            window.location.href = `/select-plan/${plan}_${billing}?token=${data.token}`;
           } else {
             alert("Error generating token.");
           }
