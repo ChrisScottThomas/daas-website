@@ -37,9 +37,9 @@ output "public_api_endpoint" {
   value       = "https://${aws_api_gateway_rest_api.waitlist_api.id}.execute-api.eu-west-2.amazonaws.com/${aws_api_gateway_stage.prod_stage.stage_name}"
 }
 
-output "s3_endpoint" {
-  value = aws_s3_bucket_website_configuration.site.website_endpoint
-}
+# output "s3_endpoint" {
+#   value = aws_s3_bucket_website_configuration.site.website_endpoint
+# }
 
 output "bucket_name" {
   value = var.bucket_name
