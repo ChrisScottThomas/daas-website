@@ -2,43 +2,30 @@
 import { plans } from "../../data/plans";
 import Base from "../../layouts/base.astro";
 
-// Get the signed token from the query string
-const token = Astro.request.url.searchParams.get("token");
-
-if (!token) {
-  throw new Error("Missing token");
-}
-
-const [encodedPayload] = token.split(".");
-let payload;
-try {
-  payload = JSON.parse(Buffer.from(encodedPayload, "base64").toString("utf-8"));
-} catch {
-  throw new Error("Invalid token payload");
-}
-
-// Destructure token payload safely, renaming to avoid conflicts
-const { plan: selectedPlanKey} = payload;
-const selectedPlan = plans[selectedPlanKey];
-
-if (!selectedPlan) {
-  throw new Error("Invalid plan or billing selected.");
-}
-
 export async function getStaticPaths() {
   return Object.keys(plans).map((plan) => ({
     params: { plan },
   }));
+}
+
+const { plan } = Astro.params;
+const selectedPlan = plans[plan];
+
+if (!selectedPlan) {
+  throw new Error("Invalid plan or billing selected.");
 }
 ---
 
 <Base title={`Confirm your plan — ${selectedPlan.name}`}>
   <main class="max-w-3xl mx-auto px-4 py-20 text-center">
     <h1 class="text-4xl font-bold mb-4">You've selected:</h1>
-    <p class="text-2xl font-semibold mb-8 text-[#429EDB]">
+    <p class="text-2xl font-semibold mb-8 text-[#429EDB]" id="plan-name">
       {selectedPlan.name}
     </p>
-    <p class="text-lg text-gray-600 dark:text-gray-300 mb-8">
+    <p
+      class="text-lg text-gray-600 dark:text-gray-300 mb-8"
+      id="plan-description"
+    >
       {selectedPlan.description}
     </p>
 
@@ -46,41 +33,70 @@ export async function getStaticPaths() {
       <button
         id="cardPaymentBtn"
         class="bg-[#429EDB] hover:bg-[#1F78C1] text-white font-semibold px-6 py-3 rounded-xl transition"
+        disabled
       >
         Pay by Card
       </button>
 
       <a
-        href={`/checkout/invoice/index.html?plan=${selectedPlanKey}`}
-        class="bg-[#429EDB] hover:bg-[#1F78C1] text-white font-semibold px-6 py-3 rounded-xl transition"
+        id="invoiceLink"
+        href="#"
+        class="bg-[#429EDB] hover:bg-[#1F78C1] text-white font-semibold px-6 py-3 rounded-xl transition pointer-events-none opacity-50"
       >
         Request Invoice
       </a>
     </div>
 
-    <p class="text-sm mt-6 text-gray-400">
-      You're not charged until payment is confirmed. Safe, secure and
-      regret-free.
+    <p class="text-sm mt-6 text-gray-400" id="status-msg">
+      Verifying your token...
     </p>
   </main>
 
   <script type="module" client:load>
-    const plan = "{selectedPlanKey}";
-    document
-      .getElementById("cardPaymentBtn")
-      ?.addEventListener("click", async () => {
-        console.log("Card button clicked:", plan);
-        const res = await fetch("API_URL_HERE", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ plan }),
+    const url = new URL(window.location.href);
+    const token = url.searchParams.get("token");
+    const cardBtn = document.getElementById("cardPaymentBtn");
+    const invoiceLink = document.getElementById("invoiceLink");
+    const statusMsg = document.getElementById("status-msg");
+
+    if (!token) {
+      statusMsg.textContent =
+        "Missing token. Please use the link from your email.";
+    } else {
+      fetch("https://getclarity.win/prod/select-plan?token=" + token)
+        .then((res) => res.json())
+        .then((data) => {
+          if (!data.valid) {
+            statusMsg.textContent = "Invalid or expired token.";
+          } else {
+            statusMsg.textContent = "Token verified. You're good to go.";
+            cardBtn.disabled = false;
+            invoiceLink.classList.remove("pointer-events-none", "opacity-50");
+
+            // Add handlers
+            cardBtn.addEventListener("click", async () => {
+              const res = await fetch(
+                "https://getclarity.win/prod/stripe-checkout",
+                {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({ plan: data.plan }),
+                },
+              );
+              const result = await res.json();
+              if (result.url) {
+                window.location.href = result.url;
+              } else {
+                alert("Something went wrong. Please try again.");
+              }
+            });
+
+            invoiceLink.href = `/checkout/invoice/index.html?plan=${data.plan}`;
+          }
+        })
+        .catch(() => {
+          statusMsg.textContent = "Error validating token. Please try again.";
         });
-        const data = await res.json();
-        if (data.url) {
-          window.location.href = data.url;
-        } else {
-          alert("Something went wrong. Please try again.");
-        }
-      });
+    }
   </script>
 </Base>

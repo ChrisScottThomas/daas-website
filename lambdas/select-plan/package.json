@@ -1,0 +1,9 @@
+{
+  "name": "select-plan",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "commonjs",
+  "dependencies": {
+    "aws-sdk": "^2.1692.0"
+  }
+}

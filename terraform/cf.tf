@@ -63,6 +63,23 @@ resource "aws_cloudfront_distribution" "cdn" {
     }
   }
 
+  ordered_cache_behavior {
+    path_pattern               = "/prod/select-plan*"
+    target_origin_id           = "api-gateway"
+    viewer_protocol_policy     = "redirect-to-https"
+    allowed_methods            = ["GET", "HEAD", "OPTIONS", "PUT", "POST", "DELETE", "PATCH"]
+    cached_methods             = ["GET", "HEAD", "OPTIONS"]
+    response_headers_policy_id = aws_cloudfront_response_headers_policy.security_headers.id
+
+    forwarded_values {
+      query_string = true
+      headers      = ["Origin", "Access-Control-Request-Headers", "Access-Control-Request-Method"]
+      cookies {
+        forward = "none"
+      }
+    }
+  }
+
   viewer_certificate {
     acm_certificate_arn      = aws_acm_certificate.clarity.arn
     ssl_support_method       = "sni-only"

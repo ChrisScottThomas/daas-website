@@ -118,6 +118,20 @@ jobs:
         zip -r ../../sign-token-lambda.zip .
       working-directory: lambdas/sign-token
 
+    # Sign Token Lambda
+    - name: Cache NPM for Select Plan Lambda
+      uses: actions/cache@v3
+      with:
+        path: lambdas/select-plan/node_modules
+        key: card-${{ runner.os }}-${{ hashFiles('lambdas/select-plan/package-lock.json') }}
+
+    - name: Package Select Plan Lambda Function
+      run: |
+        npm config set registry https://registry.npmmirror.com
+        npm ci
+        zip -r ../../select-plan-lambda.zip .
+      working-directory: lambdas/select-plan
+
     - name: Terraform Init & Apply
       run: |
         terraform init

@@ -68,10 +68,17 @@ resource "aws_api_gateway_deployment" "deployment" {
     aws_api_gateway_method_response.sign_token_options,
     aws_api_gateway_integration_response.sign_token_options,
 
+    aws_api_gateway_integration.select_plan,
+    aws_api_gateway_method.select_plan_get,
+    aws_api_gateway_method.select_plan_options,
+    aws_api_gateway_integration.select_plan_options,
+    aws_api_gateway_method_response.select_plan_options,
+    aws_api_gateway_integration_response.select_plan_options,
+
   ]
 
   triggers = {
-    version = "redeploy-20250615-1"
+    version = "redeploy-20250615-2"
   }
 
 }
@@ -418,6 +425,96 @@ resource "aws_api_gateway_integration_response" "sign_token_options" {
     "method.response.header.Access-Control-Allow-Origin"  = "'*'",
     "method.response.header.Access-Control-Allow-Methods" = "'POST,OPTIONS'",
     "method.response.header.Access-Control-Allow-Headers" = "'Content-Type'"
+  }
+
+  response_templates = {
+    "application/json" = ""
+  }
+}
+
+# Select Plan Lambda API Gateway Configuration
+
+resource "aws_api_gateway_resource" "select_plan" {
+  rest_api_id = aws_api_gateway_rest_api.waitlist_api.id
+  parent_id   = aws_api_gateway_rest_api.waitlist_api.root_resource_id
+  path_part   = "select-plan"
+}
+
+resource "aws_api_gateway_method" "select_plan_get" {
+  rest_api_id   = aws_api_gateway_rest_api.waitlist_api.id
+  resource_id   = aws_api_gateway_resource.select_plan.id
+  http_method   = "GET"
+  authorization = "NONE"
+}
+
+resource "aws_api_gateway_integration" "select_plan" {
+  rest_api_id             = aws_api_gateway_rest_api.waitlist_api.id
+  resource_id             = aws_api_gateway_resource.select_plan.id
+  http_method             = aws_api_gateway_method.select_plan_get.http_method
+  integration_http_method = "POST"
+  type                    = "AWS_PROXY"
+  uri                     = aws_lambda_function.select_plan_lambda.invoke_arn
+}
+
+resource "aws_lambda_permission" "select_plan_apigw" {
+  statement_id  = "AllowInvokeSelectPlanFromAPIGateway"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.select_plan_lambda.function_name
+  principal     = "apigateway.amazonaws.com"
+  source_arn    = "${aws_api_gateway_rest_api.waitlist_api.execution_arn}/*/*"
+}
+
+resource "aws_api_gateway_method" "select_plan_options" {
+  rest_api_id   = aws_api_gateway_rest_api.waitlist_api.id
+  resource_id   = aws_api_gateway_resource.select_plan.id
+  http_method   = "OPTIONS"
+  authorization = "NONE"
+}
+
+resource "aws_api_gateway_integration" "select_plan_options" {
+  rest_api_id             = aws_api_gateway_rest_api.waitlist_api.id
+  resource_id             = aws_api_gateway_resource.select_plan.id
+  http_method             = aws_api_gateway_method.select_plan_options.http_method
+  type                    = "MOCK"
+  integration_http_method = "OPTIONS"
+
+  request_templates = {
+    "application/json" = "{\"statusCode\": 200}"
+  }
+}
+
+resource "aws_api_gateway_method_response" "select_plan_options" {
+  rest_api_id = aws_api_gateway_rest_api.waitlist_api.id
+  resource_id = aws_api_gateway_resource.select_plan.id
+  http_method = aws_api_gateway_method.select_plan_options.http_method
+  status_code = "200"
+
+  depends_on = [
+    aws_api_gateway_integration.select_plan_options
+  ]
+
+  response_parameters = {
+    "method.response.header.Access-Control-Allow-Headers" = true,
+    "method.response.header.Access-Control-Allow-Methods" = true,
+    "method.response.header.Access-Control-Allow-Origin"  = true
+  }
+}
+
+resource "aws_api_gateway_integration_response" "select_plan_options" {
+  rest_api_id = aws_api_gateway_rest_api.waitlist_api.id
+  resource_id = aws_api_gateway_resource.select_plan.id
+  http_method = aws_api_gateway_method.select_plan_options.http_method
+  status_code = "200"
+
+  depends_on = [
+    aws_api_gateway_integration.select_plan_options,
+    aws_api_gateway_method_response.select_plan_options
+  ]
+
+  response_parameters = {
+    "method.response.header.Access-Control-Allow-Headers" = "'Content-Type,X-Amz-Date,Authorization,X-Api-Key'",
+    "method.response.header.Access-Control-Allow-Methods" = "'GET,OPTIONS'",
+    "method.response.header.Access-Control-Allow-Origin"  = "'*'"
   }
 
   response_templates = {

@@ -1,7 +1,6 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
-import node from '@astrojs/node';
 
 import react from '@astrojs/react';
 
@@ -9,6 +8,5 @@ import react from '@astrojs/react';
 export default defineConfig({
   site: 'https://getclarity.win',
   integrations: [sitemap(), react()],
-  output: "server",
-  adapter: node({ mode: 'standalone' }), // Enables self-contained output
+  output: "static",
 });
