@@ -411,7 +411,7 @@ resource "aws_api_gateway_integration_response" "sign_token_options" {
 
   depends_on = [
     aws_api_gateway_integration.sign_token_options,
-    aws_api_gateway_method_response.sign_token_options_response
+    aws_api_gateway_method_response.sign_token_options
   ]
 
   response_parameters = {
