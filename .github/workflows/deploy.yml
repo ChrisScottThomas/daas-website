@@ -101,6 +101,20 @@ jobs:
         npm ci
         zip -r ../../stripe-checkout-lambda.zip .
       working-directory: lambdas/checkout
+    
+    # Sign Token Lambda
+    - name: Cache NPM for Sign Token Lambda
+      uses: actions/cache@v3
+      with:
+        path: lambdas/sign-token/node_modules
+        key: card-${{ runner.os }}-${{ hashFiles('lambdas/sign-token/package-lock.json') }}
+
+    - name: Package Sign Token Lambda Function
+      run: |
+        npm config set registry https://registry.npmmirror.com
+        npm ci
+        zip -r ../../sign-token-lambda.zip .
+      working-directory: lambdas/sign-token
 
     # Terraform
     - name: Terraform Init & Apply
@@ -123,12 +137,12 @@ jobs:
         npm ci
         API_URL=$(terraform -chdir=../terraform output -raw api_endpoint)
         INVOICE_API_URL=$(terraform -chdir=../terraform output -raw invoice_api_endpoint)
-        CARD_API_URL=$(terraform -chdir=../terraform output -raw card_api_endpoint)
+        SIGN_TOKEN_API_URL=$(terraform -chdir=../terraform output -raw card_api_endpoint)
         CHECKOUT_API_URL=$(terraform -chdir=../terraform output -raw checkout_api_endpoint)
         sed -i "s|API_URL_HERE|$API_URL|g" src/pages/index.astro
         sed -i "s|API_URL_HERE|$INVOICE_API_URL|g" src/pages/checkout/invoice.astro
-        sed -i "s|API_URL_HERE|$CARD_API_URL|g" src/pages/select-plan/[plan].astro
-        sed -i "s|API_URL_HERE|$CHECKOUT_API_URL|g" src/pages/support-plans-preview-56fa82.astro
+        sed -i "s|API_URL_HERE|$CHECKOUT_API_URL|g" src/pages/select-plan/[plan].astro
+        sed -i "s|API_URL_HERE|$SIGN_TOKEN_API_URL|g" src/pages/support-plans-preview-56fa82.astro
         npm run build
       continue-on-error: false
       working-directory: astro-site

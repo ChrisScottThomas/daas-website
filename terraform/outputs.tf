@@ -18,8 +18,13 @@ output "card_api_endpoint" {
 }
 
 output "checkout_api_endpoint" {
-  description = "Public POST endpoint for card payments"
+  description = "Public POST endpoint for stripe checkout"
   value       = "https://${aws_api_gateway_rest_api.waitlist_api.id}.execute-api.eu-west-2.amazonaws.com/${aws_api_gateway_stage.prod_stage.stage_name}/stripe-checkout"
+}
+
+output "sign_token_api_endpoint" {
+  description = "Public POST endpoint for token signing"
+  value       = "https://${aws_api_gateway_rest_api.waitlist_api.id}.execute-api.eu-west-2.amazonaws.com/${aws_api_gateway_stage.prod_stage.stage_name}/sign-token"
 }
 
 output "s3_endpoint" {

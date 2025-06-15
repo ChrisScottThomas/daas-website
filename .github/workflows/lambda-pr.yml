@@ -88,3 +88,17 @@ jobs:
         npm ci
         zip -r ../../stripe-checkout-lambda.zip .
       working-directory: lambdas/checkout
+
+    # Sign Token Lambda
+    - name: Cache NPM for Sign Token Lambda
+      uses: actions/cache@v3
+      with:
+        path: lambdas/sign-token/node_modules
+        key: card-${{ runner.os }}-${{ hashFiles('lambdas/sign-token/package-lock.json') }}
+
+    - name: Package Sign Token Lambda Function
+      run: |
+        npm config set registry https://registry.npmmirror.com
+        npm ci
+        zip -r ../../sign-token-lambda.zip .
+      working-directory: lambdas/sign-token

@@ -2,17 +2,30 @@
 import { plans } from "../../data/plans";
 import Base from "../../layouts/base.astro";
 
-// Export getStaticPaths so Astro knows which routes to build
+import { verifyToken } from "../../utils/token";
+
+const token = Astro.request.url.searchParams.get("token");
+
+let payload;
+try {
+  payload = await verifyToken(token);
+} catch (err) {
+  throw new Error("Invalid or expired token.");
+}
+
+const { plan, billing } = payload;
+
 export async function getStaticPaths() {
-  return Object.keys(plans).map((key) => ({
-    params: { plan: key },
+  return Object.keys(plans).map((plan) => ({
+    params: { plan },
   }));
 }
 
 const { plan } = Astro.params;
 const selectedPlan = plans[plan];
+
 if (!selectedPlan) {
-  throw new Error("Invalid plan selected.");
+  throw new Error("Invalid plan or billing selected.");
 }
 ---
 
@@ -36,7 +49,7 @@ if (!selectedPlan) {
 
       <a
         href={`/checkout/invoice/index.html?plan=${plan}`}
-        class="border border-[#429EDB] text-[#429EDB] hover:bg-blue-50 dark:hover:bg-gray-800 font-semibold px-6 py-3 rounded-xl transition"
+        class="bg-[#429EDB] hover:bg-[#1F78C1] text-white font-semibold px-6 py-3 rounded-xl transition"
       >
         Request Invoice
       </a>
@@ -48,14 +61,16 @@ if (!selectedPlan) {
     </p>
   </main>
 
-  <script type="module">
+  <script type="module" client:load>
+    const plan = "{plan}"; // safely inline plan
     document
       .getElementById("cardPaymentBtn")
-      .addEventListener("click", async () => {
+      ?.addEventListener("click", async () => {
+        console.log("Card button clicked:", plan);
         const res = await fetch("API_URL_HERE", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ planId: "{plan}" }),
+          body: JSON.stringify({ plan }),
         });
         const data = await res.json();
         if (data.url) {
