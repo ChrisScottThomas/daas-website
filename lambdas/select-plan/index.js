@@ -26,16 +26,30 @@ function verifySignature(payload, signature, secret) {
 }
 
 exports.handler = async (event) => {
+  const headers = {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json"
+  };
+
   try {
     const token = event.queryStringParameters?.token;
     if (!token || !token.includes(".")) {
       return {
         statusCode: 400,
+        headers,
         body: JSON.stringify({ error: "Missing or malformed token" }),
       };
     }
 
     const [encodedPayload, signature] = token.split(".");
+    if (!encodedPayload || !signature) {
+      return {
+        statusCode: 400,
+        headers,
+        body: JSON.stringify({ error: "Malformed token" }),
+      };
+    }
+
     const payloadJson = base64Decode(encodedPayload);
     const payload = JSON.parse(payloadJson);
 
@@ -45,6 +59,7 @@ exports.handler = async (event) => {
     if (!valid) {
       return {
         statusCode: 403,
+        headers,
         body: JSON.stringify({ error: "Invalid signature" }),
       };
     }
@@ -52,12 +67,14 @@ exports.handler = async (event) => {
     if (!payload.plan || !payload.exp || Date.now() > payload.exp) {
       return {
         statusCode: 403,
+        headers,
         body: JSON.stringify({ error: "Invalid or expired token" }),
       };
     }
 
     return {
       statusCode: 200,
+      headers,
       body: JSON.stringify({
         plan: payload.plan,
         billing: payload.billing,
@@ -68,6 +85,7 @@ exports.handler = async (event) => {
     console.error("Token validation error:", err);
     return {
       statusCode: 500,
+      headers,
       body: JSON.stringify({ error: "Internal error" }),
     };
   }
