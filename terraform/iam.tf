@@ -27,8 +27,8 @@ resource "aws_iam_role_policy_attachment" "lambda_ses" {
 }
 
 resource "aws_iam_policy" "allow_secrets_access" {
-  name        = "allow_secretsmanager_get_airtable"
-  description = "Allow Lambda to access Airtable PAT from Secrets Manager"
+  name        = "allow_secretsmanager_access"
+  description = "Allow Lambda to access Secrets Manager"
 
   policy = jsonencode({
     Version = "2012-10-17",
@@ -42,6 +42,11 @@ resource "aws_iam_policy" "allow_secrets_access" {
         Effect   = "Allow",
         Action   = ["secretsmanager:GetSecretValue"],
         Resource = "arn:aws:secretsmanager:eu-west-2:097236532027:secret:clarity-stripe-key-*"
+      },
+      {
+        Effect   = "Allow",
+        Action   = ["secretsmanager:GetSecretValue"],
+        Resource = "arn:aws:secretsmanager:eu-west-2:097236532027:secret:clarity-token-secret-*"
       }
     ]
   })
