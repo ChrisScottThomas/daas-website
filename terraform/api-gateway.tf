@@ -78,7 +78,7 @@ resource "aws_api_gateway_deployment" "deployment" {
   ]
 
   triggers = {
-    version = "redeploy-20250615-2"
+    version = "redeploy-20250615-3"
   }
 
 }
