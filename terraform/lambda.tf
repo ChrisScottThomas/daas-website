@@ -133,3 +133,23 @@ resource "aws_lambda_function" "sign_token" {
     Purpose = "Signs session token"
   }
 }
+
+resource "aws_lambda_function" "select_plan_lambda" {
+  function_name    = "select-plan"
+  role             = aws_iam_role.lambda_exec.arn
+  handler          = "index.handler"
+  runtime          = "nodejs18.x"
+  filename         = "../select-plan-lambda.zip"
+  source_code_hash = filebase64sha256("../select-plan-lambda.zip")
+
+  environment {
+    variables = {
+      TOKEN_SECRET = data.aws_secretsmanager_secret_version.token_secret_version.secret_string
+    }
+  }
+
+  tags = {
+    Project = "Clarity"
+    Purpose = "Token-based plan resolver"
+  }
+}

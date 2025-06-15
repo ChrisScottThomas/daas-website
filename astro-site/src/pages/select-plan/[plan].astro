@@ -1,34 +1,36 @@
 ---
-import { plans } from "../../data/plans";
 import Base from "../../layouts/base.astro";
+import { plans } from "../../data/plans";
 
-// Get the signed token from the query string
-const token = Astro.request.url.searchParams.get("token");
+const planParam = Astro.params.plan;
+const token = Astro.url.searchParams.get("token");
+
+let selectedPlanKey = planParam;
+let selectedPlan = null;
+let tokenValid = false;
 
 if (!token) {
   throw new Error("Missing token");
 }
 
-const [encodedPayload] = token.split(".");
-let payload;
 try {
-  payload = JSON.parse(Buffer.from(encodedPayload, "base64").toString("utf-8"));
-} catch {
-  throw new Error("Invalid token payload");
-}
+  const res = await fetch(
+    "https://getclarity.win/prod/select-plan?token=" + token,
+  );
+  if (!res.ok) throw new Error("Token validation failed");
+  const data = await res.json();
 
-// Destructure token payload safely, renaming to avoid conflicts
-const { plan: selectedPlanKey} = payload;
-const selectedPlan = plans[selectedPlanKey];
+  if (data.plan !== planParam)
+    throw new Error("Token does not match selected plan");
+  selectedPlan = plans[data.plan];
+  tokenValid = true;
+} catch (err) {
+  console.error(err);
+  throw new Error("Invalid or expired token");
+}
 
 if (!selectedPlan) {
-  throw new Error("Invalid plan or billing selected.");
-}
-
-export async function getStaticPaths() {
-  return Object.keys(plans).map((plan) => ({
-    params: { plan },
-  }));
+  throw new Error("Invalid plan");
 }
 ---
 
@@ -69,7 +71,6 @@ export async function getStaticPaths() {
     document
       .getElementById("cardPaymentBtn")
       ?.addEventListener("click", async () => {
-        console.log("Card button clicked:", plan);
         const res = await fetch("API_URL_HERE", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
