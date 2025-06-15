@@ -78,7 +78,7 @@ resource "aws_api_gateway_deployment" "deployment" {
   ]
 
   triggers = {
-    version = "redeploy-20250615-3"
+    version = "redeploy-20250615-4"
   }
 
 }
@@ -386,7 +386,7 @@ resource "aws_api_gateway_integration" "sign_token_options" {
   resource_id             = aws_api_gateway_resource.sign_token.id
   http_method             = aws_api_gateway_method.sign_token_options.http_method
   type                    = "MOCK"
-  integration_http_method = "OPTIONS"
+  integration_http_method = "POST"
 
   request_templates = {
     "application/json" = "{\"statusCode\": 200}"
