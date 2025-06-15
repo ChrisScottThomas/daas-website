@@ -59,11 +59,30 @@ if (!selectedPlan) {
     const invoiceLink = document.getElementById("invoiceLink");
     const statusMsg = document.getElementById("status-msg");
 
+    // Safe to attach this early
+    cardBtn.addEventListener("click", async () => {
+      const planKey = cardBtn.dataset.planKey;
+      if (!planKey) return;
+
+      const res = await fetch("API_URL_HERE/stripe-checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ plan: planKey }),
+      });
+
+      const result = await res.json();
+      if (result.url) {
+        window.location.href = result.url;
+      } else {
+        alert("Something went wrong. Please try again.");
+      }
+    });
+
     if (!token) {
       statusMsg.textContent =
         "Missing token. Please use the link from your email.";
     } else {
-      fetch("API_URL_HERE" + "/select-plan?token=" + token)
+      fetch("API_URL_HERE/select-plan?token=" + token)
         .then((res) => res.json())
         .then((data) => {
           if (!data.valid) {
@@ -74,21 +93,7 @@ if (!selectedPlan) {
             invoiceLink.classList.remove("pointer-events-none", "opacity-50");
 
             const planKey = `${data.plan}_${data.billing}`;
-
-            cardBtn.addEventListener("click", async () => {
-              const res = await fetch("API_URL_HERE" + "/stripe-checkout", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ plan: planKey }),
-              });
-              const result = await res.json();
-              if (result.url) {
-                window.location.href = result.url;
-              } else {
-                alert("Something went wrong. Please try again.");
-              }
-            });
-
+            cardBtn.dataset.planKey = planKey;
             invoiceLink.href = `/checkout/invoice/index.html?plan=${planKey}`;
           }
         })
