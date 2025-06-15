@@ -65,7 +65,7 @@ if (!selectedPlan) {
       statusMsg.textContent =
         "Missing token. Please use the link from your email.";
     } else {
-      fetch("API_URL_HERE" + "/select-plan?token=" + token)
+      fetch("API_URL_HERE" + "/select-plan/?token=" + token)
         .then((res) => res.json())
         .then((data) => {
           if (!data.valid) {
