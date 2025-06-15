@@ -63,7 +63,7 @@ if (!selectedPlan) {
       statusMsg.textContent =
         "Missing token. Please use the link from your email.";
     } else {
-      fetch("https://getclarity.win/prod/select-plan?token=" + token)
+      fetch("API_URL_HERE" + "/select-plan?token=" + token)
         .then((res) => res.json())
         .then((data) => {
           if (!data.valid) {
@@ -75,9 +75,7 @@ if (!selectedPlan) {
 
             // Add handlers
             cardBtn.addEventListener("click", async () => {
-              const res = await fetch(
-                "https://getclarity.win/prod/stripe-checkout",
-                {
+              const res = await fetch("API_URL_HERE" + "/stripe-checkout", {
                   method: "POST",
                   headers: { "Content-Type": "application/json" },
                   body: JSON.stringify({ plan: data.plan }),
