@@ -759,16 +759,20 @@ import BarChart from "../components/BarChart.jsx";
 
       <script>
         window.startCheckout = async function (plan, billing) {
-          const slug = `${plan}_${billing}`;
-          const res = await fetch("API_URL_HERE", {
+          const response = await fetch("API_URL_HERE", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ plan: slug }),
+            body: JSON.stringify({ plan, billing })
           });
 
-          const { token } = await res.json();
-          window.location.href = `/select-plan/${slug}?token=${token}`;
-        };
+          const data = await response.json();
+
+          if (data.token) {
+            window.location.href = `/select-plan/${plan}?token=${data.token}`;
+          } else {
+            alert("Error generating token.");
+          }
+        }
       </script>
 
       <!-- AlpineJS for toggling -->
