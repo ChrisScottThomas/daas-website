@@ -1,0 +1,13 @@
+{
+  "name": "sign-token",
+  "version": "1.0.0",
+  "description": "Lambda to sign short-lived tokens for plan selection",
+  "main": "index.js",
+  "type": "commonjs",
+  "scripts": {
+    "build": "zip -r ../../sign-token-lambda.zip ."
+  },
+  "dependencies": {
+    "aws-sdk": "^2.1692.0"
+  }
+}

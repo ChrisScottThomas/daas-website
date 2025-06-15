@@ -112,3 +112,24 @@ resource "aws_lambda_function" "stripe_checkout" {
     Purpose = "Checkout"
   }
 }
+
+resource "aws_lambda_function" "sign_token" {
+  function_name    = "sign-token"
+  role             = aws_iam_role.lambda_exec.arn
+  handler          = "index.handler"
+  runtime          = "nodejs18.x"
+  filename         = "../sign-token-lambda.zip"
+  source_code_hash = filebase64sha256("../sign-token-lambda.zip")
+
+  environment {
+    variables = {
+      TOKEN_SECRET = data.aws_secretsmanager_secret_version.token_secret_version.secret_string
+      SITE_URL     = "https://getclarity.win"
+    }
+  }
+
+  tags = {
+    Project = "Clarity"
+    Purpose = "Signs session token"
+  }
+}

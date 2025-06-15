@@ -60,10 +60,18 @@ resource "aws_api_gateway_deployment" "deployment" {
     aws_api_gateway_integration.stripe_checkout_options,
     aws_api_gateway_method_response.stripe_checkout_options_response,
     aws_api_gateway_integration_response.stripe_checkout_options_response,
+
+    aws_api_gateway_integration.sign_token,
+    aws_api_gateway_method.sign_token_post,
+    aws_api_gateway_method.sign_token_options,
+    aws_api_gateway_integration.sign_token_options,
+    aws_api_gateway_method_response.sign_token_options,
+    aws_api_gateway_integration_response.sign_token_options,
+
   ]
 
   triggers = {
-    version = "redeploy-20240614"
+    version = "redeploy-20250615"
   }
 
 }
@@ -322,6 +330,85 @@ resource "aws_api_gateway_integration_response" "stripe_checkout_options_respons
     "method.response.header.Access-Control-Allow-Headers" = "'Content-Type'"
     "method.response.header.Access-Control-Allow-Methods" = "'OPTIONS,POST'"
     "method.response.header.Access-Control-Allow-Origin"  = "'*'"
+  }
+
+  response_templates = {
+    "application/json" = ""
+  }
+}
+
+resource "aws_api_gateway_resource" "sign_token" {
+  rest_api_id = aws_api_gateway_rest_api.waitlist_api.id
+  parent_id   = aws_api_gateway_rest_api.waitlist_api.root_resource_id
+  path_part   = "sign-token"
+}
+
+resource "aws_api_gateway_method" "sign_token_post" {
+  rest_api_id   = aws_api_gateway_rest_api.waitlist_api.id
+  resource_id   = aws_api_gateway_resource.sign_token.id
+  http_method   = "POST"
+  authorization = "NONE"
+}
+
+resource "aws_api_gateway_integration" "sign_token" {
+  rest_api_id             = aws_api_gateway_rest_api.waitlist_api.id
+  resource_id             = aws_api_gateway_resource.sign_token.id
+  http_method             = aws_api_gateway_method.sign_token_post.http_method
+  integration_http_method = "POST"
+  type                    = "AWS_PROXY"
+  uri                     = aws_lambda_function.sign_token.invoke_arn
+}
+
+resource "aws_lambda_permission" "allow_api_gateway_sign_token" {
+  statement_id  = "AllowExecutionFromAPIGatewaySignToken"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.sign_token.function_name
+  principal     = "apigateway.amazonaws.com"
+  source_arn    = "${aws_api_gateway_rest_api.waitlist_api.execution_arn}/*/POST/sign-token"
+}
+
+resource "aws_api_gateway_method" "sign_token_options" {
+  rest_api_id   = aws_api_gateway_rest_api.waitlist_api.id
+  resource_id   = aws_api_gateway_resource.sign_token.id
+  http_method   = "OPTIONS"
+  authorization = "NONE"
+}
+
+resource "aws_api_gateway_integration" "sign_token_options" {
+  rest_api_id             = aws_api_gateway_rest_api.waitlist_api.id
+  resource_id             = aws_api_gateway_resource.sign_token.id
+  http_method             = aws_api_gateway_method.sign_token_options.http_method
+  type                    = "MOCK"
+  integration_http_method = "OPTIONS"
+
+  request_templates = {
+    "application/json" = "{\"statusCode\": 200}"
+  }
+}
+
+resource "aws_api_gateway_method_response" "sign_token_options" {
+  rest_api_id = aws_api_gateway_rest_api.waitlist_api.id
+  resource_id = aws_api_gateway_resource.sign_token.id
+  http_method = "OPTIONS"
+  status_code = "200"
+
+  response_parameters = {
+    "method.response.header.Access-Control-Allow-Origin"  = true,
+    "method.response.header.Access-Control-Allow-Methods" = true,
+    "method.response.header.Access-Control-Allow-Headers" = true
+  }
+}
+
+resource "aws_api_gateway_integration_response" "sign_token_options" {
+  rest_api_id = aws_api_gateway_rest_api.waitlist_api.id
+  resource_id = aws_api_gateway_resource.sign_token.id
+  http_method = "OPTIONS"
+  status_code = "200"
+
+  response_parameters = {
+    "method.response.header.Access-Control-Allow-Origin"  = "'*'",
+    "method.response.header.Access-Control-Allow-Methods" = "'POST,OPTIONS'",
+    "method.response.header.Access-Control-Allow-Headers" = "'Content-Type'"
   }
 
   response_templates = {
