@@ -144,7 +144,7 @@ resource "aws_lambda_function" "select_plan_lambda" {
 
   environment {
     variables = {
-      TOKEN_SECRET = data.aws_secretsmanager_secret.token_secret.name
+      TOKEN_SECRET = data.aws_secretsmanager_secret.token_secret.arn
     }
   }
 
