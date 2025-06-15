@@ -8,4 +8,5 @@ import react from '@astrojs/react';
 export default defineConfig({
   site: 'https://getclarity.win',
   integrations: [sitemap(), react()],
+  output: "server",
 });
