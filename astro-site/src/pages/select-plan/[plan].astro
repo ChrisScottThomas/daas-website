@@ -73,14 +73,14 @@ if (!selectedPlan) {
             cardBtn.disabled = false;
             invoiceLink.classList.remove("pointer-events-none", "opacity-50");
 
-            // Add handlers
+            const planKey = `${data.plan}_${data.billing}`;
+
             cardBtn.addEventListener("click", async () => {
               const res = await fetch("API_URL_HERE" + "/stripe-checkout", {
-                  method: "POST",
-                  headers: { "Content-Type": "application/json" },
-                  body: JSON.stringify({ plan: data.plan }),
-                },
-              );
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ plan: planKey }),
+              });
               const result = await res.json();
               if (result.url) {
                 window.location.href = result.url;
@@ -89,7 +89,7 @@ if (!selectedPlan) {
               }
             });
 
-            invoiceLink.href = `/checkout/invoice/index.html?plan=${data.plan}`;
+            invoiceLink.href = `/checkout/invoice/index.html?plan=${planKey}`;
           }
         })
         .catch(() => {
