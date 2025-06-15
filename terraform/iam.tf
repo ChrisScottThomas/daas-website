@@ -46,7 +46,7 @@ resource "aws_iam_policy" "allow_secrets_access" {
       {
         Effect   = "Allow",
         Action   = ["secretsmanager:GetSecretValue"],
-        Resource = "arn:aws:secretsmanager:eu-west-2:097236532027:secret:clarity-token-secret-*"
+        Resource = "arn:aws:secretsmanager:eu-west-2:097236532027:secret:clarity-token-secret-EVenTr"
       }
     ]
   })
