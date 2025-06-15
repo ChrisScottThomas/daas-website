@@ -1,13 +1,15 @@
 ---
+export const prerender = false;
+
 import Base from "../../layouts/base.astro";
 import { plans } from "../../data/plans";
 
+// Dynamic route param (e.g. clarity_base_monthly)
 const planParam = Astro.params.plan;
 const token = Astro.url.searchParams.get("token");
 
 let selectedPlanKey = planParam;
 let selectedPlan = null;
-let tokenValid = false;
 
 if (!token) {
   throw new Error("Missing token");
@@ -23,7 +25,6 @@ try {
   if (data.plan !== planParam)
     throw new Error("Token does not match selected plan");
   selectedPlan = plans[data.plan];
-  tokenValid = true;
 } catch (err) {
   console.error(err);
   throw new Error("Invalid or expired token");
